@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.logistics.personnel.mapper.DepMapper" >
+  <!--resultMap配置-->
+  <resultMap id="BaseResultMap" type="com.zking.logistics.personnel.model.Dep" >
+    <constructor >
+      <idArg column="UUID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="NAME" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TELE" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <!--sql字段-->
+  <sql id="Base_Column_List" >
+    UUID, NAME, TELE
+  </sql>
+  <!--新增-->
+  <insert id="insertDep" parameterType="com.zking.logistics.personnel.model.Dep">
+    INSERT INTO dep(NAME,TELE) VALUES(NAME = #{name},TELE=#{tele})
+  </insert>
+  <!--修改-->
+  <update id="updateDep" parameterType="com.zking.logistics.personnel.model.Dep">
+    UPDATE dep SET NAME=#{name},tele=#{tele} WHERE uuid=#{uuid}
+  </update>
+  <!--删除-->
+  <delete id="deleteDep">
+    DELETE FROM dep WHERE uuid=#{uuid}
+  </delete>
+  <!--查询单个-->
+  <select id="querySingleDep" resultType="com.zking.logistics.personnel.model.Dep">
+    SELECT <include refid="Base_Column_List"/> FROM dep WHERE uuid=#{uuid}
+  </select>
+  <!--分页-->
+  <select id="queryDepPage" resultType="com.zking.logistics.personnel.model.Dep"
+          parameterType="com.zking.logistics.personnel.model.Dep">
+    SELECT <include refid="Base_Column_List"/> FROM dep
+  </select>
+</mapper>

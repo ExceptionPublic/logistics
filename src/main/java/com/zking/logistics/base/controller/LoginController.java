@@ -8,9 +8,9 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class LoginController {
 
-    @RequestMapping("index/index.shtml")
+    @RequestMapping("/index/index.shtml")
     public String toLogin(){
-        return "login";
+        return "index";
     }
 
     @RequestMapping("/loginOut")

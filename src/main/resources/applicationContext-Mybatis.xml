@@ -12,8 +12,7 @@
     <context:component-scan base-package="com.zking.logistics" use-default-filters="true" >
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
     </context:component-scan>
-    <!--2.导入jdbc-->
-    <!--<context:property-placeholder location="classpath:jdbc.properties"/>-->
+
     <!--3.配置dbcp2数据库连接池-->
     <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
           destroy-method="close">
@@ -41,9 +40,15 @@
         <!-- 自动扫描XxxMapping.xml文件，**任意路径 -->
         <property name="mapperLocations" value="classpath*:com/zking/logistics/**/mapper/*.xml"/>
         <!-- 指定别名 -->
-        <property name="typeAliasesPackage" value="com/zking/ssm/**/model"/>
+        <property name="typeAliasesPackage" value="com/zking/logistics/**/model"/>
         <!--包含yBatis配置文件-->
         <!--<property name="configLocation" value="classpath:mybatis-config.xml"/>-->
+        <!--开启驼峰-->
+        <property name="configuration">
+            <bean class="org.apache.ibatis.session.Configuration">
+                <property name="mapUnderscoreToCamelCase" value="true"/>
+            </bean>
+        </property>
 
 
         <!--设置mybaits对缓存的支持-->
@@ -77,7 +82,7 @@
         <!--basePackage 属性是映射器接口文件的包路径。-->
         <!--你可以使用分号或逗号 作为分隔符设置多于一个的包路径-->
 
-        <property name="basePackage" value="com/zking/ssm/**/mapper"/>
+        <property name="basePackage" value="com/zking/logistics/**/mapper"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
     <!--5.注解式事物配置-->
