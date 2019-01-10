@@ -3,6 +3,7 @@ package com.zking.logistics.personnel.service.imp;
 import com.zking.logistics.personnel.mapper.DepMapper;
 import com.zking.logistics.personnel.model.Dep;
 import com.zking.logistics.personnel.service.IDepService;
+import com.zking.logistics.personnel.vo.DepVo;
 import com.zking.logistics.util.PageBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,8 +41,8 @@ public class DepServiceImpl implements IDepService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<Dep> queryDepPage(Dep dep, PageBean pageBean) {
-        return depMapper.queryDepPage(dep);
+    public List<DepVo> queryDepPager(Dep dep, PageBean pageBean) {
+        return depMapper.queryDepPager(dep);
     }
 
     @Override
@@ -49,4 +50,11 @@ public class DepServiceImpl implements IDepService {
     public List<Dep> queryDep() {
         return depMapper.queryDep();
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public boolean isRepetitionDepName(String username) {
+        return null!=depMapper.queryDepName(username);
+    }
+
 }

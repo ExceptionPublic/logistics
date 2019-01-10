@@ -1,6 +1,7 @@
 package com.zking.logistics.personnel.mapper;
 
 import com.zking.logistics.personnel.model.Dep;
+import com.zking.logistics.personnel.vo.DepVo;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -43,9 +44,16 @@ public interface DepMapper {
      * @param dep
      * @return
      */
-    List<Dep> queryDepPage(Dep dep);
+    List<DepVo> queryDepPager(Dep dep);
 
     /**
+     * 根据部门名称查询部门
+     * @param name
+     * @return
+     */
+    Dep queryDepName(String name);
+
+   /**
      * 查询所有部门
      * @return
      */

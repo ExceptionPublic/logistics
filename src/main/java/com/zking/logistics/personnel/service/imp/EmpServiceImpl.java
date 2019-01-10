@@ -42,8 +42,8 @@ public class EmpServiceImpl implements IEmpService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<EmpVo> queryEmpPage(EmpVo emp, PageBean pageBean) {
-        return empMapper.queryEmpPage(emp);
+    public List<EmpVo> queryEmpPager(EmpVo emp, PageBean pageBean) {
+        return empMapper.queryEmpPager(emp);
     }
 
     @Override

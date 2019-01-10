@@ -52,5 +52,5 @@ public interface EmpMapper {
      * @param emp
      * @return
      */
-    List<EmpVo> queryEmpPage(EmpVo emp );
+    List<EmpVo> queryEmpPager(EmpVo emp );
 }
