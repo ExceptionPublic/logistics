@@ -4,5 +4,5 @@
  * @returns {boolean}
  */
 function isBlank(str){
-    return str!=null && str!="";
+    return undefined!=str && null!=str && str!="";
 }

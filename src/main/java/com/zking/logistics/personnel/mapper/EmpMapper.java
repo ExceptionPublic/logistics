@@ -2,6 +2,7 @@ package com.zking.logistics.personnel.mapper;
 
 import com.zking.logistics.personnel.model.Dep;
 import com.zking.logistics.personnel.model.Emp;
+import com.zking.logistics.personnel.vo.EmpVo;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -33,6 +34,13 @@ public interface EmpMapper {
     Emp querySingleEmp(Integer uuid);
 
     /**
+     * 根据用户名查询
+     * @param username
+     * @return
+     */
+    Emp querySingleEmpUsername(String username);
+
+    /**
      * 修改
      * @param record
      * @return
@@ -44,5 +52,5 @@ public interface EmpMapper {
      * @param emp
      * @return
      */
-    List<Dep> queryEmpPage(Emp emp);
+    List<EmpVo> queryEmpPage(EmpVo emp );
 }

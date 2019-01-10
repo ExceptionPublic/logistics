@@ -1,5 +1,6 @@
 package com.zking.logistics.personnel.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.ToString;
 
 import java.io.Serializable;
@@ -22,6 +23,7 @@ public class Emp implements Serializable {
 
     private String address;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
 
     private Integer depuuid;

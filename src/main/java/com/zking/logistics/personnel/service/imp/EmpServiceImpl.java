@@ -4,6 +4,7 @@ import com.zking.logistics.personnel.mapper.EmpMapper;
 import com.zking.logistics.personnel.model.Dep;
 import com.zking.logistics.personnel.model.Emp;
 import com.zking.logistics.personnel.service.IEmpService;
+import com.zking.logistics.personnel.vo.EmpVo;
 import com.zking.logistics.util.PageBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,7 +42,17 @@ public class EmpServiceImpl implements IEmpService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<Dep> queryEmpPage(Emp emp, PageBean pageBean) {
+    public List<EmpVo> queryEmpPage(EmpVo emp, PageBean pageBean) {
         return empMapper.queryEmpPage(emp);
+    }
+
+    @Override
+    public Emp querySingleEmpUsername(String username) {
+        return empMapper.querySingleEmpUsername(username);
+    }
+
+    @Override
+    public boolean isRepetitionUsername(String username) {
+        return null!=empMapper.querySingleEmpUsername(username);
     }
 }

@@ -1,8 +1,3 @@
-var rootPath;
-$(function() {
-	rootPath = $("#adsoluetPath").val();
-});
-
 
 /**
  * 获取值
@@ -26,4 +21,19 @@ function getTest(element) {
         return $(element+" option:selected").text();
     else
         return getValue(element);
+}
+
+function ajax(url,paraments) {
+    var returnData;
+    $.ajax({
+        url: url,
+        data: paraments,
+        type: "post",
+        dataType: "json",
+        async: false,
+        success: function (data) {
+            returnData=data;
+        }
+    });
+    return returnData;
 }

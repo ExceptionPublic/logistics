@@ -43,4 +43,10 @@ public class DepServiceImpl implements IDepService {
     public List<Dep> queryDepPage(Dep dep, PageBean pageBean) {
         return depMapper.queryDepPage(dep);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Dep> queryDep() {
+        return depMapper.queryDep();
+    }
 }

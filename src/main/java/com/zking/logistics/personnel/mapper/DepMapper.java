@@ -44,4 +44,10 @@ public interface DepMapper {
      * @return
      */
     List<Dep> queryDepPage(Dep dep);
+
+    /**
+     * 查询所有部门
+     * @return
+     */
+    List<Dep> queryDep();
 }

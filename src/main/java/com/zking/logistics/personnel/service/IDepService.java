@@ -44,4 +44,10 @@ public interface IDepService {
      * @return
      */
     List<Dep> queryDepPage(Dep dep,PageBean pageBean);
+
+    /**
+     * 查询所有部门
+     * @return
+     */
+    List<Dep> queryDep();
 }

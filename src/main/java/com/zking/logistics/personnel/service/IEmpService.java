@@ -2,6 +2,7 @@ package com.zking.logistics.personnel.service;
 
 import com.zking.logistics.personnel.model.Dep;
 import com.zking.logistics.personnel.model.Emp;
+import com.zking.logistics.personnel.vo.EmpVo;
 import com.zking.logistics.util.PageBean;
 import org.springframework.stereotype.Repository;
 
@@ -44,5 +45,20 @@ public interface IEmpService {
      * @param emp
      * @return
      */
-    List<Dep> queryEmpPage(Emp emp, PageBean pageBean);
+    List<EmpVo> queryEmpPage(EmpVo emp, PageBean pageBean);
+
+    /**
+     * 根据用户名查询
+     * @param username
+     * @return
+     */
+    Emp querySingleEmpUsername(String username);
+
+    /**
+     * 判断用户名是否有重复的
+     * @param username
+     * @return
+     */
+    boolean isRepetitionUsername(String username);
+
 }
