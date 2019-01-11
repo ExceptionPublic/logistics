@@ -21,6 +21,11 @@ function initSelect(url, parameters, element, value, text) {
     });
 }
 
+/**
+ * form表单重新渲染
+ * @param type
+ * @param layFilter
+ */
 function renderForm(type,layFilter) {
     layui.use('form', function () {
         var form = layui.form;
@@ -59,6 +64,11 @@ function dateParseString(date) {
     return new Date(date);
 }
 
+/**
+ * 初始化form表单
+ * @param layFilter
+ * @param paraments
+ */
 function initForm(layFilter, paraments) {
     layui.use('form', function () {
         var form = layui.form;
@@ -66,4 +76,5 @@ function initForm(layFilter, paraments) {
         form.val(layFilter, paraments);
     });
 }
+
 

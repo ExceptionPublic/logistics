@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.logistics.warehouse.mapper.StoreoperMapper">
+    <resultMap id="BaseResultMap" type="com.zking.logistics.warehouse.model.Storeoper">
+        <constructor>
+            <idArg column="UUID" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="EMPUUID" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="OPERTIME" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+            <arg column="STOREUUID" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="GOODSUUID" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="NUM" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="TYPE" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        </constructor>
+    </resultMap>
+    <!--字段-->
+    <sql id="Base_Column_List">
+        UUID, EMPUUID, OPERTIME, STOREUUID, GOODSUUID, NUM, TYPE
+    </sql>
+    <!--查询单个-->
+    <select id="querySingleStoreoper" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from storeoper
+        where UUID = #{uuid,jdbcType=INTEGER}
+    </select>
+    <!--分页查询-->
+    <select id="queryStoreoperPager" resultType="com.zking.logistics.warehouse.model.Storeoper"
+            parameterType="com.zking.logistics.warehouse.model.Storeoper">
+        select
+        <include refid="Base_Column_List"/>
+        from storeoper
+    </select>
+    <!--删除-->
+    <delete id="deleteStoreoper" parameterType="java.lang.Integer">
+        delete from storeoper
+        where UUID = #{uuid,jdbcType=INTEGER}
+    </delete>
+    <!--新增-->
+    <insert id="insertStoreoper" parameterType="com.zking.logistics.warehouse.model.Storeoper">
+        insert into storeoper ( EMPUUID, OPERTIME,
+        STOREUUID, GOODSUUID, NUM,
+        TYPE)
+        values ( #{empuuid,jdbcType=INTEGER}, #{opertime,jdbcType=TIMESTAMP},
+        #{storeuuid,jdbcType=INTEGER}, #{goodsuuid,jdbcType=INTEGER}, #{num,jdbcType=INTEGER},
+        #{type,jdbcType=VARCHAR})
+    </insert>
+    <!--修改-->
+    <update id="updateStoreoper" parameterType="com.zking.logistics.warehouse.model.Storeoper">
+        update storeoper
+        <set>
+            <if test="empuuid != null">
+                EMPUUID = #{empuuid,jdbcType=INTEGER},
+            </if>
+            <if test="opertime != null">
+                OPERTIME = #{opertime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="storeuuid != null">
+                STOREUUID = #{storeuuid,jdbcType=INTEGER},
+            </if>
+            <if test="goodsuuid != null">
+                GOODSUUID = #{goodsuuid,jdbcType=INTEGER},
+            </if>
+            <if test="num != null">
+                NUM = #{num,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                TYPE = #{type,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where UUID = #{uuid,jdbcType=INTEGER}
+    </update>
+</mapper>

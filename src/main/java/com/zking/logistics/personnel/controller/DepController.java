@@ -3,6 +3,7 @@ package com.zking.logistics.personnel.controller;
 import com.zking.logistics.personnel.model.Dep;
 import com.zking.logistics.personnel.model.Emp;
 import com.zking.logistics.personnel.service.IDepService;
+import com.zking.logistics.personnel.vo.DepVo;
 import com.zking.logistics.personnel.vo.EmpVo;
 import com.zking.logistics.util.CommonUtil;
 import com.zking.logistics.util.PageBean;
@@ -144,6 +145,9 @@ public class DepController {
         Map<String,Object> map=new HashMap<String, Object>();
         PageBean pageBean=new PageBean();
         pageBean.setRequest(request);
+        List<DepVo> depVos = depService.queryDepPager(dep, pageBean);
+        System.out.println("page:"+pageBean.getPage());
+        System.out.println("total:"+pageBean.getTotal());
         map.put("data",depService.queryDepPager(dep,pageBean));
         map.put("count",pageBean.getTotal());
         map.put("code",0);

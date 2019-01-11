@@ -29,7 +29,10 @@ function queryEmp() {
         };
         table.reload('empTable', {
             url: 'personnel/emp/queryEmpPager',
-            where: paraments
+            where: paraments,
+            page: {
+                curr: 1
+            }
         });
     });
 }
