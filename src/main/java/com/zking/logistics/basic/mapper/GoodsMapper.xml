@@ -22,24 +22,24 @@
   </delete>
 
 
-  <select id="queryGoodsPager" resultType="map" parameterType="com.zking.logistics.basic.model.Goods">
-    SELECT g.`uuid` uuid,g.`name` name,g.`origin` origin,g.`producer` producer,g.`unit` unit,
-    g.`inprice` inprice,g.`outprice` outprice,gt.`name` tname,gt.uuid tid
-    FROM goods g
-    LEFT JOIN goodstype gt
-    ON g.`GOODSTYPEUUID`=gt.`UUID`
-    where 1=1
-    <if test="null!=name and ''!=name">
-      and g.`NAME` like concat(concat('%',#{name}),'%')
-    </if>
-    ORDER BY uuid DESC
-
-  </select>
   <select id="selectByPrimaryKey" resultType="com.zking.logistics.basic.model.Goods">
     select
     <include refid="Base_Column_List" />
     from goods
     where name =#{name}
+  </select>
+  <select id="queryGoodsPager" resultType="map" parameterType="com.zking.logistics.basic.model.Goods">
+    select g.`uuid`,g.`name`,g.`origin`,g.`producer` ,
+    g.`unit`,g.`inprice` ,g.`outprice`,g.`goodstypeuuid` ,gt.`name` tname
+    from goods g
+    left join goodstype gt
+    on g.`goodstypeuuid`=gt.`uuid`
+    where 1=1
+    <if test="null!=name and ''!=name">
+      and g.`name` like concat(concat('%',#{name}),'%')
+    </if>
+    ORDER BY g.uuid DESC
+
   </select>
 
 

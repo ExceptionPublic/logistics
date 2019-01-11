@@ -1,6 +1,5 @@
 var rowData;
 $(function () {
-    console.log("sd");
     layui.use(['form'], function () {
         var form = layui.form;
 
@@ -27,9 +26,13 @@ $(function () {
         form.on('submit(btn_goodstyAdd)', function (data) {
             //获取form表单中的字段
             var field = data.field;//form表单字段{name:vlaue}
+
+            var url = "/basicJsp/goodstype/goodsTypeAdd";
+            if (isBlank(field.uuid))
+                url = "/basicJsp/goodstype/goodsTypeUpdate";
             //进行ajax请求
             $.ajax({
-                url: '/basicJsp/goodstype/goodsTypeAdd',
+                url: url,
                 data: field,
                 type: "post",
                 dataType: "json",
@@ -41,8 +44,8 @@ $(function () {
             });
             return false; //阻止表单跳转。
         });
-
     });
+
 
 });
 
@@ -62,7 +65,5 @@ function close() {
 function initGtpForm(row) {
     rowData = row;
     //初始化部门下拉
-    // initSelect("personnel/dep/queryDep", [], "#dep", "uuid", "name");
-    initForm("supplierAdd", row);
-    // renderForm("select", "depuuid");
+    initForm("goodeTypeAdd", row);
 }

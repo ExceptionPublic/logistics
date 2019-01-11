@@ -10,7 +10,7 @@
 <head>
     <%@ include file="/WEB-INF/jsp/common/head.jsp" %>
     <title>Title</title>
-    <script type="text/javascript" src="/js/basicJs/supplier/SupplierList.js"></script>
+    <script type="text/javascript" src="${ctx}/js/basicJs/supplier/SupplierList.js"></script>
 </head>
 <body>
 <div class="layui-container layui-form" style="margin-top: 10px;">
@@ -43,7 +43,7 @@
                 <i class="layui-icon">&#xe615;</i>查询
             </button>
             <button class="layui-btn layui-btn-sm"
-                    onclick="SupplierAdd()">
+                    id="btn_supplierAdd">
                 <i class="layui-icon">&#xe608;</i>添加
             </button>
 

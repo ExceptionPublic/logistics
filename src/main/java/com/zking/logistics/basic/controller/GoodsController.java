@@ -39,7 +39,7 @@ public class GoodsController {
                                               HttpServletRequest request){
         PageBean pageBean=new PageBean();
         pageBean.setRequest(request);
-        List<Map<String, Object>> mapList = goodsService.queryGoodsPager(goods, pageBean);
+        List<Map<String,Object>> mapList = goodsService.queryGoodsPager(goods, pageBean);
         Map map=new HashMap();
         map.put("data",mapList);
         map.put("count",pageBean.getTotal());

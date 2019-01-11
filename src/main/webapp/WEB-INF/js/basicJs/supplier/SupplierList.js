@@ -9,6 +9,9 @@ $(function() {
         $("#btn_querySupplier").click(function() {
             supplierListSe();
         });
+        $("#btn_supplierAdd").click(function() {
+            SupplierAdd("新增供应商",null);
+        });
         form.render();
     });
 });
@@ -57,13 +60,18 @@ function supplier(parameters){
                         var row = JSON.stringify(data).replace(/\"/g, "'");
                         var toolbar='<div >';
                         toolbar+='<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="save">保存</a>';
-                        toolbar+='<a class="layui-btn layui-btn-xs" onclick="goodsedit('+row+');">编辑</a>';
+                        toolbar+='<a href="javascript:SupplierAdd(\'修改' + data.name + '信息\',' + row + ');" class="layui-btn layui-btn-xs">';
+                        toolbar += '编辑</a>';
                         toolbar+='<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>';
                         toolbar+='</div>';
                         return toolbar;
                     }
                 },
             ]],
+            done : function(res, curr, count) {
+                if(res.success==false)
+                    layer.msg(res.message);
+            }
             // done : function(res, curr, count) {
             //     if(res.success==false)
             //         layer.msg(res.message);
@@ -96,7 +104,7 @@ function supplier(parameters){
                     });
 
                 });
-            }else if(layEvent=='update'){
+            }else if(layEvent=='save'){
                 layer.confirm('确定修改吗?',function (index) {
                     $.ajax({
                         url:'/basicJsp/supplier/supplierUpdate',
@@ -138,12 +146,12 @@ function supplierListSe(){
 
 
 
-function SupplierAdd() {
+function SupplierAdd(titile,row) {
     layui.use('layer', function() {
         var layer = layui.layer;
         layer.open({
             id : "supplierAdd",
-            title : "新增供应商",
+            title : titile,
             type : 2,
             anim : 1,
             shadeClose: false,
@@ -152,6 +160,12 @@ function SupplierAdd() {
             offset : 'auto',
             area : [ '400px', '430px' ],
             content : '/basicJsp/supplier/tosupplierAdd',
+            success : function(layero, index) {
+                if(row){
+                    var iframeWin = window[layero.find('iframe')[0]['name']];
+                    iframeWin.initSupForm(row);
+                }
+            },
             // btn : [ '保存','关闭' ],
             // yes :function(index, layero) {
             //     supplier();

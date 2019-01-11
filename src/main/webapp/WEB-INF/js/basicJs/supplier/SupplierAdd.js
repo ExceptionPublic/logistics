@@ -25,10 +25,12 @@ $(function () {
         form.on('submit(btn_supplierAdd)', function (data) {
             //获取form表单中的字段
             var field = data.field;//form表单字段{name:vlaue}
-            // var url="";
+            var url="/basicJsp/supplier/supplierAdd";
+            if (isBlank(field.uuid))
+                url="/basicJsp/supplier/supplierUpdate";
             //进行ajax请求
             $.ajax({
-                url: '/basicJsp/supplier/supplierAdd',
+                url: url,
                 data: field,
                 type: "post",
                 dataType: "json",
@@ -62,10 +64,8 @@ function close() {
  * 初始化表单
  * @param row
  */
-function initEmpForm(row) {
+function initSupForm(row) {
     rowData = row;
     //初始化部门下拉
-    initSelect("personnel/dep/queryDep", [], "#dep", "uuid", "name");
-    initForm("emp", row);
-    renderForm("select", "depuuid");
+    initForm("supplierAdd", row);
 }

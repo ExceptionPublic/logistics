@@ -5,11 +5,14 @@ public class Store {
 
     private String name;
 
+    private String address;
+
     private Integer empuuid;
 
-    public Store(Integer uuid, String name, Integer empuuid) {
+    public Store(Integer uuid, String name, String address, Integer empuuid) {
         this.uuid = uuid;
         this.name = name;
+        this.address = address;
         this.empuuid = empuuid;
     }
 
@@ -31,6 +34,14 @@ public class Store {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public Integer getEmpuuid() {

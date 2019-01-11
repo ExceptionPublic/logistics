@@ -43,7 +43,7 @@
                 <i class="layui-icon">&#xe615;</i>查询
             </button>
             <button class="layui-btn layui-btn-sm"
-                    onclick="ClientsAdd()">
+                    id="btn_clientsAdd">
                 <i class="layui-icon">&#xe608;</i>添加
             </button>
 

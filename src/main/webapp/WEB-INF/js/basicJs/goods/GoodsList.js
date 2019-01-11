@@ -9,6 +9,9 @@ $(function() {
         $("#btn_queryGoods").click(function() {
             goodsListSe();
         });
+        $("#btn_goodsAdd").click(function() {
+            goodsedit("新增商品", null);
+        });
         form.render();
     });
 });
@@ -21,7 +24,7 @@ function goods(parameters){
             id : "queryGoods2",
             elem: '#queryGoods',
             // height: 312,
-            url: '/basicJsp/goods/queryGoodsPager', //数据接口
+            url: 'basicJsp/goods/queryGoodsPager', //数据接口
             where:parameters,
             page: true ,//开启分页
             title : "是",
@@ -59,7 +62,9 @@ function goods(parameters){
                         var row = JSON.stringify(data).replace(/\"/g, "'");
                         var toolbar='<div >';
                         toolbar+='<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="save">保存</a>';
-                        toolbar+='<a class="layui-btn layui-btn-xs" onclick="goodsedit('+row+');">编辑</a>';
+                        toolbar+='<a href="javascript:goodsedit(\'修改' + data.name + '信息\',' + row + ');" class="layui-btn layui-btn-xs">';
+                        toolbar += '编辑</a>';
+                        toolbar += '<span class="layui-badge  layui-bg-gray" style="margin-left: 10px;margin-top: 5px;">';
                         toolbar+='<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>';
                         toolbar+='</div>';
                         return toolbar;
@@ -164,14 +169,13 @@ function GoodsAdd() {
 }
 
 
-function goodsedit(row) {
-    console.log(row);
-    layui.use([ 'layer', 'form' ], function() {
+function goodsedit(title,row) {
+    // console.log(row.goodstypeuuid);
+    layui.use([ 'layer'], function() {
         var layer = layui.layer;
-        var form = layui.form;
         layer.open({
             id : "goodsEdit",
-            title : '编辑商品',
+            title : title,
             type : 2,
             anim : 1,
             shadeClose: false,

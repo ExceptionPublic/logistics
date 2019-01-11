@@ -21,15 +21,15 @@
       ORDER BY uuid DESC
 
     </select>
-    <select id="SelectGtype" resultType="com.zking.logistics.basic.model.GodsType">
-      SELECT <include refid="Base_Column_List"/>
-      from goodstype where 1=1
-    </select>
   <select id="selectByname" resultType="com.zking.logistics.basic.model.GodsType">
     select
     <include refid="Base_Column_List" />
     from goodstype
     where name = #{name}
+  </select>
+  <select id="SelectGtype" resultType="com.zking.logistics.basic.model.GodsType">
+    SELECT <include refid="Base_Column_List"/>
+    from goodstype where 1=1
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from goodstype

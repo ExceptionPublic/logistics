@@ -2,7 +2,6 @@ package com.zking.logistics.basic.service;
 
 import com.zking.logistics.basic.model.Goods;
 import com.zking.logistics.util.PageBean;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;

@@ -45,7 +45,7 @@ public class GoodsServiceImpl implements IGoodsService {
 
     @Transactional(readOnly = true)
     @Override
-    public List<Map<String, Object>> queryGoodsPager(Goods goods, PageBean pageBean) {
+    public List<Map<String,Object>> queryGoodsPager(Goods goods, PageBean pageBean) {
         return goodsMapper.queryGoodsPager(goods);
     }
 }

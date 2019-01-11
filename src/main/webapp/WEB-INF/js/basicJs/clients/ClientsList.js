@@ -9,6 +9,9 @@ $(function() {
         $("#btn_queryClients").click(function() {
             supplierListSe();
         });
+        $("#btn_clientsAdd").click(function() {
+            ClientsAdd("新增客户",null);
+        });
         form.render();
     });
 });
@@ -57,18 +60,18 @@ function supplier(parameters){
                         var row = JSON.stringify(data).replace(/\"/g, "'");
                         var toolbar='<div >';
                         toolbar+='<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="save">保存</a>';
-                        toolbar+='<a class="layui-btn layui-btn-xs" title="编辑" href="javascript:ClientsAdd('+row+');">编辑</a>';
+                        toolbar+='<a href="javascript:ClientsAdd(\'修改' + data.name + '信息\',' + row + ');" class="layui-btn layui-btn-xs">';
+                        toolbar += '编辑</a></span>';
                         toolbar+='<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>';
                         toolbar+='</div>';
                         return toolbar;
                     }
                 },
             ]],
-            // done : function(res, curr, count) {
-            //     if(res.success==false)
-            //         layer.msg(res.message);
-            // }
-
+            done : function(res, curr, count) {
+                if(res.success==false)
+                    layer.msg(res.message);
+            }
         });
         //头工具栏事件
         // 监听工具条
@@ -96,7 +99,7 @@ function supplier(parameters){
                     });
 
                 });
-            }else if(layEvent=='update'){
+            }else if(layEvent=='save'){
                 layer.confirm('确定修改吗?',function (index) {
                     $.ajax({
                         url:'/basicJsp/clients/clientsUpdate',
@@ -117,7 +120,6 @@ function supplier(parameters){
 
             }
         });
-
     });
 }
 
@@ -143,9 +145,8 @@ function supplierListSe(){
 
 
 function ClientsAdd(titile,row) {
-    layui.use([ 'layer', 'form' ], function() {
+    layui.use([ 'layer' ], function() {
         var layer = layui.layer;
-        var form = layui.form;
         layer.open({
             id : "clientsAdd",
             title : titile,
@@ -156,7 +157,7 @@ function ClientsAdd(titile,row) {
             btnAlign: 'c',
             offset : 'auto',
             area : [ '400px', '430px' ],
-            content : '/basicJsp/clients/toclientsAdd',
+            content : 'basicJsp/clients/toclientsAdd',
             success : function(layero, index) {
                 if(row){
                     var iframeWin = window[layero.find('iframe')[0]['name']];
@@ -167,5 +168,4 @@ function ClientsAdd(titile,row) {
         });
     });
 }
-//   /basicJsp/goodsTypeAdd
 

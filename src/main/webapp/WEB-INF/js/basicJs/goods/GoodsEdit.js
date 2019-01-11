@@ -6,7 +6,7 @@ $(function () {
 
         //初始化部门
         if (null == rowData)
-            initSelect("/basicJsp/goodstype/SelectGtype", [], "#goodstypeuuid", "uuid", "name");
+            initSelect("basicJsp/goodstype/SelectGtype", [], "#goodstypeuuid", "uuid", "name");
 
         //按钮监听
         //关闭按钮
@@ -35,8 +35,8 @@ $(function () {
             console.log(data);
             //转换为int类型
             //判断是新增还是修改
-            // var url = "basicJsp/goods/goodsAdd";
-            // if (isBlank(field.uuid))
+            var url = "basicJsp/goods/goodsAdd";
+            if (isBlank(field.uuid))
                 url = "basicJsp/goods/goodsUpdate";
             // 进行ajax请求
             $.ajax({
@@ -71,10 +71,8 @@ function close() {
  */
 function initGoodsForm(row) {
     rowData = row;
-    console.log("rowData:"+rowData);
     //初始化部门下拉
     initSelect("basicJsp/goodstype/SelectGtype", [], "#goodstypeuuid", "uuid", "name");
     initForm("goodsEdit", row);
-    console.log(row);
     renderForm("select","goodstypeuuid");
 }

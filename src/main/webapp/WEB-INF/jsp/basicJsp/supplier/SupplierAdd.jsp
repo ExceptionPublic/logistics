@@ -13,7 +13,7 @@
     <script type="text/javascript" src="/js/basicJs/supplier/SupplierAdd.js"></script>
 </head>
 <body>
-<form method="post" lay-event="supplierAdd" id="supplierAdd" class="layui-form">
+<form method="post" lay-filter="supplierAdd" id="supplierAdd" class="layui-form">
 
 
     <div class="layui-container layui-form" style="margin-top: 10px;">
@@ -22,6 +22,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">名称：</label>
                     <div class="layui-input-block" style="width:40px;" align="center">
+                        <input type="hidden" name="uuid">
                         <input type="text" name="name" id="name" style="width: 200px;"
                                placeholder="请输入"
                                lay-verify="name|required"

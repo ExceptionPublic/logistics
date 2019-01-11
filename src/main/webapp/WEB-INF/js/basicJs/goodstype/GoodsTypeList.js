@@ -9,6 +9,9 @@ $(function() {
         $("#btn_queryGoodsType").click(function() {
             goodsTypeListSe();
         });
+        $("#btn_queryGoodsType").click(function() {
+            goodsTypeListSe("新增类型",null);
+        });
         form.render();
     });
 });
@@ -52,7 +55,8 @@ function goodsType(parameters){
                     templet : function(data) {
                         var row = JSON.stringify(data).replace(/\"/g, "'");
                         var toolbar='<div >';
-                        // toolbar+='<a class="layui-btn layui-btn-xs" onclick="goodsedit('+row+');">编辑</a>';
+                        toolbar+='<a href="javascript:GoodsTyAdd(\'修改' + data.name + '信息\',' + row + ');" class="layui-btn layui-btn-xs">';
+                        toolbar += '编辑</a>';
                         toolbar+='<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>';
 
                         toolbar+='</div>';
@@ -60,10 +64,10 @@ function goodsType(parameters){
                     }
                 },
             ]],
-            // done : function(res, curr, count) {
-            //     if(res.success==false)
-            //         layer.msg(res.message);
-            // }
+            done : function(res, curr, count) {
+                if(res.success==false)
+                    layer.msg(res.message);
+            }
 
         });
         //头工具栏事件
@@ -119,12 +123,12 @@ function goodsTypeListSe(){
 
 
 
-function GoodsTyAdd() {
+function GoodsTyAdd(title,row) {
     layui.use('layer', function() {
         var layer = layui.layer;
         layer.open({
             id : "goodsTypeAdd",
-            title : "新增类型",
+            title : title,
             type : 2,
             anim : 1,
             shadeClose: false,
@@ -133,6 +137,16 @@ function GoodsTyAdd() {
             offset : 'auto',
             area : [ '350px', '170px' ],
             content : '/basicJsp/goodstype/togoodstypeAdd',
+            success : function(layero, index) {
+                if(row){
+                    var iframeWin = window[layero.find('iframe')[0]['name']];
+                    iframeWin.initGtpForm(row);
+                }
+            },
+
+
+
+
             // btn : [ '保存','关闭' ],
             // yes :function(index, layero) {
             //     goodsType();
