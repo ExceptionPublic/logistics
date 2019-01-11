@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.logistics.basic.mapper.ClientsMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.logistics.basic.model.Clients" >
+    <constructor >
+      <idArg column="UUID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="NAME" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ADDRESS" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CONTACT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TELE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="EMAIL" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TYPE" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    UUID, NAME, ADDRESS, CONTACT, TELE, EMAIL, TYPE
+  </sql>
+
+
+  <insert id="insert" parameterType="com.zking.logistics.basic.model.Clients" >
+    insert into clients (NAME, ADDRESS,
+      CONTACT, TELE, EMAIL, 
+      TYPE)
+    values (#{name,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR},
+      #{contact,jdbcType=VARCHAR}, #{tele,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.logistics.basic.model.Clients" >
+    insert into clients
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uuid != null" >
+        UUID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="address != null" >
+        ADDRESS,
+      </if>
+      <if test="contact != null" >
+        CONTACT,
+      </if>
+      <if test="tele != null" >
+        TELE,
+      </if>
+      <if test="email != null" >
+        EMAIL,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uuid != null" >
+        #{uuid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="contact != null" >
+        #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="tele != null" >
+        #{tele,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.logistics.basic.model.Clients" >
+    update clients
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="contact != null" >
+        CONTACT = #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="tele != null" >
+        TELE = #{tele,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        TYPE = #{type,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where UUID = #{uuid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.logistics.basic.model.Clients" >
+    update clients
+    set NAME = #{name,jdbcType=VARCHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      CONTACT = #{contact,jdbcType=VARCHAR},
+      TELE = #{tele,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      TYPE = #{type,jdbcType=VARCHAR}
+    where UUID = #{uuid,jdbcType=INTEGER}
+  </update>
+  <delete id="deleteByPrimaryKey" parameterType="com.zking.logistics.basic.model.Clients">
+    delete FROM clients where uuid=#{uuid}
+  </delete>
+
+  <select id="querClientsPager" resultType="com.zking.logistics.basic.model.Clients"
+          parameterType="com.zking.logistics.basic.model.Clients">
+    SELECT <include refid="Base_Column_List"/>
+    from clients where 1=1
+    <if test="null!=name and ''!=name">
+      and name like concat(concat('%',#{name}),'%')
+    </if>
+    <if test="null!=address and ''!=address">
+      and address like concat(concat('%',#{address}),'%')
+    </if>
+  </select>
+  <select id="selectByName" resultType="com.zking.logistics.basic.model.Clients">
+    SELECT <include refid="Base_Column_List"/>
+    FROM clients where name =#{name}
+  </select>
+</mapper>
