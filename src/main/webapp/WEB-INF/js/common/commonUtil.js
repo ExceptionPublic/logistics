@@ -23,6 +23,12 @@ function getTest(element) {
         return getValue(element);
 }
 
+/**
+ * ajax
+ * @param url
+ * @param paraments
+ * @returns {*}
+ */
 function ajax(url,paraments) {
     var returnData;
     $.ajax({
@@ -36,4 +42,12 @@ function ajax(url,paraments) {
         }
     });
     return returnData;
+}
+
+
+function getToolbar(title,functionName,paraments) {
+    paraments = JSON.stringify(paraments).replace(/\"/g, "'");
+    var toolbar = '<span class="layui-badge  layui-bg-gray" style="margin-top: 5px;">';
+    toolbar += '<a href="javascript:'+functionName+'(' + paraments + ');" >';
+    toolbar += '<i title="'+title+'" class="layui-icon layui-icon-edit"></i></a></span>';
 }

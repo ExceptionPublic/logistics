@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.logistics.purchase.mapper.OrdersMapper">
+    <resultMap id="BaseResultMap" type="com.zking.logistics.purchase.model.Orders">
+        <constructor>
+            <idArg column="UUID" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="CREATETIME" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+            <arg column="CHECKTIME" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+            <arg column="STARTTIME" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+            <arg column="ENDTIME" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+            <arg column="TYPE" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="CREATER" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="CHECKER" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="STARTER" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="ENDER" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="SUPPLIERUUID" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="TOTALMONEY" jdbcType="REAL" javaType="java.lang.Float"/>
+            <arg column="STATE" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="WAYBILLSN" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+    UUID, CREATETIME, CHECKTIME, STARTTIME, ENDTIME, TYPE, CREATER, CHECKER, STARTER, 
+    ENDER, SUPPLIERUUID, TOTALMONEY, STATE, WAYBILLSN
+  </sql>
+
+    <!--查询-->
+    <!--查询单个-->
+    <select id="querySingleOrder" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from orders
+        where UUID = #{uuid,jdbcType=INTEGER}
+    </select>
+    <!--分页查询-->
+    <select id="queryOrdersPager" resultType="com.zking.logistics.purchase.vo.OrdersVo"
+            parameterType="com.zking.logistics.purchase.model.Orders">
+        select
+        <include refid="Base_Column_List"/>
+        from orders
+    </select>
+
+    <!--删除-->
+    <delete id="deleteOrder" parameterType="java.lang.Integer">
+    delete from orders
+    where UUID = #{uuid,jdbcType=INTEGER}
+  </delete>
+
+    <!--新增-->
+    <insert id="insertOrder" parameterType="com.zking.logistics.purchase.model.Orders">
+    insert into orders ( CREATETIME, CHECKTIME,
+      STARTTIME, ENDTIME, TYPE, 
+      CREATER, CHECKER, STARTER, 
+      ENDER, SUPPLIERUUID, TOTALMONEY, 
+      STATE, WAYBILLSN)
+    values ( #{createtime,jdbcType=TIMESTAMP}, #{checktime,jdbcType=TIMESTAMP},
+      #{starttime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP}, #{type,jdbcType=VARCHAR}, 
+      #{creater,jdbcType=INTEGER}, #{checker,jdbcType=INTEGER}, #{starter,jdbcType=INTEGER}, 
+      #{ender,jdbcType=INTEGER}, #{supplieruuid,jdbcType=INTEGER}, #{totalmoney,jdbcType=REAL}, 
+      #{state,jdbcType=VARCHAR}, #{waybillsn,jdbcType=INTEGER})
+  </insert>
+
+    <!--修改-->
+    <update id="updateOrder" parameterType="com.zking.logistics.purchase.model.Orders">
+        update orders
+        <set>
+            <if test="createtime != null">
+                CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="checktime != null">
+                CHECKTIME = #{checktime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="starttime != null">
+                STARTTIME = #{starttime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endtime != null">
+                ENDTIME = #{endtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="type != null">
+                TYPE = #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="creater != null">
+                CREATER = #{creater,jdbcType=INTEGER},
+            </if>
+            <if test="checker != null">
+                CHECKER = #{checker,jdbcType=INTEGER},
+            </if>
+            <if test="starter != null">
+                STARTER = #{starter,jdbcType=INTEGER},
+            </if>
+            <if test="ender != null">
+                ENDER = #{ender,jdbcType=INTEGER},
+            </if>
+            <if test="supplieruuid != null">
+                SUPPLIERUUID = #{supplieruuid,jdbcType=INTEGER},
+            </if>
+            <if test="totalmoney != null">
+                TOTALMONEY = #{totalmoney,jdbcType=REAL},
+            </if>
+            <if test="state != null">
+                STATE = #{state,jdbcType=VARCHAR},
+            </if>
+            <if test="waybillsn != null">
+                WAYBILLSN = #{waybillsn,jdbcType=INTEGER},
+            </if>
+        </set>
+        where UUID = #{uuid,jdbcType=INTEGER}
+    </update>
+
+</mapper>
