@@ -73,24 +73,24 @@
         from emp where UUID = #{uuid,jdbcType=INTEGER}
     </select>
     <!--分页-->
-    <select id="queryEmpPage" resultType="com.zking.logistics.personnel.vo.EmpVo"
+    <select id="queryEmpPager" resultType="com.zking.logistics.personnel.vo.EmpVo"
             parameterType="com.zking.logistics.personnel.model.Emp">
         SELECT
         emp.uuid,username,pwd, emp.name, gender, email, emp.tele, address, birthday, depuuid,dep.name as dep_name
         FROM emp,dep WHERE emp.depuuid=dep.uuid
-            <if test="null!=name and ''!=name">
-               and emp.name like concat('%',concat(#{name},'%'))
-            </if>
+        <if test="null!=name and ''!=name">
+            and emp.name like concat('%',concat(#{name},'%'))
+        </if>
 
-            <if test="genders.size()!=0">
-                <foreach item="item" index="index" collection="genders" open=" and(" separator="or" close=")">
-                        gender=#{item}
-                </foreach>
-            </if>
+        <if test="genders.size()!=0">
+            <foreach item="item" index="index" collection="genders" open=" and(" separator="or" close=")">
+                gender=#{item}
+            </foreach>
+        </if>
 
-            <if test="null!=depuuid and ''!=depuuid">
-               and depuuid=#{depuuid}
-            </if>
+        <if test="null!=depuuid and ''!=depuuid">
+            and depuuid=#{depuuid}
+        </if>
     </select>
     <!--根据用户名查询-->
     <select id="querySingleEmpUsername" resultType="com.zking.logistics.personnel.model.Emp">

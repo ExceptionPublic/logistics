@@ -27,7 +27,7 @@
                         <li class="layui-nav-item">
                             <a href="javascript:;">人事管理</a>
                             <dl class="layui-nav-child">
-                                <dd><a id="1423" class="open" lay-url="${ctx}/personnel/toEmpManage" href="javascript:void(0);">部门管理</a>
+                                <dd><a id="1423" class="open" lay-url="${ctx}/personnel/dep/toDepManage" href="javascript:void(0);">部门管理</a>
                                 </dd>
                                 <dd><a id="1424" class="open" lay-url="${ctx}/personnel/emp/toEmpManage" href="javascript:void(0);">员工管理</a>
                                 </dd>

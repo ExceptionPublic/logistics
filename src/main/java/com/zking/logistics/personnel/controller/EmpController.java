@@ -32,7 +32,7 @@ public class EmpController {
     }
 
     /**
-     * 跳转至新增或者查询界面
+     * 跳转至新增或者修改界面
      * @return
      */
     @RequestMapping("/toInsertOrUpdateEmp")
@@ -40,13 +40,18 @@ public class EmpController {
         return "personnel/emp/insertOrUpdateEmp";
     }
 
+    /**
+     * 新增员工
+     * @param emp
+     * @return
+     */
     @RequestMapping("/insertEmp")
     @ResponseBody
     public Map<String,Object> insertEmp(Emp emp){
         CommonUtil.createMap();
         try {
             empService.insertEmp(emp);
-            CommonUtil.put("message","添加成功");
+            CommonUtil.put("message","员工"+emp.getName()+"添加成功");
             CommonUtil.put("success",true);
         } catch (Exception e) {
             CommonUtil.put("message","系统错误");
@@ -56,13 +61,18 @@ public class EmpController {
         return CommonUtil.getMap();
     }
 
+    /**
+     * 修改员工
+     * @param emp
+     * @return
+     */
     @RequestMapping("/updateEmp")
     @ResponseBody
     public Map<String,Object> updateEmp(Emp emp){
         CommonUtil.createMap();
         try {
             empService.updateEmp(emp);
-            CommonUtil.put("message","修改成功");
+            CommonUtil.put("message","员工"+emp.getName()+"修改成功");
             CommonUtil.put("success",true);
         } catch (Exception e) {
             CommonUtil.put("message","系统错误");
@@ -73,15 +83,18 @@ public class EmpController {
     }
 
 
-
+    /**
+     * 删除员工
+     * @param emp
+     * @return
+     */
     @RequestMapping("/deleteEmp")
     @ResponseBody
     public Map<String,Object> deleteEmp(Emp emp){
         CommonUtil.createMap();
-        System.out.println(emp);
         try {
             empService.deleteBmp(emp.getUuid());
-            CommonUtil.put("message","删除成功");
+            CommonUtil.put("message","员工"+emp.getName()+"删除成功");
             CommonUtil.put("success",true);
         } catch (Exception e) {
             CommonUtil.put("message","系统错误");
@@ -91,6 +104,11 @@ public class EmpController {
         return CommonUtil.getMap();
     }
 
+    /**
+     * 判断员工是否有重复用户名
+     * @param username
+     * @return
+     */
     @RequestMapping("/isRepetitionUsername")
     @ResponseBody
     public Map<String,Object> isRepetitionUsername(String username){
@@ -98,7 +116,7 @@ public class EmpController {
         boolean repetition = empService.isRepetitionUsername(username);
         CommonUtil.put("success",repetition);
         if(repetition)
-        CommonUtil.put("message","用户账号已被占用");
+        CommonUtil.put("message","‘"+username+"’用户账号已被占用");
         return CommonUtil.getMap();
     }
 
@@ -108,15 +126,14 @@ public class EmpController {
      * @param emp
      * @return
      */
-    @RequestMapping("/queryEmpPage")
+    @RequestMapping("/queryEmpPager")
     @ResponseBody
-    public Map<String,Object> queryEmpPage(HttpServletRequest request, EmpVo emp){
+    public Map<String,Object> queryEmpPager(HttpServletRequest request, EmpVo emp){
         Map<String,Object> map=new HashMap<String, Object>();
         PageBean pageBean=new PageBean();
         pageBean.setRequest(request);
-        map.put("data",empService.queryEmpPage(emp,pageBean));
+        map.put("data",empService.queryEmpPager(emp,pageBean));
         map.put("count",pageBean.getTotal());
-        map.put("msg","");
         map.put("code",0);
         return map;
     }

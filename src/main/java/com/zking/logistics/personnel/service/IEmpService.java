@@ -45,7 +45,7 @@ public interface IEmpService {
      * @param emp
      * @return
      */
-    List<EmpVo> queryEmpPage(EmpVo emp, PageBean pageBean);
+    List<EmpVo> queryEmpPager(EmpVo emp, PageBean pageBean);
 
     /**
      * 根据用户名查询

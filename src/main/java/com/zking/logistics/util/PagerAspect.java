@@ -18,9 +18,10 @@ public class PagerAspect {
     public Object invoke(ProceedingJoinPoint args) throws Throwable {
         PageBean pageBean=null;
         Object[] params = args.getArgs();
-        for (Object o : params) {
-            if (o instanceof PageBean) {
-                pageBean=(PageBean) o;
+        for (Object param : params) {
+            if (param instanceof PageBean) {
+                pageBean=(PageBean) param;
+                break;
             }
         }
         if (null!=pageBean && pageBean.isPagination())

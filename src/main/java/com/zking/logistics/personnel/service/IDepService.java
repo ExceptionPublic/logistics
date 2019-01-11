@@ -1,6 +1,7 @@
 package com.zking.logistics.personnel.service;
 
 import com.zking.logistics.personnel.model.Dep;
+import com.zking.logistics.personnel.vo.DepVo;
 import com.zking.logistics.util.PageBean;
 import org.springframework.stereotype.Repository;
 
@@ -43,11 +44,18 @@ public interface IDepService {
      * @param dep
      * @return
      */
-    List<Dep> queryDepPage(Dep dep,PageBean pageBean);
+    List<DepVo> queryDepPager(Dep dep, PageBean pageBean);
 
     /**
      * 查询所有部门
      * @return
      */
     List<Dep> queryDep();
+
+    /**
+     * 判断部门名称是否有重复的
+     * @param username
+     * @return
+     */
+    boolean isRepetitionDepName(String username);
 }

@@ -1,10 +1,13 @@
 package com.zking.logistics.util;
 
+import lombok.ToString;
+
 import java.io.Serializable;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+@ToString
 public class PageBean implements Serializable {
 
 	private static final long serialVersionUID = 2422581023658455731L;
@@ -146,9 +149,4 @@ public class PageBean implements Serializable {
 		return previousPage;
 	}
 
-	@Override
-	public String toString() {
-		return "PageBean [page=" + page + ", rows=" + rows + ", total=" + total + ", isPagination=" + isPagination
-				+ "]";
-	}
 }

@@ -11,20 +11,20 @@
     </resultMap>
     <!--sql字段-->
     <sql id="Base_Column_List">
-    UUID, NAME, TELE
-  </sql>
+        UUID, NAME, TELE
+    </sql>
     <!--新增-->
     <insert id="insertDep" parameterType="com.zking.logistics.personnel.model.Dep">
-    INSERT INTO dep(NAME,TELE) VALUES(NAME = #{name},TELE=#{tele})
-  </insert>
+        INSERT INTO dep(name,tele) VALUES(#{name},#{tele})
+    </insert>
     <!--修改-->
     <update id="updateDep" parameterType="com.zking.logistics.personnel.model.Dep">
-    UPDATE dep SET NAME=#{name},tele=#{tele} WHERE uuid=#{uuid}
-  </update>
+        UPDATE dep SET NAME=#{name},tele=#{tele} WHERE uuid=#{uuid}
+    </update>
     <!--删除-->
     <delete id="deleteDep">
-    DELETE FROM dep WHERE uuid=#{uuid}
-  </delete>
+        DELETE FROM dep WHERE uuid=#{uuid}
+    </delete>
     <!--查询单个-->
     <select id="querySingleDep" resultType="com.zking.logistics.personnel.model.Dep">
         SELECT
@@ -32,16 +32,26 @@
         FROM dep WHERE uuid=#{uuid}
     </select>
     <!--分页-->
-    <select id="queryDepPage" resultType="com.zking.logistics.personnel.model.Dep"
+    <select id="queryDepPager" resultType="com.zking.logistics.personnel.vo.DepVo"
             parameterType="com.zking.logistics.personnel.model.Dep">
-        SELECT
-        <include refid="Base_Column_List"/>
-        FROM dep
+        SELECT dep.UUID,dep.name,dep.TELE,COUNT(emp.uuid) as emp_count FROM dep LEFT JOIN emp ON dep.uuid=emp.depuuid
+        <where>
+            <if test="null!=name and ''!=name">
+                and dep.name like concat('%',concat(#{name},'%'))
+            </if>
+        </where>
+        GROUP BY dep.uuid
     </select>
     <!--查询所有部门-->
     <select id="queryDep" resultType="com.zking.logistics.personnel.model.Dep">
         SELECT
         <include refid="Base_Column_List"/>
         FROM dep
+    </select>
+    <!--根据部门名称查询部门-->
+    <select id="queryDepName" resultType="com.zking.logistics.personnel.model.Dep">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM dep where name=#{name}
     </select>
 </mapper>

@@ -1,34 +1,26 @@
 $(function () {
-    layui.use('form', function () {
-        var form = layui.form;
-    });
-
     //初始化表格
     initTable();
-    //初始化部门下拉
-    initSelect("personnel/dep/queryDep", [], "#dep", "uuid", "name");
     //按钮监听
     //查询按钮
-    $("#btn_queryEmp").click(function () {
-        queryEmp();
+    $("#btn_queryDep").click(function () {
+        queryDep();
     });
     //新增按钮
-    $("#btn_insertEmp").click(function () {
-        openInsertOrUpdateEmp("新增员工", null);
+    $("#btn_insertDep").click(function () {
+        openInsertOrUpdateDep("新增部门", null);
     });
 });
 
 // 查询
-function queryEmp() {
+function queryDep() {
     layui.use('table', function () {
         var table = layui.table;
         var paraments = {
-            genders: getCheckboxs("gender"),
-            name: getValue("#name"),
-            depuuid: getValue("#dep")
+            name: getValue("#name")
         };
-        table.reload('empTable', {
-            url: 'personnel/emp/queryEmpPager',
+        table.reload('depTable', {
+            url: 'personnel/dep/queryDepPager',
             where: paraments
         });
     });
@@ -39,14 +31,14 @@ function initTable() {
     layui.use('table', function () {
         var table = layui.table;
         table.render({
-            id: "empTable",
-            elem: '#empTable',
+            id: "depTable",
+            elem: '#depTable',
             height: "full-80",
-            url: 'personnel/emp/queryEmpPager',
-            title: "员工信息",
+            url: 'personnel/dep/queryDepPager',
+            title: "部门信息",
             page: true,
-            limit: 10,
-            limits: [10, 15, 20],
+            limit: 15,
+            limits: [15, 20, 25],
             request: {
                 limitName: 'rows' //每页数据量的参数名，默认：limit
             },
@@ -61,70 +53,36 @@ function initTable() {
                     align: "center"
                 },
                 {
-                    title: '登陆用户名',
-                    field: 'username',
-                    width: '8%',
-                    align: "center"
-                },
-                {
-                    title: '真实姓名',
+                    title: '部门名称',
                     field: 'name',
-                    width: '8%',
+                    width: '20%',
                     align: "center"
                 },
                 {
-                    title: '性别',
-                    field: 'gender',
-                    width: '5%',
-                    align: "center",
-                    templet: function (data) {
-                        return data.gender == 0 ? "男" : "女";
-                    }
+                    title: '部门电话',
+                    field: 'tele',
+                    width: '35%',
+                    align: "center"
                 },
                 {
-                    title: '所属部门',
-                    field: 'depName',
+                    title: '部门人数',
+                    field: 'empCount',
                     width: '10%',
                     align: "center"
                 },
                 {
-                    title: '出生日期',
-                    field: 'birthday',
-                    width: '13%',
-                    sort: true,
-                    align: "center"
-                },
-                {
-                    title: '电话',
-                    field: 'tele',
-                    width: '13%',
-                    align: "center"
-                },
-                {
-                    title: '邮箱',
-                    field: 'email',
-                    width: '13%',
-                    align: "center"
-                },
-                {
-                    title: '地址',
-                    field: 'address',
-                    width: '13%',
-                    align: "center"
-                },
-                {
                     title: '操作',
-                    width: '13%',
+                    width: '30%',
                     field: "",
                     align: "center",
                     templet: function (data) {
                         var row = JSON.stringify(data).replace(/\"/g, "'");
                         var toolbar = '<div >';
                         toolbar += '<span class="layui-badge  layui-bg-gray" style="margin-top: 5px;">';
-                        toolbar += '<a href="javascript:openInsertOrUpdateEmp(\'修改' + data.name + '信息\',' + row + ');" >';
+                        toolbar += '<a href="javascript:openInsertOrUpdateDep(\'修改' + data.name + '部门信息\',' + row + ');" >';
                         toolbar += '<i title="编辑" class="layui-icon layui-icon-edit"></i></a></span>';
                         toolbar += '<span class="layui-badge  layui-bg-gray" style="margin-left: 10px;margin-top: 5px;">';
-                        toolbar += '<a href="javascript:deleteEmp(' + row + ');">';
+                        toolbar += '<a href="javascript:deleteDep(' + row + ');">';
                         toolbar += '<i title="删除" class="layui-icon layui-icon-close"></i></a></span>';
                         toolbar += '</div>';
                         console.log();
@@ -141,47 +99,47 @@ function initTable() {
 }
 
 /**
- * 打开员工新增或修改界面
+ * 打开部门新增或修改界面
  * @param title
  * @param row
  * @param url
  */
-function openInsertOrUpdateEmp(title, row) {
-    layui.use(['layer', 'form'], function () {
+function openInsertOrUpdateDep(title, row) {
+    layui.use('layer', function () {
         var layer = layui.layer;
-        var form = layui.form;
         layer.open({
-            id: "emp",
+            id: "dep",
             title: title,
             type: 2,
             anim: 1,
             offset: 'auto',
-            area: ['1000px', '600px'],
-            content: 'personnel/emp/toInsertOrUpdateEmp',
+            area: ['400px', '250px'],
+            content: 'personnel/dep/toInsertOrUpdateDep',
             success: function (layero, index) {
                 if (row) {
                     var iframeWin = window[layero.find('iframe')[0]['name']];
-                    iframeWin.initEmpForm(row);
+                    iframeWin.initDepForm(row);
                 }
             }
         });
     });
 }
 
+
 /**
- * 删除员工
+ * 删除部门
  * @param uuid
  */
-function deleteEmp(row) {
-    layer.confirm('确定删除' + row.name + '员工吗？', function (index) {
+function deleteDep(row) {
+    layer.confirm('确定删除' + row.name + '部门吗？', function (index) {
         $.ajax({
-            url: "personnel/emp/deleteEmp",
+            url: "personnel/dep/deleteDep",
             data: row,
             type: "post",
             dataType: "json",
             success: function (data) {
                 msg(data.message);
-                queryEmp();
+                queryDep();
             }
         });
         layer.close(index);
