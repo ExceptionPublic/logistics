@@ -110,11 +110,13 @@ function initTable() {
                     align: "center",
                     templet: function (data) {
                         if(data.state!=3){
+                            var title="";
+                            var icon="";
                             var toolbar = '<div >';
-                            var title="审核通过";
-                            toolbar += getToolbar(title,"alterOrdersState",{
 
-                            });
+                            getToolbar("审核通过","alterOrdersState",{
+                                state:"1"
+                            },icon);
                             toolbar += '</div>';
                             return toolbar;
                         }
@@ -152,10 +154,17 @@ function queryOrders() {
 /**
  * 改变订单状态
  */
-function alterOrdersState() {
-    ajax("purchase/alterOrdersState",[
+function alterOrdersState(paraments) {
+     $.ajax({
+        url: "purchase/alterOrdersState",
+        data: paraments,
+        type: "post",
+        dataType: "json",
+        async: false,
+        success: function (data) {
 
-    ]);
+        }
+    });
 }
 
 

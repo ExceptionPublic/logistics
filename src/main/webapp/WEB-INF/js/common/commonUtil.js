@@ -23,31 +23,10 @@ function getTest(element) {
         return getValue(element);
 }
 
-/**
- * ajax
- * @param url
- * @param paraments
- * @returns {*}
- */
-function ajax(url,paraments) {
-    var returnData;
-    $.ajax({
-        url: url,
-        data: paraments,
-        type: "post",
-        dataType: "json",
-        async: false,
-        success: function (data) {
-            returnData=data;
-        }
-    });
-    return returnData;
-}
 
-
-function getToolbar(title,functionName,paraments) {
+function getToolbar(title,functionName,paraments,icon) {
     paraments = JSON.stringify(paraments).replace(/\"/g, "'");
     var toolbar = '<span class="layui-badge  layui-bg-gray" style="margin-top: 5px;">';
     toolbar += '<a href="javascript:'+functionName+'(' + paraments + ');" >';
-    toolbar += '<i title="'+title+'" class="layui-icon layui-icon-edit"></i></a></span>';
+    toolbar += '<i title="'+title+'" class="'+icon+'"></i></a></span>';
 }
