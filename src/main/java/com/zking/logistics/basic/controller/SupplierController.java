@@ -22,7 +22,6 @@ public class SupplierController {
     private ISupplierService supplierService;
     private Map<String, Object> map = new HashMap<>();
 
-
     //查询所有供应商
     @ResponseBody
     @RequestMapping("/SupplierList")
@@ -34,17 +33,14 @@ public class SupplierController {
     @RequestMapping("/toqueryLstSupplier")
     public String toqueryLstSupplier() {
         return "basicJsp/supplier/SupplierList";
-
     }
 
 
     @RequestMapping("/queryLstSupplier")
     @ResponseBody
-    public Map<String, Object> queryLstSupplier(Supplier supplier,
-                                                HttpServletRequest request) {
+    public Map<String, Object> queryLstSupplier(Supplier supplier,HttpServletRequest request) {
         PageBean pageBean = new PageBean();
         pageBean.setRequest(request);
-
         List<Supplier> suppliers = supplierService.querySupplierPager(supplier, pageBean);
         System.out.println(suppliers);
         map.put("data", suppliers);
@@ -71,7 +67,6 @@ public class SupplierController {
         } else {
             map.put("message", "新增失败！");
         }
-
         return map;
     }
 
@@ -117,6 +112,7 @@ public class SupplierController {
         }
         return CommonUtil.getMap();
     }
+
 
 
 }

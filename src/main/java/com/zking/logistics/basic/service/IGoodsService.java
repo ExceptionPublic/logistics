@@ -22,11 +22,12 @@ public interface IGoodsService {
     //    商品修改
     int updateByPrimaryKeySelective(Goods record);
 
-
     //    商品查询分页
     List<Map<String,Object>> queryGoodsPager(Goods goods, PageBean pageBean);
 
+    boolean isGoodsname(String name);
 
+    List<Map<String, Object>> queryGoodsPager(Goods goods, PageBean pageBean);
     boolean isGoodsname(String name);
 
 }

@@ -16,6 +16,8 @@ $(function () {
     $("#btn_purchase").click(function () {
         openInsertPurchase();
     });
+
+    tableDouble();
 });
 
 // 初始化表格
@@ -42,83 +44,56 @@ function initTable() {
                 {
                     title: '创建日期',
                     field: 'createtime',
-                    width: '10%',
+                    width: '20%',
                     sort: true,
                     align: "center"
                 },
                 {
                     title: '审核日期',
                     field: 'checktime',
-                    width: '10%',
-                    sort: true,
-                    align: "center"
-                },
-                {
-                    title: '采购日期',
-                    field: 'starttime',
-                    width: '10%',
-                    sort: true,
-                    align: "center"
-                },
-                {
-                    title: '入库日期',
-                    field: 'endtime',
-                    width: '10%',
+                    width: '20%',
                     sort: true,
                     align: "center"
                 },
                 {
                     title: '下单员',
                     field: 'creater',
-                    width: '8%',
+                    width: '10%',
                     align: "center"
                 },
                 {
                     title: '审查员',
                     field: 'checker',
-                    width: '8%',
-                    align: "center"
-                },
-                {
-                    title: '采购员',
-                    field: 'starter',
-                    width: '8%',
-                    align: "center"
-                },
-                {
-                    title: '库管员',
-                    field: 'ender',
-                    width: '8%',
+                    width: '10%',
                     align: "center"
                 },
                 {
                     title: '供应商',
                     field: 'supplierName',
-                    width: '8%',
+                    width: '20%',
                     align: "center"
                 },
                 {
                     title: '总金额',
                     field: 'totalmoney',
-                    width: '5%',
+                    width: '10%',
                     align: "center"
                 },
                 {
                     title: '订单状态',
                     field: 'state',
-                    width: '7%',
+                    width: '8%',
                     align: "center",
                     templet: function (data) {
-                        if(data.state!=3){
-                            var toolbar = '<div >';
-                            var title="审核通过";
-                            toolbar += getToolbar(title,"alterOrdersState",{
-
-                            });
-                            toolbar += '</div>';
-                            return toolbar;
-                        }
-                        return data.state;
+                        var toolbar = '<div >';
+                        toolbar+=getToolbar("删除订单","deleteOrders",{
+                            uuid:data.uuid
+                        },"layui-icon layui-icon-delete");
+                        toolbar+=getToolbar("审核通过","alterOrdersState",{
+                            state:"1"
+                        },"layui-icon layui-icon-ok-circle");
+                        toolbar += '</div>';
+                        return toolbar;
                     }
                 }
             ]],
@@ -126,6 +101,33 @@ function initTable() {
                 if (res.success == false)
                     msg(res.message)
             }
+        });
+    });
+}
+
+/**
+ * 表格双击事件
+ */
+function tableDouble() {
+    layer.use('table',function(){
+        var table = layui.table;
+        table.on('rowDouble(test)', function(obj){
+            layui.use('layer', function () {
+                var layer = layui.layer;
+                layer.open({
+                    id: "dep",
+                    title: "申请采购",
+                    type: 2,
+                    anim: 1,
+                    offset: 'auto',
+                    area: ['1200px', '800px'],
+                    content: 'purchase/toInsertPurchase',
+                    success:function (layero, index) {
+                        // obj.data当前数据
+
+                    }
+                });
+            });
         });
     });
 }
@@ -152,10 +154,17 @@ function queryOrders() {
 /**
  * 改变订单状态
  */
-function alterOrdersState() {
-    ajax("purchase/alterOrdersState",[
-
-    ]);
+function alterOrdersState(paraments) {
+     $.ajax({
+        url: "purchase/alterOrdersState",
+        data: paraments,
+        type: "post",
+        dataType: "json",
+        async: false,
+        success: function (data) {
+            msg(data.message);
+        }
+    });
 }
 
 

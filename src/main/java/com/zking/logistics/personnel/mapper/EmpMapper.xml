@@ -18,12 +18,12 @@
     </resultMap>
     <!--字段-->
     <sql id="Base_Column_List">
-    UUID, USERNAME, PWD, NAME, GENDER, EMAIL, TELE, ADDRESS, BIRTHDAY, DEPUUID
+    UUID,role_id, USERNAME, PWD, NAME, GENDER, EMAIL, TELE, ADDRESS, BIRTHDAY, DEPUUID
   </sql>
     <!--新增-->
     <insert id="insertEmp" parameterType="com.zking.logistics.personnel.model.Emp">
-    insert into emp (USERNAME, PWD,NAME, GENDER, EMAIL,TELE, ADDRESS, BIRTHDAY,DEPUUID)
-    values ( #{username,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR},
+    insert into emp (role_id,USERNAME, PWD,NAME, GENDER, EMAIL,TELE, ADDRESS, BIRTHDAY,DEPUUID)
+    values ( #{roleId,javaType=INTEGER},#{username,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR},
             #{name,jdbcType=VARCHAR}, #{gender,jdbcType=INTEGER}, #{email,jdbcType=VARCHAR},
             #{tele,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{birthday,jdbcType=TIMESTAMP},
             #{depuuid,jdbcType=INTEGER})
@@ -32,6 +32,9 @@
     <update id="updateEmp" parameterType="com.zking.logistics.personnel.model.Emp">
         update emp
         <set>
+            <if test="roleId != null">
+                role_id = #{roleId,jdbcType=VARCHAR},
+            </if>
             <if test="username != null">
                 USERNAME = #{username,jdbcType=VARCHAR},
             </if>
