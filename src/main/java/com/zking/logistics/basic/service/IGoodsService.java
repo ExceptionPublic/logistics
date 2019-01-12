@@ -26,8 +26,4 @@ public interface IGoodsService {
     List<Map<String,Object>> queryGoodsPager(Goods goods, PageBean pageBean);
 
     boolean isGoodsname(String name);
-
-    List<Map<String, Object>> queryGoodsPager(Goods goods, PageBean pageBean);
-    boolean isGoodsname(String name);
-
 }
