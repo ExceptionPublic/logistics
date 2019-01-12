@@ -16,9 +16,6 @@
         delete from store
     where UUID = #{uuid}
     </delete>
-    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
-
-    </select>
     <select id="queryStorePager" resultType="map" parameterType="com.zking.logistics.basic.model.Store">
       SELECT s.uuid,s.name,s.address,e.name ename FROM store s
         INNER JOIN emp e ON s.empuuid=e.uuid

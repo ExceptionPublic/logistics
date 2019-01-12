@@ -4,27 +4,27 @@ $(function() {
         var table = layui.table,
             form = layui.form;
         // 初始化
-        supplier({});
+        store({});
         // 给查询按钮绑定事件
-        $("#btn_querySupplier").click(function() {
-            supplierListSe();
+        $("#btn_queryStore").click(function() {
+            storeListSe();
         });
-        $("#btn_supplierAdd").click(function() {
-            SupplierAdd("新增供应商",null);
+        $("#btn_storeAdd").click(function() {
+            storeAdd("新增仓库",null);
         });
         form.render();
     });
 });
 
-function supplier(parameters){
+function store(parameters){
     layui.use('table', function(){
         var table = layui.table;
         //第一个实例
         table.render({
-            id : "querySuppliers",
-            elem: '#querySupplier',
+            id : "queryStores",
+            elem: '#queryStore',
             // height: 312,
-            url: '/basicJsp/supplier/queryLstSupplier', //数据接口
+            url: '/basicJsp/store/queryStorePager', //数据接口
             where:parameters,
             page: true ,//开启分页
             title : "是",
@@ -51,16 +51,13 @@ function supplier(parameters){
             cols: [[ //表头
                 {field: 'uuid', title: '编号', width:'5%', sort: true, align: 'center'},
                 {field: 'name', title: '供应商', width:'15%',align: 'center'},
-                {field: 'address', title: '地址(点击编辑)',edit:'text', width:'20%',align: 'center'},
-                {field: 'contact', title: '联系人',edit:'text', width:'15%',align: 'center'},
-                {field: 'tele', title: '电话', width:'15%',align: 'center'},
-                {field: 'email', title: 'EMAIL', width:'15%',align: 'center'},
+                {field: 'address', title: '地址',edit:'text', width:'20%',align: 'center'},
+                {field: 'ename', title: '仓库管理员',edit:'text', width:'15%',align: 'center'},
                 {field: '', title: '操作', width: '15%',align: 'center',
                     templet : function(data) {
                         var row = JSON.stringify(data).replace(/\"/g, "'");
                         var toolbar='<div >';
-                        toolbar+='<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="save">保存</a>';
-                        toolbar+='<a href="javascript:SupplierAdd(\'修改' + data.name + '信息\',' + row + ');" class="layui-btn layui-btn-xs">';
+                        toolbar+='<a href="javascript:storeAdd(\'修改' + data.name + '信息\',' + row + ');" class="layui-btn layui-btn-xs">';
                         toolbar += '编辑</a>';
                         toolbar+='<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>';
                         toolbar+='</div>';
@@ -72,15 +69,11 @@ function supplier(parameters){
                 if(res.success==false)
                     layer.msg(res.message);
             }
-            // done : function(res, curr, count) {
-            //     if(res.success==false)
-            //         layer.msg(res.message);
-            // }
 
         });
         //头工具栏事件
         // 监听工具条
-        table.on('tool(querySupplier)', function(obj){ //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+        table.on('tool(queryStore)', function(obj){ //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
             var data = obj.data; //获得当前行数据
             var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
             var tr = obj.tr; //获得当前行 tr 的DOM对象
@@ -88,7 +81,7 @@ function supplier(parameters){
             if(layEvent === 'del'){ //删除
                 layer.confirm('真的删除'+data.name+'么?', function(index){
                     $.ajax({
-                        url : '/basicJsp/supplier/SupplierDel',
+                        url : '/basicJsp/store/storeDel',
                         data : data,
                         dataType : "json",
                         async : false,
@@ -104,32 +97,13 @@ function supplier(parameters){
                     });
 
                 });
-            }else if(layEvent=='save'){
-                layer.confirm('确定修改吗?',function (index) {
-                    $.ajax({
-                        url:'/basicJsp/supplier/supplierUpdate',
-                        data:data,
-                        dataType : "json",
-                        async : false,
-                        type : "post",
-                        success : function(data) {
-                            layer.msg(data.message);
-                            if (data.success) {
-                                obj.update(); //同步更新缓存对应的值
-                                layer.close(index); //向服务端发送指令
-                            }
-
-                        }
-                    })
-                })
-
             }
         });
 
     });
 }
 
-function supplierListSe(){
+function storeListSe(){
     layui.use('table', function() {
         var table = layui.table;
 
@@ -137,8 +111,8 @@ function supplierListSe(){
             'name': getValue('#name'),
             'address': getValue('#address'),
         };
-        table.reload('querySuppliers', {
-            url : '/basicJsp/supplier/queryLstSupplier',
+        table.reload('queryStores', {
+            url : '/basicJsp/store/queryStorePager',
             where : paraments,
             page:{
                 curr:1
@@ -149,11 +123,11 @@ function supplierListSe(){
 
 
 
-function SupplierAdd(titile,row) {
+function storeAdd(titile,row) {
     layui.use('layer', function() {
         var layer = layui.layer;
         layer.open({
-            id : "supplierAdd",
+            id : "storeEdit",
             title : titile,
             type : 2,
             anim : 1,
@@ -162,41 +136,15 @@ function SupplierAdd(titile,row) {
             btnAlign: 'c',
             offset : 'auto',
             area : [ '400px', '430px' ],
-            content : '/basicJsp/supplier/tosupplierAdd',
+            content : '/basicJsp/store/tostoreEdit',
             success : function(layero, index) {
                 if(row){
                     var iframeWin = window[layero.find('iframe')[0]['name']];
-                    iframeWin.initSupForm(row);
+                    iframeWin.initStoForm(row);
                 }
             },
-            // btn : [ '保存','关闭' ],
-            // yes :function(index, layero) {
-            //     supplier();
-            //     // 获取表单 byid添id
-            //     var form = layero.find("iframe")[0].contentWindow.document.getElementById("supplierAdd")
-            //     // 获取表单数据
-            //     var data = $(form).serializeArray();
-            //     $.ajax({
-            //         url : '/basicJsp/supplier/supplierAdd',
-            //         data : data,
-            //         dataType : "json",
-            //         async : false,
-            //         type : "post",
-            //         success : function(data) {
-            //             layer.msg(data.message);
-            //             if (data.success) {
-            //                 supplier();
-            //                 layer.close(index);
-            //             }
-            //
-            //         }
-            //
-            //     });
-            //
-            // },
 
         });
     });
 }
-//   /basicJsp/goodsTypeAdd
 
