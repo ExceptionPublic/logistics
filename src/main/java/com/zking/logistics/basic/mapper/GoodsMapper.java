@@ -22,4 +22,5 @@ public interface GoodsMapper {
 
     List<Map<String,Object>> queryGoodsPager(Goods goods);
 
+    List<Goods> queryGoods(Goods goods);
 }

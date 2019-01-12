@@ -17,6 +17,7 @@ public interface IGoodsService {
     int updateByPrimaryKeySelective(Goods record);
 
     boolean isGoodsname(String name);
-    List<Map<String,Object>> queryGoodsPager(Goods goods, PageBean pageBean);
+
+    List<Map<String, Object>> queryGoodsPager(Goods goods, PageBean pageBean);
 
 }

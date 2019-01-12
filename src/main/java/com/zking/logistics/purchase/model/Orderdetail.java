@@ -1,20 +1,9 @@
 package com.zking.logistics.purchase.model;
 
-import lombok.ToString;
-
-import java.io.Serializable;
 import java.util.Date;
 
-/**
- * 采购订单详情
- */
-@ToString
-public class Orderdetail implements Serializable {
-    private Integer uuid;
-
-    private Integer goodsuuid;
-
-    private String goodsname;
+public class Orderdetail {
+    private Integer detailId;
 
     private Float price;
 
@@ -22,56 +11,44 @@ public class Orderdetail implements Serializable {
 
     private Float money;
 
-    private Date endtime;
-
     private Integer ender;
 
-    private Integer storeuuid;
+    private Date enderDate;
+
+    private Integer purchase;
+
+    private Date purchaseDate;
+
+    private Integer storeId;
 
     private String state;
 
-    private Integer ordersuuid;
+    private Integer ordersId;
 
-    public Orderdetail(Integer uuid, Integer goodsuuid, String goodsname, Float price, Integer num, Float money, Date endtime, Integer ender, Integer storeuuid, String state, Integer ordersuuid) {
-        this.uuid = uuid;
-        this.goodsuuid = goodsuuid;
-        this.goodsname = goodsname;
+    public Orderdetail(Integer detailId, Float price, Integer num, Float money, Integer ender, Date enderDate, Integer purchase, Date purchaseDate, Integer storeId, String state, Integer ordersId) {
+        this.detailId = detailId;
         this.price = price;
         this.num = num;
         this.money = money;
-        this.endtime = endtime;
         this.ender = ender;
-        this.storeuuid = storeuuid;
+        this.enderDate = enderDate;
+        this.purchase = purchase;
+        this.purchaseDate = purchaseDate;
+        this.storeId = storeId;
         this.state = state;
-        this.ordersuuid = ordersuuid;
+        this.ordersId = ordersId;
     }
 
     public Orderdetail() {
         super();
     }
 
-    public Integer getUuid() {
-        return uuid;
+    public Integer getDetailId() {
+        return detailId;
     }
 
-    public void setUuid(Integer uuid) {
-        this.uuid = uuid;
-    }
-
-    public Integer getGoodsuuid() {
-        return goodsuuid;
-    }
-
-    public void setGoodsuuid(Integer goodsuuid) {
-        this.goodsuuid = goodsuuid;
-    }
-
-    public String getGoodsname() {
-        return goodsname;
-    }
-
-    public void setGoodsname(String goodsname) {
-        this.goodsname = goodsname;
+    public void setDetailId(Integer detailId) {
+        this.detailId = detailId;
     }
 
     public Float getPrice() {
@@ -98,14 +75,6 @@ public class Orderdetail implements Serializable {
         this.money = money;
     }
 
-    public Date getEndtime() {
-        return endtime;
-    }
-
-    public void setEndtime(Date endtime) {
-        this.endtime = endtime;
-    }
-
     public Integer getEnder() {
         return ender;
     }
@@ -114,12 +83,36 @@ public class Orderdetail implements Serializable {
         this.ender = ender;
     }
 
-    public Integer getStoreuuid() {
-        return storeuuid;
+    public Date getEnderDate() {
+        return enderDate;
     }
 
-    public void setStoreuuid(Integer storeuuid) {
-        this.storeuuid = storeuuid;
+    public void setEnderDate(Date enderDate) {
+        this.enderDate = enderDate;
+    }
+
+    public Integer getPurchase() {
+        return purchase;
+    }
+
+    public void setPurchase(Integer purchase) {
+        this.purchase = purchase;
+    }
+
+    public Date getPurchaseDate() {
+        return purchaseDate;
+    }
+
+    public void setPurchaseDate(Date purchaseDate) {
+        this.purchaseDate = purchaseDate;
+    }
+
+    public Integer getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(Integer storeId) {
+        this.storeId = storeId;
     }
 
     public String getState() {
@@ -130,11 +123,11 @@ public class Orderdetail implements Serializable {
         this.state = state;
     }
 
-    public Integer getOrdersuuid() {
-        return ordersuuid;
+    public Integer getOrdersId() {
+        return ordersId;
     }
 
-    public void setOrdersuuid(Integer ordersuuid) {
-        this.ordersuuid = ordersuuid;
+    public void setOrdersId(Integer ordersId) {
+        this.ordersId = ordersId;
     }
 }

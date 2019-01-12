@@ -43,6 +43,7 @@
   </select>
 
 
+
   <insert id="insert" parameterType="com.zking.logistics.basic.model.Goods" >
     insert into goods (NAME, ORIGIN,
       PRODUCER, UNIT, INPRICE, 

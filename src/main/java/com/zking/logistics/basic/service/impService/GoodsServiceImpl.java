@@ -48,4 +48,5 @@ public class GoodsServiceImpl implements IGoodsService {
     public List<Map<String,Object>> queryGoodsPager(Goods goods, PageBean pageBean) {
         return goodsMapper.queryGoodsPager(goods);
     }
+
 }

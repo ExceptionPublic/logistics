@@ -3,95 +3,92 @@
 <mapper namespace="com.zking.logistics.purchase.mapper.OrderdetailMapper" >
   <resultMap id="BaseResultMap" type="com.zking.logistics.purchase.model.Orderdetail" >
     <constructor >
-      <idArg column="UUID" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="GOODSUUID" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="GOODSNAME" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="PRICE" jdbcType="REAL" javaType="java.lang.Float" />
-      <arg column="NUM" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="MONEY" jdbcType="REAL" javaType="java.lang.Float" />
-      <arg column="ENDTIME" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="ENDER" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="STOREUUID" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="STATE" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="ORDERSUUID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <idArg column="detail_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="price" jdbcType="REAL" javaType="java.lang.Float" />
+      <arg column="num" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="money" jdbcType="REAL" javaType="java.lang.Float" />
+      <arg column="ender" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ender_date" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="purchase" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="purchase_date" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="store_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="state" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="orders_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
     </constructor>
   </resultMap>
   <!--字段-->
   <sql id="Base_Column_List" >
-    UUID, GOODSUUID, GOODSNAME, PRICE, NUM, MONEY, ENDTIME, ENDER, STOREUUID, STATE, 
-    ORDERSUUID
+    detail_id, price, num, money, ender, ender_date, purchase, purchase_date, store_id, 
+    state, orders_id
   </sql>
 
   <!--查询-->
   <!--查询单个-->
   <select id="querySingleOrderdetail" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from orderdetail
     where UUID = #{uuid,jdbcType=INTEGER}
   </select>
   <!--分页查询-->
-    <select id="queryOrderdetailsPager" resultType="com.zking.logistics.purchase.model.Orderdetail"
-            parameterType="com.zking.logistics.purchase.model.Orderdetail">
-      select
-      <include refid="Base_Column_List" />
-      from orderdetail
-    </select>
-
+  <select id="queryOrderdetailsPager" resultType="com.zking.logistics.purchase.model.Orderdetail"
+          parameterType="com.zking.logistics.purchase.model.Orderdetail">
+    select
+    <include refid="Base_Column_List" />
+    from orderdetail
+  </select>
   <!--删除-->
-    <delete id="deleteOrderdetail" parameterType="java.lang.Integer" >
+  <delete id="deleteOrderdetail" parameterType="java.lang.Integer" >
     delete from orderdetail
-    where UUID = #{uuid,jdbcType=INTEGER}
+    where detail_id = #{detailId,jdbcType=INTEGER}
   </delete>
-
   <!--新增-->
   <insert id="insertOrderdetail" parameterType="com.zking.logistics.purchase.model.Orderdetail" >
-    insert into orderdetail ( GOODSUUID, GOODSNAME,
-      PRICE, NUM, MONEY, ENDTIME, 
-      ENDER, STOREUUID, STATE, 
-      ORDERSUUID)
-    values (#{goodsuuid,jdbcType=INTEGER}, #{goodsname,jdbcType=VARCHAR},
-      #{price,jdbcType=REAL}, #{num,jdbcType=INTEGER}, #{money,jdbcType=REAL}, #{endtime,jdbcType=TIMESTAMP}, 
-      #{ender,jdbcType=INTEGER}, #{storeuuid,jdbcType=INTEGER}, #{state,jdbcType=VARCHAR}, 
-      #{ordersuuid,jdbcType=INTEGER})
+    insert into orderdetail ( price, num,
+      money, ender, ender_date, 
+      purchase, purchase_date, store_id, 
+      state, orders_id)
+    values ( #{price,jdbcType=REAL}, #{num,jdbcType=INTEGER},
+      #{money,jdbcType=REAL}, #{ender,jdbcType=INTEGER}, #{enderDate,jdbcType=TIMESTAMP}, 
+      #{purchase,jdbcType=INTEGER}, #{purchaseDate,jdbcType=TIMESTAMP}, #{storeId,jdbcType=INTEGER}, 
+      #{state,jdbcType=VARCHAR}, #{ordersId,jdbcType=INTEGER})
   </insert>
-
   <!--修改-->
   <update id="updateOrderdetail" parameterType="com.zking.logistics.purchase.model.Orderdetail" >
     update orderdetail
     <set >
-      <if test="goodsuuid != null" >
-        GOODSUUID = #{goodsuuid,jdbcType=INTEGER},
-      </if>
-      <if test="goodsname != null" >
-        GOODSNAME = #{goodsname,jdbcType=VARCHAR},
-      </if>
       <if test="price != null" >
-        PRICE = #{price,jdbcType=REAL},
+        price = #{price,jdbcType=REAL},
       </if>
       <if test="num != null" >
-        NUM = #{num,jdbcType=INTEGER},
+        num = #{num,jdbcType=INTEGER},
       </if>
       <if test="money != null" >
-        MONEY = #{money,jdbcType=REAL},
-      </if>
-      <if test="endtime != null" >
-        ENDTIME = #{endtime,jdbcType=TIMESTAMP},
+        money = #{money,jdbcType=REAL},
       </if>
       <if test="ender != null" >
-        ENDER = #{ender,jdbcType=INTEGER},
+        ender = #{ender,jdbcType=INTEGER},
       </if>
-      <if test="storeuuid != null" >
-        STOREUUID = #{storeuuid,jdbcType=INTEGER},
+      <if test="enderDate != null" >
+        ender_date = #{enderDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="purchase != null" >
+        purchase = #{purchase,jdbcType=INTEGER},
+      </if>
+      <if test="purchaseDate != null" >
+        purchase_date = #{purchaseDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="storeId != null" >
+        store_id = #{storeId,jdbcType=INTEGER},
       </if>
       <if test="state != null" >
-        STATE = #{state,jdbcType=VARCHAR},
+        state = #{state,jdbcType=VARCHAR},
       </if>
-      <if test="ordersuuid != null" >
-        ORDERSUUID = #{ordersuuid,jdbcType=INTEGER},
+      <if test="ordersId != null" >
+        orders_id = #{ordersId,jdbcType=INTEGER},
       </if>
     </set>
-    where UUID = #{uuid,jdbcType=INTEGER}
+    where detail_id = #{detailId,jdbcType=INTEGER}
   </update>
 
 </mapper>

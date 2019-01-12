@@ -9,6 +9,8 @@ import java.util.Date;
 public class Emp implements Serializable {
     private Integer uuid;
 
+    private Integer roleId;
+
     private String username;
 
     private String pwd;
@@ -28,8 +30,9 @@ public class Emp implements Serializable {
 
     private Integer depuuid;
 
-    public Emp(Integer uuid, String username, String pwd, String name, Integer gender, String email, String tele, String address, Date birthday, Integer depuuid) {
+    public Emp(Integer uuid, Integer roleId, String username, String pwd, String name, Integer gender, String email, String tele, String address, Date birthday, Integer depuuid) {
         this.uuid = uuid;
+        this.roleId = roleId;
         this.username = username;
         this.pwd = pwd;
         this.name = name;
@@ -43,6 +46,14 @@ public class Emp implements Serializable {
 
     public Emp() {
         super();
+    }
+
+    public Integer getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
     }
 
     public Integer getUuid() {
