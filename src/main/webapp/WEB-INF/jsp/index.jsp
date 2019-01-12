@@ -42,6 +42,16 @@
                                 </dd>
                             </dl>
                         </li>
+                        <li class="layui-nav-item">
+                            <a href="javascript:;">基本信息</a>
+                            <dl class="layui-nav-child">
+                                <dd><a id="2421" class="open" lay-url="${ctx}/basicJsp/goodsTypeLst" href="${ctx}/basicJsp/goodstype/toGoodstypeList">商品类型</a></dd>
+                                <dd><a id="2422" class="open" lay-url="${ctx}/personnel/toEmpManage" href="/basicJsp/goods/toqueryGoods">商品</a></dd>
+                                <dd><a id="2423" class="open" lay-url="${ctx}/personnel/toEmpManage" href="${ctx}/basicJsp/supplier/toqueryLstSupplier">供应商</a></dd>
+                                <dd><a id="2424" class="open" lay-url="${ctx}/personnel/toEmpManage" href="/basicJsp/clients/toqueryClients">客户</a></dd>
+                                <dd><a id="2425" class="open" lay-url="${ctx}/personnel/toEmpManage" href="javascript:void(0);">仓库</a></dd>
+                            </dl>
+                        </li>
                     </ul>
                 </div>
             </div>
