@@ -76,7 +76,8 @@
     <select id="queryEmpPager" resultType="com.zking.logistics.personnel.vo.EmpVo"
             parameterType="com.zking.logistics.personnel.model.Emp">
         SELECT
-        emp.uuid,username,pwd, emp.name, gender, email, emp.tele, address, birthday, depuuid,dep.name as dep_name
+        emp.uuid,username,pwd, emp.name, gender, email, emp.tele, address,
+        birthday, depuuid,dep.name as dep_name
         FROM emp,dep WHERE emp.depuuid=dep.uuid
         <if test="null!=name and ''!=name">
             and emp.name like concat('%',concat(#{name},'%'))
