@@ -13,7 +13,7 @@ $(function() {
 
         storeOp({});
         // 给查询按钮绑定事件
-        $("#btn_queryStoreoper").click(function() {
+        $("#btn_queryStoreDa").click(function() {
             storeDeListSe();
         });
         form.render();

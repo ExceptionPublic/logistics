@@ -50,12 +50,12 @@ function goods(parameters){
             // },
             cols: [[ //表头
                 {field: 'uuid', title: '编号', width:'10%', sort: true, align: 'center'},
-                {field: 'name', title: '名称', width:'15%',align: 'center'},
-                {field: 'sname', title: '供应商', width:'20%',align: 'center'},
+                {field: 'name', title: '商品名称', width:'15%',align: 'center'},
+                {field: 'spname', title: '供应商', width:'20%',align: 'center'},
                 {field: 'unit', title: '计量单位', width:'10%',align: 'center'},
                 {field: 'inprice', title: '进货价格(点击编辑)',edit:'number', width:'10%',align: 'center'},
                 {field: 'outprice', title: '销售价格',edit:'number', width:'10%',align: 'center'},
-                {field: 'tname', title: '商品类型', width:'10%',align: 'center'},
+                {field: 'gtname', title: '商品类型', width:'10%',align: 'center'},
                 {field: '', title: '操作', width: '15%',align: 'center',
                     templet : function(data) {
                         var row = JSON.stringify(data).replace(/\"/g, "'");
@@ -169,7 +169,7 @@ function GoodsAdd() {
 
 
 function goodsedit(title,row) {
-    // console.log(row.goodstypeuuid);
+    console.log(row.goodstypeuuid);
     layui.use([ 'layer'], function() {
         var layer = layui.layer;
         layer.open({

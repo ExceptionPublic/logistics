@@ -47,7 +47,7 @@ public class GoodsController {
         PageBean pageBean=new PageBean();
         pageBean.setRequest(request);
         List<Map<String,Object>> mapList = goodsService.queryGoodsPager(goods, pageBean);
-        Map map=new HashMap();
+        Map<String,Object> map=new HashMap<String,Object>();
         map.put("data",mapList);
         map.put("count",pageBean.getTotal());
         map.put("code",0);

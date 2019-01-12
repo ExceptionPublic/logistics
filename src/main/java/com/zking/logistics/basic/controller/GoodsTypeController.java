@@ -42,7 +42,8 @@ public class GoodsTypeController {
 
     @RequestMapping("/goodsTypeLst")
     @ResponseBody
-    public Map<String,Object> queryLstGoodType(GodsType godsType,HttpServletRequest request){
+    public Map<String,Object> queryLstGoodType(GodsType godsType,
+                                               HttpServletRequest request){
 //        Map<String,Object> map=new HashMap<>();
         PageBean pageBean=new PageBean();
         pageBean.setRequest(request);

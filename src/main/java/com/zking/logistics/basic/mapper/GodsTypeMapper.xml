@@ -42,8 +42,8 @@
 
   </delete>
   <insert id="insert" parameterType="com.zking.logistics.basic.model.GodsType" >
-    insert into goodstype (UUID, NAME)
-    values (#{uuid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR})
+    insert into goodstype (NAME)
+    values ( #{name,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.zking.logistics.basic.model.GodsType" >
     insert into goodstype
