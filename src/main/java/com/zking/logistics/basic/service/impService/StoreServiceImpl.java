@@ -48,4 +48,9 @@ public class StoreServiceImpl implements IStoreService {
     public List<Map<String, Object>> queryStorePager(Store store, PageBean pageBean) {
         return storeMapper.queryStorePager(store);
     }
+
+    @Override
+    public List<Map<String, Object>> empMap() {
+        return storeMapper.empMap();
+    }
 }

@@ -8,6 +8,7 @@ import java.util.Map;
 
 @Repository
 public interface StoreMapper {
+//     删除仓库
     int deleteByPrimaryKey(Store store);
 
     //添加
@@ -18,9 +19,14 @@ public interface StoreMapper {
     //用用判断重复
     Store selectByName(String name);
 
+//    修改仓库
     int updateByPrimaryKeySelective(Store record);
 
     int updateByPrimaryKey(Store record);
 
+//    查询仓库
     List<Map<String,Object>> queryStorePager(Store store);
+
+//    库管员下拉
+    List<Map<String,Object>> empMap();
 }

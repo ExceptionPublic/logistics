@@ -48,6 +48,10 @@
     from supplier
     where NAME = #{name}
   </select>
+  <select id="SupplierList" resultType="com.zking.logistics.basic.model.Supplier">
+    select <include refid="Base_Column_List"/>
+    from supplier where 1=1
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from supplier
     where UUID = #{uuid,jdbcType=INTEGER}

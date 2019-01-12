@@ -2,6 +2,9 @@ var rowData;
 $(function () {
     layui.use(['form', 'laydate'], function () {
         var form = layui.form;
+        //初始化部门
+        if (null == rowData)
+            initSelect("basicJsp/store/empMap", [], "#empuuid", "uuid", "name");
         //提交按钮
         $("#btn_close").click(function () {
             close();
@@ -9,7 +12,7 @@ $(function () {
         //自定义验证
         form.verify({
             name: function (value, item) { //value：表单的值、item：表单的DOM对象
-                var data = ajax("basicJsp/supplier/isRepetitionSuppliertsname", {
+                var data = ajax("basicJsp/store/storeService", {
                     name:value
                 });
                 console.log(data);
@@ -22,12 +25,12 @@ $(function () {
             }
         });
         //关闭按钮
-        form.on('submit(btn_supplierAdd)', function (data) {
+        form.on('submit(btn_storeEdit)', function (data) {
             //获取form表单中的字段
             var field = data.field;//form表单字段{name:vlaue}
-            var url="/basicJsp/supplier/supplierAdd";
+            var url="/basicJsp/store/storeAdd";
             if (isBlank(field.uuid))
-                url="/basicJsp/supplier/supplierUpdate";
+                url="/basicJsp/store/storeUpdate";
             //进行ajax请求
             $.ajax({
                 url: url,
@@ -38,7 +41,7 @@ $(function () {
                     if (data.success){
                         msg(data.message);
                         close();
-                        parent.supplier();
+                        parent.store();
                     }else {
                         layer.msg("服务器忙！")
                     }
@@ -67,5 +70,7 @@ function close() {
 function initStoForm(row) {
     rowData = row;
     //初始化部门下拉
-    initForm("supplierAdd", row);
+    initForm("storeEdit", row);
+    initSelect("basicJsp/store/empMap", [], "#empuuid", "uuid", "name");
+    renderForm("select", "empuuid");
 }

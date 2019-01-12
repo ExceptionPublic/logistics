@@ -40,7 +40,7 @@ $(function () {
                     if (data.success){
                         msg(data.message);
                         close();
-                        parent.supplier();
+                        parent.clients();
                     }else {
                         layer.msg("服务器忙！")
                     }

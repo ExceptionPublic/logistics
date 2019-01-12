@@ -137,6 +137,17 @@ public class GoodsController {
     }
 
 
+    //根据商品id查询
+    @RequestMapping("/selectByUuid")
+    @ResponseBody
+    public Map<String,Object> selectByUuid(Integer uuid){
+        Map<String,Object> map =new HashMap<String,Object>();
+        Goods goods = goodsService.selectByUuid(uuid);
+        map.put("goods",goods);
+        return map;
+    }
+
+
 
 
 

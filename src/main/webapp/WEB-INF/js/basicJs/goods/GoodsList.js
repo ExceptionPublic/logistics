@@ -49,13 +49,12 @@ function goods(parameters){
             //     dataName : 'rows' // 规定数据列表的字段名称，默认：data
             // },
             cols: [[ //表头
-                {field: 'uuid', title: '编号', width:'5%', sort: true, align: 'center'},
-                {field: 'name', title: '名称', width:'10%',align: 'center'},
-                {field: 'origin', title: '产地(点击编辑)',edit:'text', width:'20%',align: 'center'},
-                {field: 'producer', title: '厂家',edit:'text', width:'15%',align: 'center'},
-                {field: 'unit', title: '计量单位', width:'7%',align: 'center'},
-                {field: 'inprice', title: '进货价格',edit:'number', width:'10%',align: 'center'},
-                {field: 'outprice', title: '销售价格',edit:'number', width:'8%',align: 'center'},
+                {field: 'uuid', title: '编号', width:'10%', sort: true, align: 'center'},
+                {field: 'name', title: '名称', width:'15%',align: 'center'},
+                {field: 'sname', title: '供应商', width:'20%',align: 'center'},
+                {field: 'unit', title: '计量单位', width:'10%',align: 'center'},
+                {field: 'inprice', title: '进货价格(点击编辑)',edit:'number', width:'10%',align: 'center'},
+                {field: 'outprice', title: '销售价格',edit:'number', width:'10%',align: 'center'},
                 {field: 'tname', title: '商品类型', width:'10%',align: 'center'},
                 {field: '', title: '操作', width: '15%',align: 'center',
                     templet : function(data) {

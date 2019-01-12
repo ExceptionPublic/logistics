@@ -126,4 +126,10 @@ public class StoreController {
     }
 
 
+    @RequestMapping("/empMap")
+    @ResponseBody
+    public List<Map<String,Object>> empMap(){
+        return storeService.empMap();
+    }
+
 }

@@ -1,16 +1,11 @@
 package com.zking.logistics.basic.model;
 
-import lombok.ToString;
-
-@ToString
 public class Goods {
     private Integer uuid;
 
     private String name;
 
-    private String origin;
-
-    private String producer;
+    private Integer supplieruuid;
 
     private String unit;
 
@@ -20,11 +15,10 @@ public class Goods {
 
     private Integer goodstypeuuid;
 
-    public Goods(Integer uuid, String name, String origin, String producer, String unit, Float inprice, Float outprice, Integer goodstypeuuid) {
+    public Goods(Integer uuid, String name, Integer supplieruuid, String unit, Float inprice, Float outprice, Integer goodstypeuuid) {
         this.uuid = uuid;
         this.name = name;
-        this.origin = origin;
-        this.producer = producer;
+        this.supplieruuid = supplieruuid;
         this.unit = unit;
         this.inprice = inprice;
         this.outprice = outprice;
@@ -51,20 +45,12 @@ public class Goods {
         this.name = name;
     }
 
-    public String getOrigin() {
-        return origin;
+    public Integer getSupplieruuid() {
+        return supplieruuid;
     }
 
-    public void setOrigin(String origin) {
-        this.origin = origin;
-    }
-
-    public String getProducer() {
-        return producer;
-    }
-
-    public void setProducer(String producer) {
-        this.producer = producer;
+    public void setSupplieruuid(Integer supplieruuid) {
+        this.supplieruuid = supplieruuid;
     }
 
     public String getUnit() {

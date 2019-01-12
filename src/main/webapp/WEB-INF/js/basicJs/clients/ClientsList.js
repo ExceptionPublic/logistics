@@ -4,10 +4,10 @@ $(function() {
         var table = layui.table,
             form = layui.form;
         // 初始化
-        supplier({});
+        clients({});
         // 给查询按钮绑定事件
         $("#btn_queryClients").click(function() {
-            supplierListSe();
+            clientsListSe();
         });
         $("#btn_clientsAdd").click(function() {
             ClientsAdd("新增客户",null);
@@ -16,7 +16,7 @@ $(function() {
     });
 });
 
-function supplier(parameters){
+function clients(parameters){
     layui.use('table', function(){
         var table = layui.table;
         //第一个实例
@@ -123,7 +123,7 @@ function supplier(parameters){
     });
 }
 
-function supplierListSe(){
+function clientsListSe(){
     layui.use('table', function() {
         var table = layui.table;
 
