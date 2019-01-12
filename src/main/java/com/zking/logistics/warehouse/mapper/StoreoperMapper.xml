@@ -23,13 +23,30 @@
         from storeoper
         where UUID = #{uuid,jdbcType=INTEGER}
     </select>
-    <!--分页查询-->
-    <select id="queryStoreoperPager" resultType="com.zking.logistics.warehouse.model.Storeoper"
-            parameterType="com.zking.logistics.warehouse.model.Storeoper">
-        select
-        <include refid="Base_Column_List"/>
-        from storeoper
+    <select id="queryStoreoperPager" resultType="map"
+            parameterType="com.zking.logistics.warehouse.vo.StoreoperVo">
+        select sp.`uuid`,s.`name` sname,e.`name` ename,g.`name` gname,
+        sp.`opertime`,sp.`num`,sp.`type`,sp.`storeuuid`,sp.`goodsuuid`
+        from storeoper sp inner join store s
+        on sp.`storeuuid`=s.`uuid` inner join goods g
+        on sp.`goodsuuid`=g.`uuid` inner join emp e
+        on sp.`empuuid`=e.`uuid` where 1=1
+        <if test="null!=goodsuuid and ''!=goodsuuid">
+            and goodsuuid=#{goodsuuid}
+        </if>
+        <if test="null!=storeuuid and ''!=storeuuid">
+            and storeuuid=#{storeuuid}
+        </if>
+        <if test="null !=opertime and ''!=opertime">
+            and opertime &lt;= #{opertime}
+        </if>
+        <if test="null!=endTime and ''!=endTime">
+            and opertime &gt;=#{endTime}
+        </if>
+
     </select>
+
+    <!--分页查询-->
     <!--删除-->
     <delete id="deleteStoreoper" parameterType="java.lang.Integer">
         delete from storeoper

@@ -1,13 +1,16 @@
 package com.zking.logistics.warehouse.service.imp;
 
+import com.zking.logistics.util.PageBean;
 import com.zking.logistics.warehouse.mapper.StoreoperMapper;
 import com.zking.logistics.warehouse.model.Storeoper;
 import com.zking.logistics.warehouse.service.IStoreoperService;
+import com.zking.logistics.warehouse.vo.StoreoperVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Transactional
@@ -38,8 +41,8 @@ public class StoreoperServiceImpl implements IStoreoperService {
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public List<Storeoper> queryStoreoperPager(Storeoper storeoper) {
-        return storeoperMapper.queryStoreoperPager(storeoper);
+    public List<Map<String, Object>> queryStoreoperPager(StoreoperVo storeoperVo, PageBean pageBean) {
+        return storeoperMapper.queryStoreoperPager(storeoperVo);
     }
+
 }

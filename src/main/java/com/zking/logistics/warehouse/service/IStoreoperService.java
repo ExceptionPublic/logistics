@@ -1,9 +1,12 @@
 package com.zking.logistics.warehouse.service;
 
+import com.zking.logistics.util.PageBean;
 import com.zking.logistics.warehouse.model.Storeoper;
+import com.zking.logistics.warehouse.vo.StoreoperVo;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 仓库操作记录
@@ -39,10 +42,10 @@ public interface IStoreoperService {
 
     /**
      * 分页查询
-     * @param storeoper
+     * @param storeoperVo
      * @return
      */
-    List<Storeoper> queryStoreoperPager(Storeoper storeoper);
+    List<Map<String,Object>> queryStoreoperPager(StoreoperVo storeoperVo, PageBean pageBean);
 
 
 }

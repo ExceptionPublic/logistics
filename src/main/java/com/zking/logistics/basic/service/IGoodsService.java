@@ -26,4 +26,8 @@ public interface IGoodsService {
     List<Map<String,Object>> queryGoodsPager(Goods goods, PageBean pageBean);
 
     boolean isGoodsname(String name);
+
+//    查询所有商品
+    List<Goods> queryGoods();
+
 }

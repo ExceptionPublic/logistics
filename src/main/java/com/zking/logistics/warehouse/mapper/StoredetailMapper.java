@@ -4,6 +4,7 @@ import com.zking.logistics.warehouse.model.Storedetail;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 仓库库存
@@ -43,6 +44,6 @@ public interface StoredetailMapper {
      * @param storedetail
      * @return
      */
-    List<Storedetail> queryStoredetailPager(Storedetail storedetail);
+    List<Map<String,Object>> queryStoredetailPager(Storedetail storedetail);
 
 }

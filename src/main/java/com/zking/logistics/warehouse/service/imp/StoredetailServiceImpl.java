@@ -1,5 +1,6 @@
 package com.zking.logistics.warehouse.service.imp;
 
+import com.zking.logistics.util.PageBean;
 import com.zking.logistics.warehouse.mapper.StoredetailMapper;
 import com.zking.logistics.warehouse.model.Storedetail;
 import com.zking.logistics.warehouse.service.IStoredetailService;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Transactional
@@ -37,10 +39,11 @@ public class StoredetailServiceImpl implements IStoredetailService {
         return storedetailMapper.updateStoredetail(record);
     }
 
-    @Override
     @Transactional(readOnly = true)
-    public List<Storedetail> queryStoredetailPager(Storedetail storedetail) {
+    @Override
+    public List<Map<String, Object>> queryStoredetailPager(Storedetail storedetail, PageBean pageBean) {
         return storedetailMapper.queryStoredetailPager(storedetail);
     }
+
 
 }

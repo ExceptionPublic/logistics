@@ -32,6 +32,13 @@ public class GoodsController {
 
     }
 
+//    查询所有商品
+    @RequestMapping("/queryGoods")
+    @ResponseBody
+    public List<Goods> queryGoods(){
+        return goodsService.queryGoods();
+    }
+
 
     @RequestMapping("/queryGoodsPager")
     @ResponseBody
