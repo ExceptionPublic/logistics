@@ -49,9 +49,9 @@ function store(parameters){
             //     dataName : 'rows' // 规定数据列表的字段名称，默认：data
             // },
             cols: [[ //表头
-                {field: 'uuid', title: '编号', width:'5%', sort: true, align: 'center'},
-                {field: 'name', title: '供应商', width:'15%',align: 'center'},
-                {field: 'address', title: '地址',edit:'text', width:'20%',align: 'center'},
+                {field: 'uuid', title: '仓库编号', width:'10%', sort: true, align: 'center'},
+                {field: 'name', title: '仓库名称', width:'15%',align: 'center'},
+                {field: 'address', title: '仓库地址',edit:'text', width:'20%',align: 'center'},
                 {field: 'ename', title: '仓库管理员',edit:'text', width:'15%',align: 'center'},
                 {field: '', title: '操作', width: '15%',align: 'center',
                     templet : function(data) {
@@ -135,7 +135,7 @@ function storeAdd(titile,row) {
             shade: 0.8,
             btnAlign: 'c',
             offset : 'auto',
-            area : [ '400px', '430px' ],
+            area : [ '400px', '300px' ],
             content : '/basicJsp/store/tostoreEdit',
             success : function(layero, index) {
                 if(row){

@@ -36,7 +36,7 @@
 
         </div>
 
-    </div>
+
         <div class="layui-col-md2 layui-col-md-offset1">
 
             <button class="layui-btn layui-btn-sm layui-btn-primary"

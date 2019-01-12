@@ -52,4 +52,9 @@ public class SupplierServiceImpl implements ISupplierService {
     public boolean isRepetitionSuppliertsname(String name) {
         return null!=supplierMapper.selectByName(name);
     }
+
+    @Override
+    public List<Supplier> SupplierList() {
+        return supplierMapper.SupplierList();
+    }
 }

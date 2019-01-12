@@ -7,7 +7,7 @@ $(function () {
         //初始化部门
         if (null == rowData)
             initSelect("basicJsp/goodstype/SelectGtype", [], "#goodstypeuuid", "uuid", "name");
-
+            initSelect("basicJsp/supplier/SupplierList", [], "#supplieruuid", "uuid", "name");
         //按钮监听
         //关闭按钮
         $("#btn_close").click(function () {
@@ -17,7 +17,7 @@ $(function () {
         form.verify({
             name: function (value, item) { //value：表单的值、item：表单的DOM对象
                 var data = ajax("basicJsp/goods/goodsService", {
-                    name:value
+                    name: value
                 });
                 console.log(data);
                 if (null == rowData || (null != rowData && rowData.name != value)) {
@@ -73,6 +73,8 @@ function initGoodsForm(row) {
     rowData = row;
     //初始化部门下拉
     initSelect("basicJsp/goodstype/SelectGtype", [], "#goodstypeuuid", "uuid", "name");
+    initSelect("basicJsp/supplier/SupplierList", [], "#supplieruuid", "uuid", "name");
     initForm("goodsEdit", row);
-    renderForm("select","goodstypeuuid");
+    renderForm("select", "supplieruuid");
+    renderForm("select", "goodstypeuuid");
 }

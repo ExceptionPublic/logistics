@@ -34,9 +34,15 @@ public class GoodsServiceImpl implements IGoodsService {
     }
 
     @Override
+    public Goods selectByUuid(Integer uuid) {
+        return goodsMapper.selectByUuid(uuid);
+    }
+
+    @Override
     public int updateByPrimaryKeySelective(Goods record) {
         return goodsMapper.updateByPrimaryKeySelective(record);
     }
+
 
     @Override
     public boolean isGoodsname(String name) {

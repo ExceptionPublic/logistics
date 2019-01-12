@@ -16,10 +16,13 @@ public interface IStoreService {
 
     //用用判断重复
     Store selectByName(String name);
+
+
     boolean isStoreName(String name);
 
     int updateByPrimaryKeySelective(Store record);
 
 
     List<Map<String,Object>> queryStorePager(Store store, PageBean pageBean);
+    List<Map<String,Object>> empMap();
 }

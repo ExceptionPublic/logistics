@@ -5,8 +5,7 @@
     <constructor >
       <idArg column="UUID" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="NAME" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="ORIGIN" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="PRODUCER" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="supplieruuid" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="UNIT" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="INPRICE" jdbcType="REAL" javaType="java.lang.Float" />
       <arg column="OUTPRICE" jdbcType="REAL" javaType="java.lang.Float" />
@@ -14,43 +13,45 @@
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    UUID, NAME, ORIGIN, PRODUCER, UNIT, INPRICE, OUTPRICE, GOODSTYPEUUID
+    UUID, NAME, supplieruuid, UNIT, INPRICE, OUTPRICE, GOODSTYPEUUID
   </sql>
   <delete id="deleteByPrimaryKey" parameterType="com.zking.logistics.basic.model.Goods">
     delete from goods
     where UUID = #{uuid}
   </delete>
-
-
   <select id="selectByPrimaryKey" resultType="com.zking.logistics.basic.model.Goods">
     select
     <include refid="Base_Column_List" />
     from goods
-    where name =#{name}
+    where NAME =#{name}
+  </select>
+  <select id="selectByUuid" resultType="com.zking.logistics.basic.model.Goods">
+    select
+    <include refid="Base_Column_List" />
+    from goods
+    where UUID = #{uuid}
   </select>
   <select id="queryGoodsPager" resultType="map" parameterType="com.zking.logistics.basic.model.Goods">
-    select g.`uuid`,g.`name`,g.`origin`,g.`producer` ,
-    g.`unit`,g.`inprice` ,g.`outprice`,g.`goodstypeuuid` ,gt.`name` tname
-    from goods g
-    left join goodstype gt
-    on g.`goodstypeuuid`=gt.`uuid`
+    select g.`uuid`,g.`name`,s.`name` sname,g.`supplieruuid`,
+    g.`unit`,g.`inprice`,g.`outprice`,gt.`name` tname,
+    g.goodstypeuuid from goods g
+    LEFT join goodstype gt
+    on g.`supplieruuid`=gt.`uuid`
+    inner join supplier s
+    on s.`uuid`=g.`supplieruuid`
     where 1=1
     <if test="null!=name and ''!=name">
       and g.`name` like concat(concat('%',#{name}),'%')
     </if>
     ORDER BY g.uuid DESC
-
   </select>
-
-
-
   <insert id="insert" parameterType="com.zking.logistics.basic.model.Goods" >
-    insert into goods (NAME, ORIGIN,
-      PRODUCER, UNIT, INPRICE, 
-      OUTPRICE, GOODSTYPEUUID)
-    values (#{name,jdbcType=VARCHAR}, #{origin,jdbcType=VARCHAR},
-      #{producer,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, #{inprice,jdbcType=REAL}, 
-      #{outprice,jdbcType=REAL}, #{goodstypeuuid,jdbcType=INTEGER})
+    insert into goods ( NAME, supplieruuid,
+      UNIT, INPRICE, OUTPRICE, 
+      GOODSTYPEUUID)
+    values ( #{name,jdbcType=VARCHAR}, #{supplieruuid,jdbcType=INTEGER},
+      #{unit,jdbcType=VARCHAR}, #{inprice,jdbcType=REAL}, #{outprice,jdbcType=REAL}, 
+      #{goodstypeuuid,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.zking.logistics.basic.model.Goods" >
     insert into goods
@@ -61,11 +62,8 @@
       <if test="name != null" >
         NAME,
       </if>
-      <if test="origin != null" >
-        ORIGIN,
-      </if>
-      <if test="producer != null" >
-        PRODUCER,
+      <if test="supplieruuid != null" >
+        supplieruuid,
       </if>
       <if test="unit != null" >
         UNIT,
@@ -87,11 +85,8 @@
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="origin != null" >
-        #{origin,jdbcType=VARCHAR},
-      </if>
-      <if test="producer != null" >
-        #{producer,jdbcType=VARCHAR},
+      <if test="supplieruuid != null" >
+        #{supplieruuid,jdbcType=INTEGER},
       </if>
       <if test="unit != null" >
         #{unit,jdbcType=VARCHAR},
@@ -113,11 +108,8 @@
       <if test="name != null" >
         NAME = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="origin != null" >
-        ORIGIN = #{origin,jdbcType=VARCHAR},
-      </if>
-      <if test="producer != null" >
-        PRODUCER = #{producer,jdbcType=VARCHAR},
+      <if test="supplieruuid != null" >
+        supplieruuid = #{supplieruuid,jdbcType=INTEGER},
       </if>
       <if test="unit != null" >
         UNIT = #{unit,jdbcType=VARCHAR},
@@ -132,13 +124,12 @@
         GOODSTYPEUUID = #{goodstypeuuid,jdbcType=INTEGER},
       </if>
     </set>
-    where UUID = #{uuid}
+    where UUID = #{uuid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.zking.logistics.basic.model.Goods" >
     update goods
     set NAME = #{name,jdbcType=VARCHAR},
-      ORIGIN = #{origin,jdbcType=VARCHAR},
-      PRODUCER = #{producer,jdbcType=VARCHAR},
+      supplieruuid = #{supplieruuid,jdbcType=INTEGER},
       UNIT = #{unit,jdbcType=VARCHAR},
       INPRICE = #{inprice,jdbcType=REAL},
       OUTPRICE = #{outprice,jdbcType=REAL},

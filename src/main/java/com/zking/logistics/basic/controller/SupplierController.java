@@ -20,8 +20,14 @@ import java.util.Map;
 public class SupplierController {
     @Autowired
     private ISupplierService supplierService;
-
     private Map<String, Object> map = new HashMap<>();
+
+    //查询所有供应商
+    @ResponseBody
+    @RequestMapping("/SupplierList")
+    public List<Supplier> SupplierList(){
+       return supplierService.SupplierList();
+    }
 
     //供应商查询
     @RequestMapping("/toqueryLstSupplier")

@@ -18,4 +18,6 @@ public interface ISupplierService {
     Supplier selectByName(String name);
     boolean isRepetitionSuppliertsname(String name);
 
+    List<Supplier> SupplierList();
+
 }

@@ -17,10 +17,12 @@
     where UUID = #{uuid}
     </delete>
     <select id="queryStorePager" resultType="map" parameterType="com.zking.logistics.basic.model.Store">
-      SELECT s.uuid,s.name,s.address,e.name ename FROM store s
-        INNER JOIN emp e ON s.empuuid=e.uuid
-        INNER JOIN emp_role er on e.uuid=er.empuuid
-        inner join role r on r.uuid=er.roleuuid where r.name='库管员'
+
+        SELECT s.uuid,s.name,s.address,e.name ename,s.empuuid
+        FROM store s
+        LEFT JOIN emp e ON s.empuuid=e.uuid
+        INNER JOIN role r ON e.role_id=r.uuid
+        WHERE r.name='库管员'
         <if test="null!=name and ''!=name">
             and s.name LIKE concat(concat('%',#{name}),'%')
         </if>
@@ -35,6 +37,14 @@
         <include refid="Base_Column_List"/>
         from store
         where name = #{name}
+    </select>
+    <select id="empMap" resultType="map">
+
+      SELECT e.uuid,e.name FROM emp e
+      INNER JOIN role r
+      ON e.role_id=r.uuid
+      WHERE r.name='库管员'
+
     </select>
     <insert id="insert" parameterType="com.zking.logistics.basic.model.Store">
     insert into store ( NAME, address,
