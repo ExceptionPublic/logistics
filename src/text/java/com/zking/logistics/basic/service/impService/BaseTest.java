@@ -1,6 +1,5 @@
 package com.zking.logistics.basic.service.impService;
 
-import com.zking.logistics.basic.model.GodsType;
 import com.zking.logistics.basic.model.Goods;
 import org.junit.Before;
 import org.junit.runner.RunWith;
