@@ -48,9 +48,9 @@ function storeop(parameters){
                 {field: 'gname', title: '商品名称', width:'15%',align: 'center'},
                 {field: 'num', title: '库存数量', width:'10%',align: 'center'},
                 {field: 'opertime', title: '记录日期', width:'30%',align: 'center',
-                    // templet : function(data) {
-                    //     return dateParseString(data.opertime);
-                    // }
+                    templet : function(data) {
+                        return dateParseString(data.opertime);
+                    }
                 },
                 {field: 'type', title: '类型', width:'10%',align: 'center'},
             ]],

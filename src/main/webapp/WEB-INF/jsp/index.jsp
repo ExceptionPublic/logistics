@@ -57,8 +57,9 @@
                             <dl class="layui-nav-child">
                                 <dd><a id="2521" class="open" lay-url="${ctx}/basicJsp/goodsTypeLst" href="${ctx}/warehouse/storeDetail/toStoreDeList">库存查询</a></dd>
                                 <dd><a id="2522" class="open" lay-url="${ctx}/personnel/toEmpManage" href="${ctx}/warehouse/storeoper/toStoreoperList">库存变动记录</a></dd>
-                                <dd><a id="2523" class="open" lay-url="${ctx}/personnel/toEmpManage" href="${ctx}">盘盈盘亏审核</a></dd>
-                                <dd><a id="2524" class="open" lay-url="${ctx}/personnel/toEmpManage" href="${ctx}">盘盈盘亏查询</a></dd>
+                                <dd><a id="2523" class="open" lay-url="${ctx}/personnel/toEmpManage" href="${ctx}/warehouse/inventory/toInvenListRegister">盘盈盘亏登记</a></dd>
+                                <dd><a id="2523" class="open" lay-url="${ctx}/personnel/toEmpManage" href="${ctx}/warehouse/inventory/toInvenListAudit">盘盈盘亏审核</a></dd>
+                                <dd><a id="2524" class="open" lay-url="${ctx}/personnel/toEmpManage" href="${ctx}/warehouse/inventory/toInvenList">盘盈盘亏查询</a></dd>
                             </dl>
                         </li>
                     </ul>

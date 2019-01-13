@@ -10,20 +10,34 @@
 <head>
     <%@ include file="/WEB-INF/jsp/common/head.jsp" %>
     <title>Title</title>
-    <script type="text/javascript" src="${ctx}/js/warehouse/storeoper/StoreoperList.js"></script>
+    <script type="text/javascript" src="${ctx}/js/warehouse/inventory/list/InventoryList.js"></script>
 </head>
 <body>
 <div class="layui-container layui-form" style="margin-top: 10px;">
     <div class="layui-row">
+        <%--<div class="layui-col-md3">--%>
+            <%--<div class="layui-form-item">--%>
+                <%--<label class="layui-form-label">登记日期：</label>--%>
+                <%--<div class="layui-input-block" style="width:40px;" align="center">--%>
+                    <%--<input type="text"--%>
+                           <%--name="createtime"--%>
+                           <%--id="createtime"--%>
+                           <%--style="width: 200px;"--%>
+                           <%--placeholder="请输入"--%>
+                           <%--class="layui-input">--%>
+                <%--</div>--%>
+            <%--</div>--%>
+
+        <%--</div>--%>
         <div class="layui-col-md3">
             <div class="layui-form-item">
-                <label class="layui-form-label">仓库名称：</label>
+                <label class="layui-form-label">类型：</label>
                 <div class="layui-input-block" style="width: 200px">
-                    <select name="storeuuid"
-                            lay-verify="required"
-                            id="storeuuid"
-                            lay-filter="storeuuid">
+                    <select name="type"
+                            id="type">
                         <option value=""></option>
+                        <option value="盘盈">盘盈</option>
+                        <option value="盘亏">盘亏</option>
                     </select>
                 </div>
             </div>
@@ -43,15 +57,18 @@
         </div>
         <div class="layui-col-md2 layui-col-md-offset1">
             <button class="layui-btn layui-btn-sm layui-btn-primary"
-                    id="btn_queryStoreoper">
+                    id="btn_queryInven">
                 <i class="layui-icon">&#xe615;</i>查询
             </button>
-
+            <%--<button class="layui-btn layui-btn-sm"--%>
+                    <%--id="btn_invenAddregister" onclick="InvenAdd()">--%>
+                <%--<i class="layui-icon">&#xe608;</i>盘盈盘亏登记--%>
+            <%--</button>--%>
 
         </div>
     </div>
 </div>
-<table id="queryStoreoper" lay-filter="queryStoreoper"></table>
+<table id="queryInven" lay-filter="queryInven"></table>
 
 </body>
 </html>

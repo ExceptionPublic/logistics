@@ -43,6 +43,7 @@
         <if test="null!=endTime and ''!=endTime">
             and opertime &gt;=#{endTime}
         </if>
+        ORDER by opertime DESC
 
     </select>
 

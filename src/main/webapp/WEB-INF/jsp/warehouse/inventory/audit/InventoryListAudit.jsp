@@ -10,20 +10,20 @@
 <head>
     <%@ include file="/WEB-INF/jsp/common/head.jsp" %>
     <title>Title</title>
-    <script type="text/javascript" src="${ctx}/js/warehouse/storeoper/StoreoperList.js"></script>
+    <script type="text/javascript" src="${ctx}/js/warehouse/inventory/audit/InventoryListAudit.js"></script>
 </head>
 <body>
 <div class="layui-container layui-form" style="margin-top: 10px;">
     <div class="layui-row">
         <div class="layui-col-md3">
             <div class="layui-form-item">
-                <label class="layui-form-label">仓库名称：</label>
+                <label class="layui-form-label">类型：</label>
                 <div class="layui-input-block" style="width: 200px">
-                    <select name="storeuuid"
-                            lay-verify="required"
-                            id="storeuuid"
-                            lay-filter="storeuuid">
+                    <select name="type"
+                            id="type">
                         <option value=""></option>
+                        <option value="盘盈">盘盈</option>
+                        <option value="盘亏">盘亏</option>
                     </select>
                 </div>
             </div>
@@ -43,15 +43,14 @@
         </div>
         <div class="layui-col-md2 layui-col-md-offset1">
             <button class="layui-btn layui-btn-sm layui-btn-primary"
-                    id="btn_queryStoreoper">
+                    id="btn_queryInvenAudit">
                 <i class="layui-icon">&#xe615;</i>查询
             </button>
-
 
         </div>
     </div>
 </div>
-<table id="queryStoreoper" lay-filter="queryStoreoper"></table>
+<table id="queryInvenAudit" lay-filter="queryInvenAudit"></table>
 
 </body>
 </html>

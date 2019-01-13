@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.logistics.warehouse.mapper.InventoryMapper">
+    <resultMap id="BaseResultMap" type="com.zking.logistics.warehouse.model.Inventory">
+        <constructor>
+            <idArg column="UUID" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="GOODSUUID" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="STOREUUID" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="NUM" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="TYPE" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="CREATETIME" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+            <arg column="CHECKTIME" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+            <arg column="CREATER" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="CHECKER" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="STATE" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="REMARK" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+    UUID, GOODSUUID, STOREUUID, NUM, TYPE, CREATETIME, CHECKTIME, CREATER, CHECKER, STATE, 
+    REMARK
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from inventory
+        where UUID = #{uuid,jdbcType=INTEGER}
+    </select>
+    <select id="queryInventoryPager" resultType="map"
+            parameterType="com.zking.logistics.warehouse.vo.InventoryVo">
+
+        select it.`uuid`, g.`name` gname,s.`name` sname,it.`num`,it.`type`,
+        it.`createtime`,it.`checktime`,e.`name` pname,e2.`name` shname,it.`state`,
+        it.`goodsuuid`,it.`storeuuid`,it.`creater`,it.`checker`,d.`dict_item` dname
+        from inventory it LEFT join goods g
+        on g.`uuid`=it.`goodsuuid` LEFT join store s
+        on s.`uuid`=it.`storeuuid` LEFT join emp e
+        on e.`uuid`=it.`creater` LEFT join emp e2
+        on e2.`uuid`=it.`checker` inner join dict d
+        on d.`dict_value`=it.`state` where 1=1
+        <if test="null!=type and ''!=type">
+            and type =#{type}
+        </if>
+        <if test="null!=goodsuuid and ''!=goodsuuid">
+            and goodsuuid =#{goodsuuid}
+        </if>
+        <if test="null!=createtime and ''!=createtime">
+            and createtime &lt;= #{createtime}
+        </if>
+        <if test="null!=endcreatetime and ''!=endcreatetime">
+            and createtime &gt;=#{endcreatetime}
+        </if>
+        ORDER by createtime DESC
+
+
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from inventory
+    where UUID = #{uuid,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.zking.logistics.warehouse.model.Inventory">
+    insert into inventory (GOODSUUID, STOREUUID,
+      NUM, TYPE, CREATETIME, 
+      CHECKTIME, CREATER, CHECKER, 
+       REMARK)
+    values ( #{goodsuuid,jdbcType=INTEGER}, #{storeuuid,jdbcType=INTEGER},
+      #{num,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{checktime,jdbcType=TIMESTAMP}, #{creater,jdbcType=INTEGER}, #{checker,jdbcType=INTEGER}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.zking.logistics.warehouse.model.Inventory">
+        insert into inventory
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                UUID,
+            </if>
+            <if test="goodsuuid != null">
+                GOODSUUID,
+            </if>
+            <if test="storeuuid != null">
+                STOREUUID,
+            </if>
+            <if test="num != null">
+                NUM,
+            </if>
+            <if test="type != null">
+                TYPE,
+            </if>
+            <if test="createtime != null">
+                CREATETIME,
+            </if>
+            <if test="checktime != null">
+                CHECKTIME,
+            </if>
+            <if test="creater != null">
+                CREATER,
+            </if>
+            <if test="checker != null">
+                CHECKER,
+            </if>
+            <if test="state != null">
+                STATE,
+            </if>
+            <if test="remark != null">
+                REMARK,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                #{uuid,jdbcType=INTEGER},
+            </if>
+            <if test="goodsuuid != null">
+                #{goodsuuid,jdbcType=INTEGER},
+            </if>
+            <if test="storeuuid != null">
+                #{storeuuid,jdbcType=INTEGER},
+            </if>
+            <if test="num != null">
+                #{num,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="createtime != null">
+                #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="checktime != null">
+                #{checktime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="creater != null">
+                #{creater,jdbcType=INTEGER},
+            </if>
+            <if test="checker != null">
+                #{checker,jdbcType=INTEGER},
+            </if>
+            <if test="state != null">
+                #{state,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.zking.logistics.warehouse.model.Inventory">
+        update inventory
+        <set>
+            <if test="goodsuuid != null">
+                GOODSUUID = #{goodsuuid,jdbcType=INTEGER},
+            </if>
+            <if test="storeuuid != null">
+                STOREUUID = #{storeuuid,jdbcType=INTEGER},
+            </if>
+            <if test="num != null">
+                NUM = #{num,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                TYPE = #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="createtime != null">
+                CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="checktime != null">
+                CHECKTIME = #{checktime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="creater != null">
+                CREATER = #{creater,jdbcType=INTEGER},
+            </if>
+            <if test="checker != null">
+                CHECKER = #{checker,jdbcType=INTEGER},
+            </if>
+            <if test="state != null">
+                STATE = #{state,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                REMARK = #{remark,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where UUID = #{uuid,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.zking.logistics.warehouse.model.Inventory">
+    update inventory
+    set GOODSUUID = #{goodsuuid,jdbcType=INTEGER},
+      STOREUUID = #{storeuuid,jdbcType=INTEGER},
+      NUM = #{num,jdbcType=INTEGER},
+      TYPE = #{type,jdbcType=VARCHAR},
+      CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      CHECKTIME = #{checktime,jdbcType=TIMESTAMP},
+      CREATER = #{creater,jdbcType=INTEGER},
+      CHECKER = #{checker,jdbcType=INTEGER},
+      STATE = #{state,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR}
+    where UUID = #{uuid,jdbcType=INTEGER}
+  </update>
+</mapper>
