@@ -29,4 +29,7 @@ public interface StoreMapper {
 
 //    库管员下拉
     List<Map<String,Object>> empMap();
+
+    //仓库查询所有用于下拉
+    List<Store> StoreList();
 }

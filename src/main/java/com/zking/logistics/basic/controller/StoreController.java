@@ -30,6 +30,14 @@ public class StoreController {
 
     }
 
+
+    //查询仓库下拉
+    @RequestMapping("/StoreList")
+    @ResponseBody
+    public List<Store> StoreList(){
+        return storeService.StoreList();
+    }
+
     //仓库查询
     @RequestMapping("/queryStorePager")
     @ResponseBody

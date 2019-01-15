@@ -3,7 +3,6 @@ $(function () {
     layui.use(['form'], function () {
         var form = layui.form;
 
-        //提交按钮
         $("#btn_close").click(function () {
             close();
         });
@@ -22,14 +21,13 @@ $(function () {
 
             }
         });
-        //关闭按钮
         form.on('submit(btn_goodstyAdd)', function (data) {
             //获取form表单中的字段
             var field = data.field;//form表单字段{name:vlaue}
 
-            var url = "/basicJsp/goodstype/goodsTypeAdd";
+            var url = "basicJsp/goodstype/goodsTypeAdd";
             if (isBlank(field.uuid))
-                url = "/basicJsp/goodstype/goodsTypeUpdate";
+                url = "basicJsp/goodstype/goodsTypeUpdate";
             //进行ajax请求
             $.ajax({
                 url: url,

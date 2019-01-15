@@ -49,7 +49,17 @@
                                 <dd><a id="2422" class="open" lay-url="${ctx}/personnel/toEmpManage" href="/basicJsp/goods/toqueryGoods">商品</a></dd>
                                 <dd><a id="2423" class="open" lay-url="${ctx}/personnel/toEmpManage" href="${ctx}/basicJsp/supplier/toqueryLstSupplier">供应商</a></dd>
                                 <dd><a id="2424" class="open" lay-url="${ctx}/personnel/toEmpManage" href="/basicJsp/clients/toqueryClients">客户</a></dd>
-                                <dd><a id="2425" class="open" lay-url="${ctx}/personnel/toEmpManage" href="javascript:void(0);">仓库</a></dd>
+                                <dd><a id="2425" class="open" lay-url="${ctx}/personnel/toEmpManage" href="/basicJsp/store/toqueryStore">仓库</a></dd>
+                            </dl>
+                        </li>
+                        <li class="layui-nav-item">
+                            <a href="javascript:;">库存管理</a>
+                            <dl class="layui-nav-child">
+                                <dd><a id="2521" class="open" lay-url="${ctx}/basicJsp/goodsTypeLst" href="${ctx}/warehouse/storeDetail/toStoreDeList">库存查询</a></dd>
+                                <dd><a id="2522" class="open" lay-url="${ctx}/personnel/toEmpManage" href="${ctx}/warehouse/storeoper/toStoreoperList">库存变动记录</a></dd>
+                                <dd><a id="2523" class="open" lay-url="${ctx}/personnel/toEmpManage" href="${ctx}/warehouse/inventory/toInvenListRegister">盘盈盘亏登记</a></dd>
+                                <dd><a id="2523" class="open" lay-url="${ctx}/personnel/toEmpManage" href="${ctx}/warehouse/inventory/toInvenListAudit">盘盈盘亏审核</a></dd>
+                                <dd><a id="2524" class="open" lay-url="${ctx}/personnel/toEmpManage" href="${ctx}/warehouse/inventory/toInvenList">盘盈盘亏查询</a></dd>
                             </dl>
                         </li>
                     </ul>

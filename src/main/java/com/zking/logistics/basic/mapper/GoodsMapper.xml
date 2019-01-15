@@ -32,18 +32,20 @@
     where UUID = #{uuid}
   </select>
   <select id="queryGoodsPager" resultType="map" parameterType="com.zking.logistics.basic.model.Goods">
-    select g.`uuid`,g.`name`,s.`name` sname,g.`supplieruuid`,
-    g.`unit`,g.`inprice`,g.`outprice`,gt.`name` tname,
-    g.goodstypeuuid from goods g
-    LEFT join goodstype gt
-    on g.`supplieruuid`=gt.`uuid`
-    inner join supplier s
-    on s.`uuid`=g.`supplieruuid`
+    select g.`uuid`,g.`name`,g.`supplieruuid`,g.`unit`,
+    g.`inprice`,g.`outprice`,g.`goodstypeuuid`,gt.`name` gtname,sp.name spname
+    from goods g
+    left join goodstype gt on g.`goodstypeuuid`=gt.`uuid`
+    inner join supplier sp on sp.`uuid`=g.`supplieruuid`
     where 1=1
     <if test="null!=name and ''!=name">
       and g.`name` like concat(concat('%',#{name}),'%')
     </if>
     ORDER BY g.uuid DESC
+  </select>
+  <select id="queryGoods" resultType="com.zking.logistics.basic.model.Goods">
+    SELECT <include refid="Base_Column_List"/>
+    from goods where 1=1
   </select>
   <insert id="insert" parameterType="com.zking.logistics.basic.model.Goods" >
     insert into goods ( NAME, supplieruuid,

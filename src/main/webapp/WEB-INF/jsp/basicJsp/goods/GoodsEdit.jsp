@@ -3,7 +3,7 @@
 <head>
     <%@ include file="/WEB-INF/jsp/common/head.jsp" %>
     <title>Title</title>
-    <script type="text/javascript" src="/js/basicJs/goods/GoodsEdit.js"></script>
+    <script type="text/javascript" src="${ctx}/js/basicJs/goods/GoodsEdit.js"></script>
 </head>
 <body>
 <form method="post" lay-filter="goodsEdit" id="goodsEdit" class="layui-form">

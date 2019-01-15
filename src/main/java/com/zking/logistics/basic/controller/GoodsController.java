@@ -32,6 +32,13 @@ public class GoodsController {
 
     }
 
+//    查询所有商品
+    @RequestMapping("/queryGoods")
+    @ResponseBody
+    public List<Goods> queryGoods(){
+        return goodsService.queryGoods();
+    }
+
 
     @RequestMapping("/queryGoodsPager")
     @ResponseBody
@@ -40,7 +47,7 @@ public class GoodsController {
         PageBean pageBean=new PageBean();
         pageBean.setRequest(request);
         List<Map<String,Object>> mapList = goodsService.queryGoodsPager(goods, pageBean);
-        Map map=new HashMap();
+        Map<String,Object> map=new HashMap<String,Object>();
         map.put("data",mapList);
         map.put("count",pageBean.getTotal());
         map.put("code",0);

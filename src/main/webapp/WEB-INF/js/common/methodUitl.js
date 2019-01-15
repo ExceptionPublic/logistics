@@ -77,4 +77,3 @@ function initForm(layFilter, paraments) {
     });
 }
 
-

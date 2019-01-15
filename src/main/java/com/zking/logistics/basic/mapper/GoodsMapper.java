@@ -30,5 +30,6 @@ public interface GoodsMapper {
 //    商品查询分页
     List<Map<String,Object>> queryGoodsPager(Goods goods);
 
-    List<Goods> queryGoods(Goods goods);
+    //    查询所有商品
+    List<Goods> queryGoods();
 }

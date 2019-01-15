@@ -25,4 +25,6 @@ public interface IStoreService {
 
     List<Map<String,Object>> queryStorePager(Store store, PageBean pageBean);
     List<Map<String,Object>> empMap();
+
+    List<Store> StoreList();
 }

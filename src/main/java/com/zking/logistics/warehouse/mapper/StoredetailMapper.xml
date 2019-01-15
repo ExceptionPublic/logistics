@@ -20,11 +20,18 @@
         from storedetail
         where UUID = #{uuid,jdbcType=INTEGER}
     </select>
-    <select id="queryStoredetailPager" resultType="com.zking.logistics.warehouse.model.Storedetail"
+    <select id="queryStoredetailPager" resultType="map"
             parameterType="com.zking.logistics.warehouse.model.Storedetail">
-        select
-        <include refid="Base_Column_List"/>
-        from storedetail
+        select sd.`uuid`,s.`name` sname,g.`name` gname,sd.`num` quantity,
+        sd.storeuuid storeuuid
+        from storedetail sd inner join store s
+        on s.`uuid`=sd.`storeuuid` inner join goods g
+        on g.`uuid`=sd.`goodsuuid`
+        where 1=1
+        <if test="null!=storeuuid and ''!=storeuuid">
+            and sd.storeuuid = #{storeuuid}
+        </if>
+        ORDER BY sd.uuid DESC
     </select>
     <!--删除-->
     <delete id="deleteStoredetail" parameterType="java.lang.Integer">

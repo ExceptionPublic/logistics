@@ -53,4 +53,9 @@ public class StoreServiceImpl implements IStoreService {
     public List<Map<String, Object>> empMap() {
         return storeMapper.empMap();
     }
+
+    @Override
+    public List<Store> StoreList() {
+        return storeMapper.StoreList();
+    }
 }

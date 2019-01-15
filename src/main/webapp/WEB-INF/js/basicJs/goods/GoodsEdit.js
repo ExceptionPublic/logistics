@@ -7,7 +7,10 @@ $(function () {
         //初始化部门
         if (null == rowData)
             initSelect("basicJsp/goodstype/SelectGtype", [], "#goodstypeuuid", "uuid", "name");
+
+        if(null==rowData)
             initSelect("basicJsp/supplier/SupplierList", [], "#supplieruuid", "uuid", "name");
+
         //按钮监听
         //关闭按钮
         $("#btn_close").click(function () {

@@ -49,6 +49,11 @@ public class GoodsServiceImpl implements IGoodsService {
         return null!=goodsMapper.selectByPrimaryKey(name);
     }
 
+    @Override
+    public List<Goods> queryGoods() {
+        return goodsMapper.queryGoods();
+    }
+
     @Transactional(readOnly = true)
     @Override
     public List<Map<String,Object>> queryGoodsPager(Goods goods, PageBean pageBean) {

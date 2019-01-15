@@ -1,6 +1,8 @@
 package com.zking.logistics.warehouse.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.ToString;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -13,6 +15,7 @@ public class Storeoper {
 
     private Integer empuuid;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date opertime;
 
     private Integer storeuuid;

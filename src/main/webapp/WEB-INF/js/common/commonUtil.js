@@ -22,7 +22,26 @@ function getTest(element) {
     else
         return getValue(element);
 }
-
+/**
+ * ajax
+ * @param url
+ * @param paraments
+ * @returns {*}
+ */
+function ajax(url,paraments) {
+    var returnData;
+    $.ajax({
+        url: url,
+        data: paraments,
+        type: "post",
+        dataType: "json",
+        async: false,
+        success: function (data) {
+            returnData=data;
+        }
+    });
+    return returnData;
+}
 
 function getToolbar(title,functionName,paraments,icon) {
     paraments = JSON.stringify(paraments).replace(/\"/g, "'");

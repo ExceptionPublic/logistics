@@ -51,8 +51,8 @@ function store(parameters){
             cols: [[ //表头
                 {field: 'uuid', title: '仓库编号', width:'10%', sort: true, align: 'center'},
                 {field: 'name', title: '仓库名称', width:'15%',align: 'center'},
-                {field: 'address', title: '仓库地址',edit:'text', width:'20%',align: 'center'},
-                {field: 'ename', title: '仓库管理员',edit:'text', width:'15%',align: 'center'},
+                {field: 'address', title: '仓库地址',width:'20%',align: 'center'},
+                {field: 'ename', title: '仓库管理员',width:'15%',align: 'center'},
                 {field: '', title: '操作', width: '15%',align: 'center',
                     templet : function(data) {
                         var row = JSON.stringify(data).replace(/\"/g, "'");

@@ -46,6 +46,10 @@
       WHERE r.name='库管员'
 
     </select>
+    <select id="StoreList" resultType="com.zking.logistics.basic.model.Store">
+        SELECT <include refid="Base_Column_List"/>
+        from store where 1=1
+    </select>
     <insert id="insert" parameterType="com.zking.logistics.basic.model.Store">
     insert into store ( NAME, address,
       EMPUUID)
