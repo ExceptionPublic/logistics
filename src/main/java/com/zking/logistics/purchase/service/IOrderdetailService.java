@@ -1,6 +1,7 @@
 package com.zking.logistics.purchase.service;
 
 import com.zking.logistics.purchase.model.Orderdetail;
+import com.zking.logistics.purchase.vo.OrderdetailVo;
 import com.zking.logistics.util.PageBean;
 import org.springframework.stereotype.Repository;
 
@@ -22,7 +23,7 @@ public interface IOrderdetailService {
      * @param orderdetail
      * @return
      */
-    List<Orderdetail> queryOrderdetailsPager(Orderdetail orderdetail, PageBean pageBean);
+    List<OrderdetailVo> queryOrderdetailsPager(Orderdetail orderdetail, PageBean pageBean);
 
     /**
      * 删除

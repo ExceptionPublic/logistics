@@ -43,9 +43,10 @@ function ajax(url,paraments) {
     return returnData;
 }
 
-function getToolbar(title,functionName,paraments,icon) {
+function getToolbar(title,functionName,paraments,icon,event) {
     paraments = JSON.stringify(paraments).replace(/\"/g, "'");
     var toolbar = '<span class="layui-badge  layui-bg-gray" style="margin-top: 5px;">';
-    toolbar += '<a href="javascript:'+functionName+'(' + paraments + ');" >';
+    toolbar += '<a lay-event="'+event+'" href="javascript:'+functionName+'(' + paraments + ');" >';
     toolbar += '<i title="'+title+'" class="'+icon+'"></i></a></span>';
+    return toolbar;
 }

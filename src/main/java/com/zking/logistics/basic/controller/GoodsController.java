@@ -144,14 +144,11 @@ public class GoodsController {
     }
 
 
-    //根据商品id查询
-    @RequestMapping("/selectByUuid")
+    //根据供应商id查询
+    @RequestMapping("/querySupplierGoods")
     @ResponseBody
-    public Map<String,Object> selectByUuid(Integer uuid){
-        Map<String,Object> map =new HashMap<String,Object>();
-        Goods goods = goodsService.selectByUuid(uuid);
-        map.put("goods",goods);
-        return map;
+    public List<Goods> querySupplierGoods(Integer uuid){
+        return goodsService.querySupplierGoods(uuid);
     }
 
 

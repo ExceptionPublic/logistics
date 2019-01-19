@@ -250,6 +250,7 @@
             <artifactId>jackson-annotations</artifactId>
             <version>${jackson.version}</version>
         </dependency>
+
         <!-- ********************** JSTL依赖 ********************** -->
         <!-- 缺少下面的这两个jar包会报java.lang.NoClassDefFoundError: javax/servlet/jsp/jstl/core/Config-->
         <!-- 原因：org.springframework.web.servlet.view.JstlView在视图解析时需要这二个jar包-->

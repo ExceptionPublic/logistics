@@ -90,7 +90,7 @@ public class EmpController {
      */
     @RequestMapping("/deleteEmp")
     @ResponseBody
-    public Map<String,Object> deleteEmp(Emp emp){
+    public Map<String,Object> deleteEmp(EmpVo emp){
         CommonUtil.createMap();
         try {
             empService.deleteBmp(emp.getUuid());

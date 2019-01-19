@@ -34,8 +34,8 @@ public class GoodsServiceImpl implements IGoodsService {
     }
 
     @Override
-    public Goods selectByUuid(Integer uuid) {
-        return goodsMapper.selectByUuid(uuid);
+    public List<Goods> querySupplierGoods(Integer uuid) {
+        return goodsMapper.querySupplierGoods(uuid);
     }
 
     @Override

@@ -43,27 +43,27 @@ function initTable() {
             cols: [[ // 表头
                 {
                     title: '创建日期',
-                    field: 'createtime',
+                    field: 'createDate',
                     width: '20%',
                     sort: true,
                     align: "center"
                 },
                 {
-                    title: '审核日期',
-                    field: 'checktime',
+                    title: '确认日期',
+                    field: 'checkerDate',
                     width: '20%',
                     sort: true,
                     align: "center"
                 },
                 {
                     title: '下单员',
-                    field: 'creater',
+                    field: 'createName',
                     width: '10%',
                     align: "center"
                 },
                 {
                     title: '审查员',
-                    field: 'checker',
+                    field: 'checkerName',
                     width: '10%',
                     align: "center"
                 },
@@ -75,25 +75,28 @@ function initTable() {
                 },
                 {
                     title: '总金额',
-                    field: 'totalmoney',
+                    field: 'totalMoney',
                     width: '10%',
                     align: "center"
                 },
                 {
-                    title: '订单状态',
+                    title: '订单操作',
                     field: 'state',
-                    width: '8%',
+                    width: '10%',
                     align: "center",
                     templet: function (data) {
-                        var toolbar = '<div >';
-                        toolbar+=getToolbar("删除订单","deleteOrders",{
-                            uuid:data.uuid
-                        },"layui-icon layui-icon-delete");
-                        toolbar+=getToolbar("审核通过","alterOrdersState",{
-                            state:"1"
-                        },"layui-icon layui-icon-ok-circle");
-                        toolbar += '</div>';
-                        return toolbar;
+                        var state=data.state;
+                        if(state==0){
+                            var toolbar = '<div >';
+                            toolbar+=getToolbar("取消订单","deleteOrder",data.ordersId,"layui-icon layui-icon-delete");
+                            toolbar+=getToolbar("确认订单","alterOrdersState",{
+                                ordersId:data.ordersId,
+                                state:"1"
+                            },"layui-icon layui-icon-ok-circle");
+                            toolbar += '</div>';
+                            return toolbar;
+                        }
+                        return state=="1" ? "已确认" :"未知";
                     }
                 }
             ]],
@@ -109,22 +112,23 @@ function initTable() {
  * 表格双击事件
  */
 function tableDouble() {
-    layer.use('table',function(){
+    layui.use('table',function(){
         var table = layui.table;
-        table.on('rowDouble(test)', function(obj){
+        table.on('rowDouble(purchaseTable)', function(obj){
             layui.use('layer', function () {
                 var layer = layui.layer;
                 layer.open({
                     id: "dep",
-                    title: "申请采购",
+                    title: "订单详情",
                     type: 2,
                     anim: 1,
                     offset: 'auto',
-                    area: ['1200px', '800px'],
-                    content: 'purchase/toInsertPurchase',
+                    area: ['1200px', '700px'],
+                    content: 'purchase/toOrderDetail',
                     success:function (layero, index) {
                         // obj.data当前数据
-
+                        var iframeWin = window[layero.find('iframe')[0]['name']];
+                        iframeWin.initOrderDetailForm(JSON.stringify(obj.data));
                     }
                 });
             });
@@ -141,7 +145,7 @@ function queryOrders() {
             name: getValue("#name"),
             depuuid: getValue("#dep")
         };
-        table.reload('empTable', {
+        table.reload('purchaseTable', {
             url: 'personnel/emp/queryEmpPager',
             where: paraments,
             page: {
@@ -155,7 +159,7 @@ function queryOrders() {
  * 改变订单状态
  */
 function alterOrdersState(paraments) {
-     $.ajax({
+    $.ajax({
         url: "purchase/alterOrdersState",
         data: paraments,
         type: "post",
@@ -163,6 +167,7 @@ function alterOrdersState(paraments) {
         async: false,
         success: function (data) {
             msg(data.message);
+            queryOrders();
         }
     });
 }
@@ -182,8 +187,34 @@ function openInsertPurchase() {
             type: 2,
             anim: 1,
             offset: 'auto',
-            area: ['1200px', '800px'],
+            area: ['1200px', '700px'],
             content: 'purchase/toInsertPurchase'
         });
     });
+}
+
+
+/**
+ * 取消订单
+ */
+function deleteOrder(ordersId) {
+    layer.confirm('确定取消此订单么?', function(index){
+        $.ajax({
+            url: "purchase/deleteOrder",
+            data: {
+                ordersId:ordersId
+            },
+            type: "post",
+            dataType: "json",
+            async: false,
+            success: function (data) {
+                msg(data.message);
+                //关闭
+                layer.close(index);
+                queryOrders();
+            }
+        });
+
+    });
+
 }

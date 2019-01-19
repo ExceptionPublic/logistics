@@ -18,7 +18,7 @@
   </resultMap>
   <!--字段-->
   <sql id="Base_Column_List" >
-    detail_id, price, num, money, ender, ender_date, purchase, purchase_date, store_id, 
+    detail_id,goods_id,store_id, price, num, money, ender, ender_date, purchase, purchase_date,
     state, orders_id
   </sql>
 
@@ -31,27 +31,23 @@
     where UUID = #{uuid,jdbcType=INTEGER}
   </select>
   <!--分页查询-->
-  <select id="queryOrderdetailsPager" resultType="com.zking.logistics.purchase.model.Orderdetail"
+  <select id="queryOrderdetailsPager" resultType="com.zking.logistics.purchase.vo.OrderdetailVo"
           parameterType="com.zking.logistics.purchase.model.Orderdetail">
     select
-    <include refid="Base_Column_List" />
-    from orderdetail
+     detail_id,goods_id,store_id, price, num, money, ender, ender_date, purchase, purchase_date,
+     state, orders_id,goods.name as goods_name
+    from orderdetail LEFT JOIN goods on goods.uuid=orderdetail.goods_id WHERE orders_id = #{ordersId}
   </select>
   <!--删除-->
   <delete id="deleteOrderdetail" parameterType="java.lang.Integer" >
     delete from orderdetail
-    where detail_id = #{detailId,jdbcType=INTEGER}
+    where orders_id = #{uuid}
   </delete>
   <!--新增-->
   <insert id="insertOrderdetail" parameterType="com.zking.logistics.purchase.model.Orderdetail" >
-    insert into orderdetail ( price, num,
-      money, ender, ender_date, 
-      purchase, purchase_date, store_id, 
-      state, orders_id)
-    values ( #{price,jdbcType=REAL}, #{num,jdbcType=INTEGER},
-      #{money,jdbcType=REAL}, #{ender,jdbcType=INTEGER}, #{enderDate,jdbcType=TIMESTAMP}, 
-      #{purchase,jdbcType=INTEGER}, #{purchaseDate,jdbcType=TIMESTAMP}, #{storeId,jdbcType=INTEGER}, 
-      #{state,jdbcType=VARCHAR}, #{ordersId,jdbcType=INTEGER})
+    insert into orderdetail ( orders_id, goods_id,price,num,money)
+    values (#{ordersId,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER},#{price,jdbcType=REAL}, #{num,jdbcType=INTEGER},
+      #{money,jdbcType=REAL})
   </insert>
   <!--修改-->
   <update id="updateOrderdetail" parameterType="com.zking.logistics.purchase.model.Orderdetail" >
@@ -80,6 +76,9 @@
       </if>
       <if test="storeId != null" >
         store_id = #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsId != null" >
+        store_id = #{goodsId,jdbcType=INTEGER},
       </if>
       <if test="state != null" >
         state = #{state,jdbcType=VARCHAR},

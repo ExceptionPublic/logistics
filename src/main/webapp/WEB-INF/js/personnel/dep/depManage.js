@@ -40,8 +40,8 @@ function initTable() {
             url: 'personnel/dep/queryDepPager',
             title: "部门信息",
             page: true,
-            limit: 3,
-            limits: [3, 20, 25],
+            limit: 15,
+            limits: [15, 20, 25],
             request: {
                 limitName: 'rows' //每页数据量的参数名，默认：limit
             },

@@ -1,83 +1,84 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.zking.logistics.purchase.mapper.OrdersMapper" >
-  <resultMap id="BaseResultMap" type="com.zking.logistics.purchase.model.Orders" >
-    <constructor >
-      <idArg column="orders_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="create_date" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="checker_date" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="create" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="checker" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="supplier_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="total_money" jdbcType="REAL" javaType="java.lang.Float" />
-      <arg column="state" jdbcType="VARCHAR" javaType="java.lang.String" />
-    </constructor>
-  </resultMap>
-  <!--字段-->
-  <sql id="Base_Column_List" >
-    orders_id, create_date, checker_date, create, checker, supplier_id, total_money, 
-    state
+<mapper namespace="com.zking.logistics.purchase.mapper.OrdersMapper">
+    <resultMap id="BaseResultMap" type="com.zking.logistics.purchase.model.Orders">
+        <constructor>
+            <idArg column="orders_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="create_date" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+            <arg column="checker_date" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+            <arg column="create" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="checker" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="supplier_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="total_money" jdbcType="REAL" javaType="java.lang.Float"/>
+            <arg column="state" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        </constructor>
+    </resultMap>
+    <!--字段-->
+    <sql id="Base_Column_List">
+    orders_id, create_date, checker_date,orders.create, checker, supplier_id, total_money,state
   </sql>
 
-  <!--查询-->
-  <!--查询单个-->
-  <select id="querySingleOrder" resultMap="BaseResultMap" parameterType="java.lang.Integer">
-    select
-    <include refid="Base_Column_List"/>
-    from orders
-    where UUID = #{uuid,jdbcType=INTEGER}
-  </select>
-  <!--分页查询-->
-  <select id="queryOrdersPager" resultType="com.zking.logistics.purchase.vo.OrdersVo"
-          parameterType="com.zking.logistics.purchase.model.Orders">
-    select
-    <include refid="Base_Column_List"/>
-    from orders
-  </select>
+    <!--查询-->
+    <!--查询单个-->
+    <select id="querySingleOrder" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from orders
+        where UUID = #{uuid,jdbcType=INTEGER}
+    </select>
+    <!--分页查询-->
+    <select id="queryOrdersPager" resultType="com.zking.logistics.purchase.vo.OrdersVo"
+            parameterType="com.zking.logistics.purchase.vo.OrdersVo">
+        select orders_id, create_date, checker_date,orders.create,emp.name as createName, checker,checkerTable.name as checkerName, supplier_id, supplier.name as  supplierName,total_money,state from orders
+        LEFT JOIN emp on orders.create=emp.uuid LEFT JOIN supplier ON supplier.uuid = orders.supplier_id
+        LEFT JOIN  emp checkerTable on orders.checker=checkerTable.uuid
+    </select>
 
-  <!--删除-->
-  <delete id="deleteOrder" parameterType="java.lang.Integer" >
+
+    <!--删除-->
+    <delete id="deleteOrder" parameterType="java.lang.Integer">
     delete from orders
     where orders_id = #{ordersId,jdbcType=INTEGER}
   </delete>
 
-  <!--新增-->
-  <insert id="insertOrder" parameterType="com.zking.logistics.purchase.model.Orders" >
-    insert into orders (orders_id, create_date, checker_date, 
-      create, checker, supplier_id, 
-      total_money, state)
-    values (#{ordersId,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, #{checkerDate,jdbcType=TIMESTAMP}, 
-      #{create,jdbcType=INTEGER}, #{checker,jdbcType=INTEGER}, #{supplierId,jdbcType=INTEGER}, 
-      #{totalMoney,jdbcType=REAL}, #{state,jdbcType=VARCHAR})
+    <!--新增-->
+    <insert id="insertOrder" parameterType="com.zking.logistics.purchase.vo.OrdersVo" useGeneratedKeys="true"
+            keyProperty="ordersId" keyColumn="orders_id">
+    insert into orders (orders.create, supplier_id,total_money)
+    values (#{create,jdbcType=INTEGER}, #{supplierId,jdbcType=INTEGER}, #{totalMoney,jdbcType=REAL})
   </insert>
 
-  <!--修改-->
-  <update id="updateOrder" parameterType="com.zking.logistics.purchase.model.Orders" >
-    update orders
-    <set >
-      <if test="createDate != null" >
-        create_date = #{createDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="checkerDate != null" >
-        checker_date = #{checkerDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="create != null" >
-        create = #{create,jdbcType=INTEGER},
-      </if>
-      <if test="checker != null" >
-        checker = #{checker,jdbcType=INTEGER},
-      </if>
-      <if test="supplierId != null" >
-        supplier_id = #{supplierId,jdbcType=INTEGER},
-      </if>
-      <if test="totalMoney != null" >
-        total_money = #{totalMoney,jdbcType=REAL},
-      </if>
-      <if test="state != null" >
-        state = #{state,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where orders_id = #{ordersId,jdbcType=INTEGER}
-  </update>
+    <!--修改-->
+    <update id="updateOrder" parameterType="com.zking.logistics.purchase.model.Orders">
+        update orders
+        <set>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="checkerDate != null">
+                checker_date = #{checkerDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="create != null">
+                create = #{create,jdbcType=INTEGER},
+            </if>
+            <if test="checker != null">
+                checker = #{checker,jdbcType=INTEGER},
+            </if>
+            <if test="supplierId != null">
+                supplier_id = #{supplierId,jdbcType=INTEGER},
+            </if>
+            <if test="totalMoney != null">
+                total_money = #{totalMoney,jdbcType=REAL},
+            </if>
+            <if test="state != null">
+                state = #{state,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where orders_id = #{ordersId,jdbcType=INTEGER}
+    </update>
+    <!--更改订单状态-->
+    <update id="alterOrdersState" parameterType="com.zking.logistics.purchase.model.Orders">
+        update orders set state = #{state,jdbcType=VARCHAR} where orders_id = #{ordersId,jdbcType=INTEGER}
+    </update>
 
 </mapper>
