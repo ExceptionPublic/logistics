@@ -107,11 +107,24 @@
         <%--第五行--%>
         <div class="layui-row layui-col-space10">
             <%--第一列--%>
-            <div class="layui-col-md12">
+            <div class="layui-col-md6">
                 <div class="layui-form-item">
                     <label class="layui-form-label" id="address">家庭住址：</label>
                     <div class="layui-input-block">
                         <input type="text" name="address" class="layui-input" lay-verify="required">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">员工角色：</label>
+                    <div class="layui-input-block">
+                        <select name="roleId"
+                                id="roleId"
+                                lay-filter="roleId"
+                                lay-verify="required">
+                            <option value=""></option>
+                        </select>
                     </div>
                 </div>
             </div>

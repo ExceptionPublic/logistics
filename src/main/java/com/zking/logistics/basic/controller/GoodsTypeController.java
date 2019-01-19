@@ -57,13 +57,13 @@ public class GoodsTypeController {
 
     }
 
-    //类型新增
+    //类型新增或修改页面
     @RequestMapping("/togoodstypeAdd")
     public String togoodstypeAdd(){
         return "basicJsp/goodstype/GoodsTypeAdd";
     }
 
-
+    //类型新增
     @RequestMapping(value = "/goodsTypeAdd",method = RequestMethod.POST)
     @ResponseBody
     public Map<String,Object> goodsTypeAdd(GodsType godsType){
@@ -83,6 +83,7 @@ public class GoodsTypeController {
     }
 
 
+    //类型修改
     @RequestMapping("/goodsTypeUpdate")
     @ResponseBody
     public Map<String, Object> goodsTypeUpdate(GodsType godsType){
@@ -122,7 +123,7 @@ public class GoodsTypeController {
         boolean gtype = godsTypeService.isGtype(name);
         CommonUtil.put("success",gtype);
         if(gtype){
-            CommonUtil.put("message","该类型存在");
+            CommonUtil.put("message","‘"+name+"’该类型存在");
         }
         return CommonUtil.getMap();
     }

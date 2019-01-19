@@ -24,4 +24,7 @@ public interface InventoryMapper {
     int updateByPrimaryKey(Inventory record);
 //  盘盈盘亏查询分页
     List<Map<String,Object>> queryInventoryPager(InventoryVo inventoryVo);
+
+
+
 }

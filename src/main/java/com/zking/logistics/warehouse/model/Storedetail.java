@@ -2,11 +2,13 @@ package com.zking.logistics.warehouse.model;
 
 import lombok.ToString;
 
+import java.io.Serializable;
+
 /**
  * 仓库库存
  */
 @ToString
-public class Storedetail {
+public class Storedetail implements Serializable{
     private Integer uuid;
 
     private Integer storeuuid;

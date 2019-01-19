@@ -48,4 +48,13 @@ public interface StoreoperMapper {
     List<Map<String,Object>> queryStoreoperPager(StoreoperVo storeoperVo);
 
 
+    //销售统计
+    List<Map<String,Object>> StatisticsMap(StoreoperVo storeoperVo);
+
+    //销售趋势
+    List<Map<String,Object>> TendencyMap(StoreoperVo storeoperVo);
+
+
+
+
 }

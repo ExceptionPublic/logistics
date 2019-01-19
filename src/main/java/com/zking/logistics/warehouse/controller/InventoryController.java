@@ -2,6 +2,7 @@ package com.zking.logistics.warehouse.controller;
 
 import com.zking.logistics.util.CommonUtil;
 import com.zking.logistics.util.PageBean;
+import com.zking.logistics.warehouse.model.Inventory;
 import com.zking.logistics.warehouse.service.IinventoryService;
 import com.zking.logistics.warehouse.vo.InventoryVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 盘盈盘亏
+ */
 @RequestMapping("/warehouse/inventory")
 @Controller
 public class InventoryController {
@@ -68,9 +72,10 @@ public class InventoryController {
     //盘盈盘亏审核
     @ResponseBody
     @RequestMapping("/updateByPrimaryKeySelective")
-    public Map<String,Object> updateByPrimaryKeySelective(InventoryVo inventoryVo){
+    public Map<String,Object> updateByPrimaryKeySelective(Inventory inventoryVo){
         CommonUtil.createMap();
         try {
+            inventoryVo.setState("2");
             inventoryService.updateByPrimaryKeySelective(inventoryVo);
             System.out.println(inventoryVo);
             CommonUtil.put("message","修改成功");

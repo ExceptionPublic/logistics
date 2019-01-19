@@ -49,3 +49,4 @@ function getToolbar(title,functionName,paraments,icon) {
     toolbar += '<a href="javascript:'+functionName+'(' + paraments + ');" >';
     toolbar += '<i title="'+title+'" class="'+icon+'"></i></a></span>';
 }
+

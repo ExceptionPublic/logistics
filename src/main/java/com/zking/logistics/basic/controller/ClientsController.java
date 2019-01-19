@@ -23,14 +23,14 @@ public class ClientsController {
     @Autowired
     private IClientsService clientsService;
 
-    //客户查询
+    //客户查询页面
     @RequestMapping("/toqueryClients")
     public String toqueryClients(){
         return "basicJsp/clients/ClientsList";
 
     }
 
-
+    //客户查询
     @RequestMapping("/queryLstClients")
     @ResponseBody
     public Map<String,Object> queryLstClients(Clients clients,
@@ -46,20 +46,21 @@ public class ClientsController {
 
     }
 
-    //客户新增
+    //客户新增及修改页面
     @RequestMapping("/toclientsAdd")
     public String toclientsAdd(){
         return "basicJsp/clients/ClientsAdd";
     }
 
 
+    //客户新增
     @RequestMapping(value = "/clientsAdd",method = RequestMethod.POST)
     @ResponseBody
     public Map<String,Object> clientsAdd(Clients clients){
         CommonUtil.createMap();
         try {
             clientsService.insert(clients);
-            CommonUtil.put("message","添加成功");
+            CommonUtil.put("message","添加"+clients.getName()+"成功");
             CommonUtil.put("success",true);
         } catch (Exception e) {
             CommonUtil.put("message","系统错误");
@@ -79,7 +80,7 @@ public class ClientsController {
         CommonUtil.createMap();
         try {
             clientsService.updateByPrimaryKeySelective(clients);
-            CommonUtil.put("message","修改成功");
+            CommonUtil.put("message","修改"+clients.getName()+"成功");
             CommonUtil.put("success",true);
         } catch (Exception e) {
             CommonUtil.put("message","系统错误");
@@ -97,7 +98,7 @@ public class ClientsController {
         CommonUtil.createMap();
         try {
             clientsService.deleteByPrimaryKey(clients);
-            CommonUtil.put("message","删除成功");
+            CommonUtil.put("message","删除"+clients.getName()+"成功");
             CommonUtil.put("success",true);
         } catch (Exception e) {
             CommonUtil.put("message","系统错误");
@@ -118,7 +119,7 @@ public class ClientsController {
         boolean repetition = clientsService.isRepetitionClientsname(name);
         CommonUtil.put("success",repetition);
         if(repetition)
-            CommonUtil.put("message","该客户存在");
+            CommonUtil.put("message","‘"+name+"’该客户存在");
         return CommonUtil.getMap();
     }
 

@@ -31,24 +31,25 @@
 
         select it.`uuid`, g.`name` gname,s.`name` sname,it.`num`,it.`type`,
         it.`createtime`,it.`checktime`,e.`name` pname,e2.`name` shname,it.`state`,
-        it.`goodsuuid`,it.`storeuuid`,it.`creater`,it.`checker`,d.`dict_item` dname
+        it.`goodsuuid`,it.`storeuuid`,it.`creater`,it.`checker`,
+        d.`dict_item` dname,it.`remark`
         from inventory it LEFT join goods g
         on g.`uuid`=it.`goodsuuid` LEFT join store s
         on s.`uuid`=it.`storeuuid` LEFT join emp e
         on e.`uuid`=it.`creater` LEFT join emp e2
         on e2.`uuid`=it.`checker` inner join dict d
-        on d.`dict_value`=it.`state` where 1=1
+        on d.`dict_value`=it.`state` where d.dict_type='inventorytype'
         <if test="null!=type and ''!=type">
             and type =#{type}
         </if>
         <if test="null!=goodsuuid and ''!=goodsuuid">
             and goodsuuid =#{goodsuuid}
         </if>
-        <if test="null!=createtime and ''!=createtime">
-            and createtime &lt;= #{createtime}
+        <if test="null!=startcreatetime and ''!=startcreatetime">
+            and createtime &gt;= #{startcreatetime}
         </if>
         <if test="null!=endcreatetime and ''!=endcreatetime">
-            and createtime &gt;=#{endcreatetime}
+            and createtime &lt;=#{endcreatetime}
         </if>
         ORDER by createtime DESC
 
@@ -144,26 +145,8 @@
     <update id="updateByPrimaryKeySelective" parameterType="com.zking.logistics.warehouse.model.Inventory">
         update inventory
         <set>
-            <if test="goodsuuid != null">
-                GOODSUUID = #{goodsuuid,jdbcType=INTEGER},
-            </if>
-            <if test="storeuuid != null">
-                STOREUUID = #{storeuuid,jdbcType=INTEGER},
-            </if>
-            <if test="num != null">
-                NUM = #{num,jdbcType=INTEGER},
-            </if>
-            <if test="type != null">
-                TYPE = #{type,jdbcType=VARCHAR},
-            </if>
-            <if test="createtime != null">
-                CREATETIME = #{createtime,jdbcType=TIMESTAMP},
-            </if>
             <if test="checktime != null">
                 CHECKTIME = #{checktime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="creater != null">
-                CREATER = #{creater,jdbcType=INTEGER},
             </if>
             <if test="checker != null">
                 CHECKER = #{checker,jdbcType=INTEGER},
@@ -171,11 +154,8 @@
             <if test="state != null">
                 STATE = #{state,jdbcType=VARCHAR},
             </if>
-            <if test="remark != null">
-                REMARK = #{remark,jdbcType=VARCHAR},
-            </if>
         </set>
-        where UUID = #{uuid,jdbcType=INTEGER}
+        where UUID = #{uuid}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.zking.logistics.warehouse.model.Inventory">
     update inventory

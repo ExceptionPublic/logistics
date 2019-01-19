@@ -1,10 +1,8 @@
 package com.zking.logistics.personnel.controller;
 
 import com.zking.logistics.personnel.model.Dep;
-import com.zking.logistics.personnel.model.Emp;
 import com.zking.logistics.personnel.service.IDepService;
 import com.zking.logistics.personnel.vo.DepVo;
-import com.zking.logistics.personnel.vo.EmpVo;
 import com.zking.logistics.util.CommonUtil;
 import com.zking.logistics.util.PageBean;
 import org.springframework.beans.factory.annotation.Autowired;

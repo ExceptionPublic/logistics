@@ -27,7 +27,7 @@ function store(parameters){
             url: '/basicJsp/store/queryStorePager', //数据接口
             where:parameters,
             page: true ,//开启分页
-            title : "是",
+            title : "仓库页面",
             method : "post",
             // toolbar: '#toolbarDemo',//这是个神奇的标签
             text : {

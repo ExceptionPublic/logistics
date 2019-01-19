@@ -77,3 +77,42 @@ function initForm(layFilter, paraments) {
     });
 }
 
+/**
+ * 进行时间补零
+ *
+ * @param num
+ * @returns
+ */
+function getzf(num) {
+    if (parseInt(num) < 10) {
+        num = '0' + num;
+    }
+    return num;
+}
+/**
+ * 时间搓转换为时间 带小时分秒
+ *
+ * @param str
+ * @returns
+ */
+function getDateTime(str) {
+    var oDate = new Date(str), oYear = oDate.getFullYear(), oMonth = oDate
+        .getMonth() + 1, oDay = oDate.getDate(), oHour = oDate.getHours(), oMin = oDate
+        .getMinutes(), oSen = oDate.getSeconds(), oTime = oYear + '-'
+        + getzf(oMonth) + '-' + getzf(oDay) + ' ' + getzf(oHour) + ':'
+        + getzf(oMin) + ':' + getzf(oSen);// 最后拼接时间
+    return oTime;
+};
+
+/**
+ * 时间搓转换为时间 不带小时分秒
+ *
+ * @param str
+ * @returns
+ */
+function getDate(str) {
+    var oDate = new Date(str), oYear = oDate.getFullYear(), oMonth = oDate
+        .getMonth() + 1, oDay = oDate.getDate(), oTime = oYear + '-'
+        + getzf(oMonth) + '-' + getzf(oDay);
+    return oTime;
+};

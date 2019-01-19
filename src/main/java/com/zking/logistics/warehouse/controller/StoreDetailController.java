@@ -14,6 +14,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 库存查询
+ */
 @Controller
 @RequestMapping("/warehouse/storeDetail")
 public class StoreDetailController {
@@ -21,11 +24,13 @@ public class StoreDetailController {
     @Autowired
     private IStoredetailService storedetailService;
 
+    //库存查询页面
     @RequestMapping("/toStoreDeList")
     public String toStoreDeList(){
         return "warehouse/storeDetail/StoreDetailList";
     }
 
+//    库存查询
     @RequestMapping("/queryStoredetailPager")
     @ResponseBody
     public Map<String,Object> queryStoredetailPager(Storedetail storedetail,

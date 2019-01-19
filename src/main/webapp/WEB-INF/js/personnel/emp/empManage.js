@@ -91,16 +91,22 @@ function initTable() {
                     align: "center"
                 },
                 {
+                    title: '角色',
+                    field: 'rname',
+                    width: '6%',
+                    align: "center"
+                },
+                {
                     title: '出生日期',
                     field: 'birthday',
-                    width: '13%',
+                    width: '10%',
                     sort: true,
                     align: "center"
                 },
                 {
                     title: '电话',
                     field: 'tele',
-                    width: '13%',
+                    width: '10%',
                     align: "center"
                 },
                 {
@@ -124,7 +130,7 @@ function initTable() {
                         var row = JSON.stringify(data).replace(/\"/g, "'");
                         var toolbar = '<div >';
                         toolbar += '<span class="layui-badge  layui-bg-gray" style="margin-top: 5px;">';
-                        toolbar += '<a href="javascript:openInsertOrUpdateEmp(\'修改' + data.name + '信息\',' + row + ');" >';
+                        toolbar += '<a href="javascript:EditEmp(\'修改' + data.name + '信息\',' + row + ');" >';
                         toolbar += '<i title="编辑" class="layui-icon layui-icon-edit"></i></a></span>';
                         toolbar += '<span class="layui-badge  layui-bg-gray" style="margin-left: 10px;margin-top: 5px;">';
                         toolbar += '<a href="javascript:deleteEmp(' + row + ');">';
@@ -156,15 +162,42 @@ function openInsertOrUpdateEmp(title, row) {
         layer.open({
             id: "emp",
             title: title,
-            type: 2,
-            anim: 1,
-            offset: 'auto',
-            area: ['1000px', '600px'],
+            type : 2,
+            anim : 1,
+            shadeClose: false,
+            shade: 0.8,
+            btnAlign: 'c',
+            offset : 'auto',
+            area: ['1000px', '500px'],
             content: 'personnel/emp/toInsertOrUpdateEmp',
             success: function (layero, index) {
                 if (row) {
                     var iframeWin = window[layero.find('iframe')[0]['name']];
                     iframeWin.initEmpForm(row);
+                }
+            }
+        });
+    });
+}
+function EditEmp(title, row) {
+    layui.use(['layer', 'form'], function () {
+        var layer = layui.layer;
+        var form = layui.form;
+        layer.open({
+            id: "EditEmp",
+            title: title,
+            type : 2,
+            anim : 1,
+            shadeClose: false,
+            shade: 0.8,
+            btnAlign: 'c',
+            offset : 'auto',
+            area: ['1000px', '500px'],
+            content: 'personnel/emp/EditEmp',
+            success: function (layero, index) {
+                if (row) {
+                    var iframeWin = window[layero.find('iframe')[0]['name']];
+                    iframeWin.initEditEmpForm(row);
                 }
             }
         });
@@ -176,11 +209,13 @@ function openInsertOrUpdateEmp(title, row) {
  * @param uuid
  */
 function deleteEmp(row) {
+    // console.log(row);
     layer.confirm('确定删除' + row.name + '员工吗？', function (index) {
         $.ajax({
             url: "personnel/emp/deleteEmp",
             data: row,
             type: "post",
+            // async : false,
             dataType: "json",
             success: function (data) {
                 msg(data.message);

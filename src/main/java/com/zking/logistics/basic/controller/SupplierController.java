@@ -50,13 +50,14 @@ public class SupplierController {
 
     }
 
-    //供应商新增
+    //供应商新增及修改页面
     @RequestMapping("/tosupplierAdd")
     public String tosupplierAdd() {
         return "basicJsp/supplier/SupplierAdd";
     }
 
 
+    //供应商新增
     @RequestMapping(value = "/supplierAdd", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> supplierAdd(Supplier supplier) {
@@ -108,7 +109,7 @@ public class SupplierController {
         boolean suppliertsname = supplierService.isRepetitionSuppliertsname(name);
         CommonUtil.put("success", suppliertsname);
         if (suppliertsname) {
-            CommonUtil.put("message", "该供应商存在");
+            CommonUtil.put("message", "‘"+name+"’该供应商存在");
         }
         return CommonUtil.getMap();
     }

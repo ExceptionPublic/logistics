@@ -32,7 +32,7 @@ function storeop(parameters){
             url: 'warehouse/storeoper/queryStoreoperPager', //数据接口
             where:parameters,
             page: true ,//开启分页
-            title : "是",
+            title : "库存变动记录",
             method : "post",
             // toolbar: '#toolbarDemo',//这是个神奇的标签
             text : {
@@ -43,13 +43,13 @@ function storeop(parameters){
             },
             cols: [[ //表头
                 {field: 'uuid', title: '编号', width:'10%', align: 'center'},
-                {field: 'ename', title: '员工', width:'10%',align: 'center'},
+                {field: 'ename', title: '库管员', width:'10%',align: 'center'},
                 {field: 'sname', title: '仓库名称', width:'15%',align: 'center'},
                 {field: 'gname', title: '商品名称', width:'15%',align: 'center'},
                 {field: 'num', title: '库存数量', width:'10%',align: 'center'},
                 {field: 'opertime', title: '记录日期', width:'30%',align: 'center',
                     templet : function(data) {
-                        return dateParseString(data.opertime);
+                        return getDateTime(data.opertime);
                     }
                 },
                 {field: 'type', title: '类型', width:'10%',align: 'center'},

@@ -1,23 +1,25 @@
 package com.zking.logistics.personnel.service;
 
-import com.zking.logistics.personnel.model.Dep;
 import com.zking.logistics.personnel.model.Emp;
 import com.zking.logistics.personnel.vo.EmpVo;
 import com.zking.logistics.util.PageBean;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 员工
  */
 public interface IEmpService {
     /**
-     * 删除
-     * @param uuid
+     * 删除对象
+     * @param
      * @return
      */
-    int deleteBmp(Integer uuid);
+    int deleteEmp(Integer uuid);
+
+    int delByKey(Emp emp);
+
 
     /**
      * 新增
@@ -46,6 +48,7 @@ public interface IEmpService {
      * @return
      */
     List<EmpVo> queryEmpPager(EmpVo emp, PageBean pageBean);
+    List<Map> queryEmpMapPager(EmpVo emp ,PageBean pageBean);
 
     /**
      * 根据用户名查询
