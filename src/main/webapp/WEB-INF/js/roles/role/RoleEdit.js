@@ -6,6 +6,10 @@ $(function () {
         $("#btn_close").click(function () {
             close();
         });
+
+        //初始化部门
+        if (null == rowData)
+            initSelect("personnel/dep/queryDep", [], "#depuuid", "uuid", "name");
         //自定义验证
         form.verify({
             name: function (value, item) { //value：表单的值、item：表单的DOM对象
@@ -63,5 +67,6 @@ function close() {
 function initRoleForm(row) {
     rowData = row;
     //初始化部门下拉
+    initSelect("personnel/dep/queryDep", [], "#depuuid", "uuid", "name");
     initForm("roleEdit", row);
 }

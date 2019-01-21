@@ -2,6 +2,7 @@ package com.zking.logistics.warehouse.service;
 
 import com.zking.logistics.util.PageBean;
 import com.zking.logistics.warehouse.model.Storedetail;
+import com.zking.logistics.warehouse.vo.StoredetailVo;
 
 import java.util.List;
 import java.util.Map;
@@ -40,9 +41,9 @@ public interface IStoredetailService {
 
     /**
      * 分页查询
-     * @param storedetail
+     * @param storedetailVo
      * @return
      */
-    List<Map<String,Object>> queryStoredetailPager(Storedetail storedetail, PageBean pageBean);
+    List<Map<String,Object>> queryStoredetailPager(StoredetailVo storedetailVo, PageBean pageBean);
 
 }

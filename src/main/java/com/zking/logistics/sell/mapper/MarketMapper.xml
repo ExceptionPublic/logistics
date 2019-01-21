@@ -42,6 +42,21 @@
 
 
   </select>
+  <select id="queryMarketMap" resultType="map" parameterType="com.zking.logistics.sell.vo.MarketVo">
+    select m.maid,m.markettime,m.salesman,e.name empsalesman,
+    sp.name suppliername,m.state
+    from market m inner join marketdetail mt
+    on m.maid=mt.ordersuuid inner join emp e
+    on e.uuid=m.salesman inner join role r
+    on e.role_id=r.uuid inner join supplier sp
+    on sp.uuid=m.supplieruuid where 1=1
+    <if test="null!=maid and ''!=maid">
+      and m.maid=#{maid}
+    </if>
+    ORDER by maid DESC
+
+
+  </select>
   <insert id="insert" parameterType="com.zking.logistics.sell.model.Market" >
     insert into market (maid, marketTIME, chukuTIME, 
       salesman, ENDER, SUPPLIERUUID, 
@@ -53,9 +68,6 @@
   <insert id="insertSelective" parameterType="com.zking.logistics.sell.model.Market" >
     insert into market
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="maid != null" >
-        maid,
-      </if>
       <if test="markettime != null" >
         marketTIME,
       </if>
@@ -79,9 +91,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="maid != null" >
-        #{maid,jdbcType=INTEGER},
-      </if>
       <if test="markettime != null" >
         #{markettime,jdbcType=TIMESTAMP},
       </if>

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Transactional
@@ -42,14 +43,19 @@ public class RoleServiceImpl implements IRoleService {
         return roleMapper.updateByPrimaryKeySelective(record);
     }
 
+    @Override
+    public List<Role> selectByPrimaryKey(Integer depuuid) {
+        return roleMapper.selectByPrimaryKey(depuuid);
+    }
+
     @Transactional(readOnly = true)
     @Override
-    public List<Role> queryRolePager(Role role, PageBean pageBean) {
+    public List<Map<String,Object>> queryRolePager(Role role, PageBean pageBean) {
         return roleMapper.queryRolePager(role);
     }
 
     @Override
-    public List<Role> RoleList() {
-        return roleMapper.RoleList();
+    public List<Role> RoleList(Role role) {
+        return roleMapper.RoleList(role);
     }
 }

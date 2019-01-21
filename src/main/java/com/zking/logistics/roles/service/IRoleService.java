@@ -4,6 +4,7 @@ import com.zking.logistics.roles.model.Role;
 import com.zking.logistics.util.PageBean;
 
 import java.util.List;
+import java.util.Map;
 
 public interface IRoleService {
     //删除角色
@@ -21,11 +22,13 @@ public interface IRoleService {
     //修改角色
     int updateByPrimaryKeySelective(Role record);
 
-
+    //根据id查询
+    List<Role> selectByPrimaryKey(Integer depuuid);
 
     //角色分页查询
-    List<Role> queryRolePager(Role role, PageBean pageBean);
+    List<Map<String,Object>> queryRolePager(Role role, PageBean pageBean);
+
     //查询所有角色下拉
-    List<Role> RoleList();
+    List<Role> RoleList(Role role);
 
 }

@@ -90,7 +90,7 @@
                             <a href="javascript:;">角色管理</a>
                             <dl class="layui-nav-child">
                                 <dd><a id="3523" class="open" lay-url="${ctx}/roles/role/toRolelist"
-                                       <%--href="${ctx}/roles/role/toRolelist"--%>
+                                       href="${ctx}/roles/role/toRolelist"
                                 >角色设置</a></dd>
                                 <dd><a id="3525" class="open" lay-url="${ctx}/roles/rolepwd/toRolepwd"
                                        <%--href="${ctx}/roles/rolepwd/toRolepwd"--%>
@@ -122,10 +122,10 @@
                                                <%--href="${ctx}/sell/sellOrder/toSellOrderList"--%>
                                         >销售查询</a></dd>
                                         <dd><a id="552502" class="open" lay-url="${ctx}/sell/sellOrder/salesEntry//toSellOrderEntryList"
-                                               <%--href="${ctx}/sell/sellOrder/salesEntry//toSellOrderEntryList"--%>
+                                               href="${ctx}/sell/sellOrder/salesEntry/toSellOrderEntryList"
                                         >销售录入</a></dd>
                                         <dd><a id="552503" class="open" lay-url="${ctx}/sell/sellOrder/salesOutbound/toSalesOutboundList"
-                                               <%--href="${ctx}/sell/sellOrder/salesOutbound/toSalesOutboundList"--%>
+                                               href="${ctx}/sell/sellOrder/salesOutbound/toSalesOutboundList"
                                         >销售出库</a></dd>
                                     </dl>
                                 </li>

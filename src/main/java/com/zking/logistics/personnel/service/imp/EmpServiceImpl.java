@@ -67,4 +67,10 @@ public class EmpServiceImpl implements IEmpService {
     public boolean isRepetitionUsername(String username) {
         return null!=empMapper.querySingleEmpUsername(username);
     }
+
+    @Transactional
+    @Override
+    public EmpVo EmpLogin(EmpVo empVo) {
+        return empMapper.EmpLogin(empVo);
+    }
 }

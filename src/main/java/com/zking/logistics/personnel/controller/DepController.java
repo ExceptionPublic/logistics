@@ -104,7 +104,7 @@ public class DepController {
     }
 
     /**
-     * 判断员工是否有重复用户名
+     * 判断部门是否有重复用户名
      * @param name
      * @return
      */

@@ -28,8 +28,9 @@ public class GoodsTypeController {
     //应用商品下拉
     @RequestMapping("/SelectGtype")
     @ResponseBody
-    public List<GodsType> SelectGtype(){
-        return godsTypeService.SelectGtype();
+    public List<GodsType> SelectGtype(GodsType godsType){
+        System.out.println(godsType.getSupplieruuid());
+        return godsTypeService.SelectGtype(godsType);
     }
 
     //类型查询

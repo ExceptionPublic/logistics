@@ -27,6 +27,19 @@
                     </div>
                 </div>
             </div>
+            <div class="layui-col-md3">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">所属部门：</label>
+                    <div class="layui-input-block" style="width: 200px">
+                        <select name="depuuid"
+                                lay-verify="required"
+                                id="depuuid"
+                                lay-filter="depuuid">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
             <div class="layui-form-item">
                 <div class="layui-input-block">
                     <button class="layui-btn" lay-submit lay-filter="btn_rooleEdit">立即提交</button>

@@ -85,28 +85,20 @@ function querySellOrderListSe(){
 
 
 
-
-// function goodsedit(title,row) {
-//     console.log(row.goodstypeuuid);
-//     layui.use([ 'layer'], function() {
-//         var layer = layui.layer;
-//         layer.open({
-//             id : "goodsEdit",
-//             title : title,
-//             type : 2,
-//             anim : 1,
-//             shadeClose: false,
-//             shade: 0.8,
-//             btnAlign: 'c',
-//             offset : 'auto',
-//             area : [ '400px', '480px' ],
-//             content : 'basicJsp/goods/togoodsEdit',
-//             success : function(layero, index) {
-//                 if(row){
-//                     var iframeWin = window[layero.find('iframe')[0]['name']];
-//                     iframeWin.initGoodsForm(row);
-//                 }
-//             },
-//         });
-//     });
-// }
+function SellOrderAdd() {
+    layui.use('layer', function() {
+        var layer = layui.layer;
+        layer.open({
+            title: "添加订单",
+            type: 2,
+            anim: 1,
+            shadeClose: false,
+            shade: 0.8,
+            btnAlign: 'c',
+            offset: 'auto',
+            area: ['980px', '480px'],
+            // area : [ 宽, 高 ],
+            content: 'sell/sellOrder/salesEntry/toSellOrderEntryAdd',
+        });
+    });
+}

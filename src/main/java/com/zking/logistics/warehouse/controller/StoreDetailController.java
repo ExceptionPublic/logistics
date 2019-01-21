@@ -4,6 +4,7 @@ import com.zking.logistics.util.PageBean;
 import com.zking.logistics.warehouse.model.Storedetail;
 import com.zking.logistics.warehouse.service.IStoredetailService;
 import com.zking.logistics.warehouse.service.IStoreoperService;
+import com.zking.logistics.warehouse.vo.StoredetailVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,7 +34,7 @@ public class StoreDetailController {
 //    库存查询
     @RequestMapping("/queryStoredetailPager")
     @ResponseBody
-    public Map<String,Object> queryStoredetailPager(Storedetail storedetail,
+    public Map<String,Object> queryStoredetailPager(StoredetailVo storedetail,
                                                  HttpServletRequest request) {
         PageBean pageBean = new PageBean();
         pageBean.setRequest(request);

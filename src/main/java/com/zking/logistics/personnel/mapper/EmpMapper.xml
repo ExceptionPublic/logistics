@@ -41,7 +41,7 @@
 
     select
     emp.uuid uuid,username,pwd, emp.name, gender, email, emp.tele, address,
-    birthday, depuuid,dep.name as dep_name,role.name rname,emp.`role_id` roleid
+    birthday,emp.depuuid,dep.name as dep_name,role.name rname,emp.`role_id` roleid
     from emp,dep,role
     where emp.depuuid=dep.uuid
     and emp.`role_id`=role.`uuid`
@@ -79,6 +79,16 @@
 
     <if test="null!=depuuid and ''!=depuuid">
       and depuuid=#{depuuid}
+    </if>
+  </select>
+  <select id="EmpLogin" resultType="com.zking.logistics.personnel.vo.EmpVo"
+          parameterType="com.zking.logistics.personnel.vo.EmpVo">
+    SELECT * FROM emp where 1=1
+    <if test="null!=username and ''!=pwd">
+      and username=#{username}
+    </if>
+    <if test="null!=pwd and ''!=pwd">
+      and pwd=#{pwd}
     </if>
   </select>
   <insert id="insertEmp" parameterType="com.zking.logistics.personnel.model.Emp" >

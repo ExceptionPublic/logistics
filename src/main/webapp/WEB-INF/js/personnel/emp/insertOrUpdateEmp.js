@@ -7,8 +7,10 @@ $(function () {
         //初始化部门
         if (null == rowData)
             initSelect("personnel/dep/queryDep", [], "#dep", "uuid", "name");
-        if (null == rowData)
-            initSelect("roles/role/roleList", [], "#roleId", "uuid", "name");
+        form.on('select(depuuid)', function(data){
+            $('#roleId').empty();
+            initSelect("roles/role/roleByDepuuid", {'depuuid':data.value}, "#roleId", "uuid", "name");
+        });
 
         //日期控件配置
         laydate.render({
@@ -95,8 +97,6 @@ function initEmpForm(row) {
     rowData = row;
     //初始化部门下拉
     initSelect("personnel/dep/queryDep", [], "#dep", "uuid", "name");
-    initSelect("roles/role/roleList", [], "#roleId", "uuid", "name");
     initForm("emp", row);
     renderForm("select", "depuuid");
-    renderForm("select", "roleId");
 }

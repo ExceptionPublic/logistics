@@ -1,13 +1,19 @@
 package com.zking.logistics.roles.model;
 
+import lombok.ToString;
+
+@ToString
 public class Role {
     private Integer uuid;
 
     private String name;
 
-    public Role(Integer uuid, String name) {
+    private Integer depuuid;
+
+    public Role(Integer uuid, String name, Integer depuuid) {
         this.uuid = uuid;
         this.name = name;
+        this.depuuid = depuuid;
     }
 
     public Role() {
@@ -28,5 +34,13 @@ public class Role {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Integer getDepuuid() {
+        return depuuid;
+    }
+
+    public void setDepuuid(Integer depuuid) {
+        this.depuuid = depuuid;
     }
 }

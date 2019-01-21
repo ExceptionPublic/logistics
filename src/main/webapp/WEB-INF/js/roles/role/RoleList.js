@@ -38,8 +38,9 @@ function rolelist(parameters){
                 limitName : 'rows'
             },
             cols: [[ //表头
-                {field: 'uuid', title: '编号', width:'10%', sort: true, align: 'center'},
-                {field: 'name', title: '名称', width:'15%',align: 'center'},
+                {field: 'uuid', title: '角色编号', width:'10%', sort: true, align: 'center'},
+                {field: 'name', title: '角色名称', width:'15%',align: 'center'},
+                {field: 'dname', title: '所属部门', width:'15%',align: 'center'},
                 {field: '', title: '操作', width: '15%',align: 'center',
                     templet : function(data) {
                         var row = JSON.stringify(data).replace(/\"/g, "'");
@@ -124,7 +125,7 @@ function roleEdit(title,row) {
             shade: 0.8,
             btnAlign: 'c',
             offset : 'auto',
-            area : [ '350px', '170px' ],
+            area : [ '350px', '230px' ],
             content : 'roles/role/toRoleEdit',
             success : function(layero, index) {
                 if(row){

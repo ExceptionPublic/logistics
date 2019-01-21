@@ -40,8 +40,17 @@ public class RoleController {
     //查询所有角色
     @RequestMapping("/roleList")
     @ResponseBody
-    public List<Role> roleList(){
-        return roleService.RoleList();
+    public List<Role> roleList(Role role){
+        System.out.println(role);
+        return roleService.RoleList(role);
+    }
+
+    //根据id查询角色
+    @RequestMapping("/roleByDepuuid")
+    @ResponseBody
+    public List<Role> roleByDepuuid(Role role){
+        System.out.println(role.getDepuuid());
+        return roleService.selectByPrimaryKey(role.getDepuuid());
     }
 
     //判断角色是否重复
@@ -63,7 +72,7 @@ public class RoleController {
         PageBean pageBean =new PageBean();
         pageBean.setRequest(request);
         Map map=new HashMap();
-        List<Role> roleList = roleService.queryRolePager(role, pageBean);
+        List<Map<String,Object>> roleList = roleService.queryRolePager(role, pageBean);
         map.put("data",roleList);
         map.put("count",pageBean.getTotal());
         map.put("code",0);

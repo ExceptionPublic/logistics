@@ -31,5 +31,5 @@ public interface GodsTypeMapper {
     List<GodsType> queryLstGoodTypePager(GodsType godsType);
 
     //应用商品下拉
-    List<GodsType> SelectGtype();
+    List<GodsType> SelectGtype(GodsType godsType);
 }

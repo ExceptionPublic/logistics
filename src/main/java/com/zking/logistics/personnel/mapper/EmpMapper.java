@@ -54,5 +54,12 @@ public interface EmpMapper {
 
     List<Map> queryEmpMapPager(EmpVo emp );
 
+    /**
+     * 员工登录
+     * @param empVo
+     * @return
+     */
+    EmpVo EmpLogin(EmpVo empVo);
+
 
 }

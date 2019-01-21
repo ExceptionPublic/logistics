@@ -119,7 +119,8 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">员工角色：</label>
                     <div class="layui-input-block">
-                        <select name="roleId"
+                        <select
+                                name="roleId"
                                 id="roleId"
                                 lay-filter="roleId"
                                 lay-verify="required">

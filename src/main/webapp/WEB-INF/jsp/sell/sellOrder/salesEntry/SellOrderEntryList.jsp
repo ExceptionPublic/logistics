@@ -61,7 +61,7 @@
                 <i class="layui-icon">&#xe615;</i>查询
             </button>
             <button class="layui-btn layui-btn-sm"
-                    id="btn_SellOrderAdd">
+                    id="btn_SellOrderAdd" onclick="SellOrderAdd()">
                 <i class="layui-icon">&#xe608;</i>录入销售订单
             </button>
         </div>

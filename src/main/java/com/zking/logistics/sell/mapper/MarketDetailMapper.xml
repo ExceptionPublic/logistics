@@ -23,15 +23,28 @@
     from marketdetail
     where UUID = #{uuid,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <select id="queryMarkDetPager" resultType="map" parameterType="com.zking.logistics.sell.vo.MarketDetailVo">
+
+
+
+  </select>
+    <select id="queryMarkDetMap" resultType="map" parameterType="com.zking.logistics.sell.vo.MarketDetailVo">
+      select mt.uuid,mt.goodsuuid,mt.price,mt.ordersuuid,
+      mt.num,mt.money,mt.state,g.name gname,s.name sname
+      from marketdetail mt
+      inner join goods g on mt.goodsuuid=g.uuid
+      inner join store s on s.uuid=mt.storeuuid
+      where mt.ordersuuid=#{ordersuuid}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from marketdetail
     where UUID = #{uuid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.zking.logistics.sell.model.MarketDetail" >
-    insert into marketdetail (UUID, GOODSUUID, PRICE, 
+    insert into marketdetail (GOODSUUID, PRICE,
       NUM, MONEY, ENDER, STOREUUID, 
       STATE, ORDERSUUID)
-    values (#{uuid,jdbcType=INTEGER}, #{goodsuuid,jdbcType=INTEGER}, #{price,jdbcType=REAL}, 
+    values (#{goodsuuid,jdbcType=INTEGER}, #{price,jdbcType=REAL},
       #{num,jdbcType=INTEGER}, #{money,jdbcType=REAL}, #{ender,jdbcType=INTEGER}, #{storeuuid,jdbcType=INTEGER}, 
       #{state,jdbcType=VARCHAR}, #{ordersuuid,jdbcType=INTEGER})
   </insert>

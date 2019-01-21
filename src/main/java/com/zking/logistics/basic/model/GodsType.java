@@ -8,13 +8,25 @@ public class GodsType {
 
     private String name;
 
-    public GodsType(Integer uuid, String name) {
+    private Integer supplieruuid;
+
+    public GodsType(Integer uuid, String name,Integer supplieruuid) {
         this.uuid = uuid;
         this.name = name;
+        this.supplieruuid=supplieruuid;
     }
+
 
     public GodsType() {
         super();
+    }
+
+    public Integer getSupplieruuid() {
+        return supplieruuid;
+    }
+
+    public void setSupplieruuid(Integer supplieruuid) {
+        this.supplieruuid = supplieruuid;
     }
 
     public Integer getUuid() {

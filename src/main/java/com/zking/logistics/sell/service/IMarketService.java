@@ -20,4 +20,7 @@ public interface IMarketService {
 
     //查询销售订单及分页
     List<Map<String,Object>> queryMarketPager(MarketVo marketVo, PageBean pageBean);
+
+    //根据id查询销售订单
+    List<Map<String,Object>> queryMarketMap(MarketVo marketVo);
 }

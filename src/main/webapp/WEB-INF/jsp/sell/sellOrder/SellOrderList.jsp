@@ -71,7 +71,6 @@
             </button>
         </div>
     </div>
-</div>
 <table id="querySellOrder" lay-filter="querySellOrder"></table>
 
 </body>

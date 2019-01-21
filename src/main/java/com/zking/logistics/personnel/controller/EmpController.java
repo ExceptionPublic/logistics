@@ -119,21 +119,21 @@ public class EmpController {
         return CommonUtil.getMap();
     }
 
-//    @RequestMapping("/delByKey")
-//    @ResponseBody
-//    public Map<String,Object> delByKey(Emp empVo){
-//        CommonUtil.createMap();
-//        try {
-//            empService.delByKey(empVo);
-//            CommonUtil.put("message","员工"+empVo.getName()+"删除成功");
-//            CommonUtil.put("success",true);
-//        } catch (Exception e) {
-//            CommonUtil.put("message","系统错误");
-//            CommonUtil.put("success",false);
-//            e.printStackTrace();
-//        }
-//        return CommonUtil.getMap();
-//    }
+    @RequestMapping("/delByKey")
+    @ResponseBody
+    public Map<String,Object> delByKey(Emp empVo){
+        CommonUtil.createMap();
+        try {
+            empService.delByKey(empVo);
+            CommonUtil.put("message","员工"+empVo.getName()+"删除成功");
+            CommonUtil.put("success",true);
+        } catch (Exception e) {
+            CommonUtil.put("message","系统错误");
+            CommonUtil.put("success",false);
+            e.printStackTrace();
+        }
+        return CommonUtil.getMap();
+    }
 
 
 
@@ -177,18 +177,41 @@ public class EmpController {
      * @param emp
      * @return
      */
-//    @RequestMapping("/queryEmpMapPager")
-//    @ResponseBody
-//    public Map<String,Object> queryEmpMapPager(HttpServletRequest request, EmpVo emp){
-//        Map<String,Object> map=new HashMap<String, Object>();
-//        PageBean pageBean=new PageBean();
-//        pageBean.setRequest(request);
-//        List<Map> maps = empService.queryEmpMapPager(emp, pageBean);
-//        map.put("data",maps);
-//        map.put("count",pageBean.getTotal());
-//        map.put("code",0);
-//        return map;
-//    }
+    @RequestMapping("/queryEmpMapPager")
+    @ResponseBody
+    public Map<String,Object> queryEmpMapPager(HttpServletRequest request, EmpVo emp){
+        Map<String,Object> map=new HashMap<String, Object>();
+        PageBean pageBean=new PageBean();
+        pageBean.setRequest(request);
+        List<Map> maps = empService.queryEmpMapPager(emp, pageBean);
+        map.put("data",maps);
+        map.put("count",pageBean.getTotal());
+        map.put("code",0);
+        return map;
+    }
+
+
+    /**
+     * 员工登录
+     * @param empVo
+     * @return
+     */
+    @RequestMapping("/EmpLogin")
+    @ResponseBody
+    public Map<String,Object> EmpLogin(EmpVo empVo){
+        Map<String,Object> map=new HashMap<>();
+        EmpVo login = empService.EmpLogin(empVo);
+
+        if(null==login){
+            map.put("success",true);
+            map.put("message","登录成功");
+
+        }else{
+            map.put("success",false);
+            map.put("message","账号或密码错误");
+        }
+        return map;
+    }
 
 
 

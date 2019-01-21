@@ -63,5 +63,11 @@ public interface IEmpService {
      * @return
      */
     boolean isRepetitionUsername(String username);
+    /**
+     * 员工登录
+     * @param empVo
+     * @return
+     */
+    EmpVo EmpLogin(EmpVo empVo);
 
 }

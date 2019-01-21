@@ -54,7 +54,7 @@ public class GodsTypeServiceImpl implements IGodsTypeService {
     }
 
     @Override
-    public List<GodsType> SelectGtype() {
-        return godsTypeMapper.SelectGtype();
+    public List<GodsType> SelectGtype(GodsType godsType) {
+        return godsTypeMapper.SelectGtype(godsType);
     }
 }

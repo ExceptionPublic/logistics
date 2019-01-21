@@ -1,5 +1,8 @@
 package com.zking.logistics.basic.model;
 
+import lombok.ToString;
+
+@ToString
 public class Goods {
     private Integer uuid;
 

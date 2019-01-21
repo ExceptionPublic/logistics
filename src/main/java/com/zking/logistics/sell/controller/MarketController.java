@@ -23,11 +23,19 @@ public class MarketController {
     @Autowired
     private IMarketService marketService;
 
+    //查询销售页面
     @RequestMapping("/toSellOrderList")
     public String toSellOrderList() {
         return "/sell/sellOrder/SellOrderList";
     }
 
+    //查询销售详情页面
+    @RequestMapping("/toSellParticulars")
+    public String toSellParticulars() {
+        return "/sell/sellOrder/salesOutbound/SellParticulars";
+    }
+
+    //查询销售订单
     @RequestMapping("/queryMarketPager")
     @ResponseBody
     public Map<String,Object> queryMarketPager(MarketVo marketVo,
@@ -45,5 +53,16 @@ public class MarketController {
 
         return map;
     }
+
+    //根据id查询销售订单
+    @RequestMapping("/queryMarketMap")
+    @ResponseBody
+    public List<Map<String,Object>> queryMarketMap(MarketVo marketVo){
+        return marketService.queryMarketMap(marketVo);
+    }
+
+
+
+
 
 }

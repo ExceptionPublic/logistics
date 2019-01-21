@@ -24,4 +24,7 @@ public interface MarketMapper {
 
     //查询销售订单及分页
     List<Map<String,Object>> queryMarketPager(MarketVo marketVo);
+
+    //根据id查询销售订单
+    List<Map<String,Object>> queryMarketMap(MarketVo marketVo);
 }
