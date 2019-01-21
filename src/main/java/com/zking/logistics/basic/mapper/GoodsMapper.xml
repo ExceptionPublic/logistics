@@ -25,11 +25,11 @@
     from goods
     where NAME =#{name}
   </select>
-  <select id="selectByUuid" resultType="com.zking.logistics.basic.model.Goods">
+  <select id="querySupplierGoods" resultType="com.zking.logistics.basic.model.Goods">
     select
     <include refid="Base_Column_List" />
     from goods
-    where UUID = #{uuid}
+    where supplieruuid = #{uuid}
   </select>
   <select id="queryGoodsPager" resultType="map" parameterType="com.zking.logistics.basic.model.Goods">
     select g.`uuid`,g.`name`,g.`supplieruuid`,g.`unit`,
@@ -50,6 +50,7 @@
     SELECT <include refid="Base_Column_List"/>
     from goods where 1=1
   </select>
+
   <insert id="insert" parameterType="com.zking.logistics.basic.model.Goods" >
     insert into goods ( NAME, supplieruuid,
       UNIT, INPRICE, OUTPRICE, 

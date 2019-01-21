@@ -1,10 +1,12 @@
 package com.zking.logistics.purchase.service;
 
 import com.zking.logistics.purchase.model.Orders;
+import com.zking.logistics.purchase.vo.OrderdetailVo;
 import com.zking.logistics.purchase.vo.OrdersVo;
 import com.zking.logistics.util.PageBean;
 import org.springframework.stereotype.Repository;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -24,7 +26,7 @@ public interface IOrdersService {
      * @param ordersVO
      * @return
      */
-    List<Orders> queryOrdersPager(OrdersVo ordersVO, PageBean pageBean);
+    List<OrdersVo> queryOrdersPager(OrdersVo ordersVO, PageBean pageBean);
 
 
     /**
@@ -39,7 +41,7 @@ public interface IOrdersService {
      * @param record
      * @return
      */
-    int insertOrder(Orders record);
+    int insertOrder(OrdersVo  record) throws IOException;
 
     /**
      * 修改
@@ -47,5 +49,13 @@ public interface IOrdersService {
      * @return
      */
     int updateOrder(Orders record);
+
+    /**
+     * 更改订单状态
+     * @param orders
+     * @return
+     */
+    int alterOrdersState(Orders orders);
+
 
 }

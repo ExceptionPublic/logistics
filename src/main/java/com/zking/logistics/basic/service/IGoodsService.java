@@ -17,7 +17,7 @@ public interface IGoodsService {
     Goods selectByPrimaryKey(String name);
 
     //    根据id查询
-    Goods selectByUuid(Integer uuid);
+    List<Goods> querySupplierGoods(Integer uuid);
 
     //    商品修改
     int updateByPrimaryKeySelective(Goods record);

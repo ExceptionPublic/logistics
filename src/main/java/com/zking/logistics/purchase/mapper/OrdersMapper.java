@@ -24,7 +24,7 @@ public interface OrdersMapper {
      * @param ordersVO
      * @return
      */
-    List<Orders> queryOrdersPager(OrdersVo ordersVO);
+    List<OrdersVo> queryOrdersPager(OrdersVo ordersVO);
 
 
     /**
@@ -39,7 +39,7 @@ public interface OrdersMapper {
      * @param record
      * @return
      */
-    int insertOrder(Orders record);
+    int insertOrder(OrdersVo record);
 
     /**
      * 修改
@@ -47,5 +47,12 @@ public interface OrdersMapper {
      * @return
      */
     int updateOrder(Orders record);
+
+    /**
+     * 更改订单状态
+     * @param orders
+     * @return
+     */
+    int alterOrdersState(Orders orders);
 
 }

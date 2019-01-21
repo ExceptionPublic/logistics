@@ -3,6 +3,7 @@ package com.zking.logistics.purchase.service.imp;
 import com.zking.logistics.purchase.mapper.OrderdetailMapper;
 import com.zking.logistics.purchase.model.Orderdetail;
 import com.zking.logistics.purchase.service.IOrderdetailService;
+import com.zking.logistics.purchase.vo.OrderdetailVo;
 import com.zking.logistics.util.PageBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,7 +26,7 @@ public class OrderdetailServiceImpl implements IOrderdetailService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<Orderdetail> queryOrderdetailsPager(Orderdetail orderdetail, PageBean pageBean) {
+    public List<OrderdetailVo> queryOrderdetailsPager(Orderdetail orderdetail, PageBean pageBean) {
         return orderdetailMapper.queryOrderdetailsPager(orderdetail);
     }
 

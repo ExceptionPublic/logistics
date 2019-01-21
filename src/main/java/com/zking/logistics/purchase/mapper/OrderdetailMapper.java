@@ -1,6 +1,7 @@
 package com.zking.logistics.purchase.mapper;
 
 import com.zking.logistics.purchase.model.Orderdetail;
+import com.zking.logistics.purchase.vo.OrderdetailVo;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public interface OrderdetailMapper {
      * @param orderdetail
      * @return
      */
-    List<Orderdetail> queryOrderdetailsPager(Orderdetail orderdetail);
+    List<OrderdetailVo> queryOrderdetailsPager(Orderdetail orderdetail);
 
     /**
      * 删除

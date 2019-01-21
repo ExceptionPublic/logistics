@@ -104,24 +104,7 @@ public class EmpController {
      */
     @RequestMapping("/deleteEmp")
     @ResponseBody
-    public Map<String,Object> deleteEmp(Emp empVo){
-        CommonUtil.createMap();
-        try {
-            System.out.println("员工id："+empVo.getUuid());
-            empService.deleteEmp(empVo.getUuid());
-            CommonUtil.put("message","员工"+empVo.getName()+"删除成功");
-            CommonUtil.put("success",true);
-        } catch (Exception e) {
-            CommonUtil.put("message","系统错误");
-            CommonUtil.put("success",false);
-            e.printStackTrace();
-        }
-        return CommonUtil.getMap();
-    }
-
-    @RequestMapping("/delByKey")
-    @ResponseBody
-    public Map<String,Object> delByKey(Emp empVo){
+    public Map<String,Object> deleteEmp(EmpVo emp){
         CommonUtil.createMap();
         try {
             empService.delByKey(empVo);

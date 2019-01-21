@@ -1,9 +1,16 @@
 package com.zking.logistics.purchase.model;
 
+
+import lombok.ToString;
+
+import java.io.Serializable;
 import java.util.Date;
 
-public class Orderdetail {
+@ToString
+public class Orderdetail implements Serializable{
     private Integer detailId;
+
+    private Integer goodsId;
 
     private Float price;
 
@@ -39,8 +46,23 @@ public class Orderdetail {
         this.ordersId = ordersId;
     }
 
+    public Orderdetail(Integer goodsId, Float price, Integer num, Float money) {
+        this.goodsId = goodsId;
+        this.price = price;
+        this.num = num;
+        this.money = money;
+    }
+
     public Orderdetail() {
         super();
+    }
+
+    public Integer getGoodsId() {
+        return goodsId;
+    }
+
+    public void setGoodsId(Integer goodsId) {
+        this.goodsId = goodsId;
     }
 
     public Integer getDetailId() {

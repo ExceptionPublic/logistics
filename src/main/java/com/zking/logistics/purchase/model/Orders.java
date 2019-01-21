@@ -1,12 +1,19 @@
 package com.zking.logistics.purchase.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.ToString;
+
+import java.io.Serializable;
 import java.util.Date;
 
-public class Orders {
+@ToString
+public class Orders implements Serializable{
     private Integer ordersId;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date createDate;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date checkerDate;
 
     private Integer create;
