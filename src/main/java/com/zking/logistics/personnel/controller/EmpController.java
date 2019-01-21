@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 @Controller
 @RequestMapping("/personnel/emp")
@@ -31,14 +31,25 @@ public class EmpController {
         return "personnel/emp/empManage";
     }
 
+
     /**
-     * 跳转至新增或者修改界面
+     * 跳转至新增界面
      * @return
      */
     @RequestMapping("/toInsertOrUpdateEmp")
     public String toInsertOrUpdateEmp(){
         return "personnel/emp/insertOrUpdateEmp";
     }
+    /**
+     * 跳转修改界面
+     * @return
+     */
+    @RequestMapping("/EditEmp")
+    public String EditEmp(){
+        return "personnel/emp/EditEmp";
+    }
+
+
 
     /**
      * 新增员工
@@ -51,6 +62,7 @@ public class EmpController {
         CommonUtil.createMap();
         try {
             empService.insertEmp(emp);
+            System.out.println("添加员工："+emp);
             CommonUtil.put("message","员工"+emp.getName()+"添加成功");
             CommonUtil.put("success",true);
         } catch (Exception e) {
@@ -72,6 +84,7 @@ public class EmpController {
         CommonUtil.createMap();
         try {
             empService.updateEmp(emp);
+            System.out.println("修改员工："+emp);
             CommonUtil.put("message","员工"+emp.getName()+"修改成功");
             CommonUtil.put("success",true);
         } catch (Exception e) {
@@ -83,9 +96,10 @@ public class EmpController {
     }
 
 
+
     /**
      * 删除员工
-     * @param emp
+     * @param empVo
      * @return
      */
     @RequestMapping("/deleteEmp")
@@ -93,8 +107,8 @@ public class EmpController {
     public Map<String,Object> deleteEmp(EmpVo emp){
         CommonUtil.createMap();
         try {
-            empService.deleteBmp(emp.getUuid());
-            CommonUtil.put("message","员工"+emp.getName()+"删除成功");
+            empService.delByKey(empVo);
+            CommonUtil.put("message","员工"+empVo.getName()+"删除成功");
             CommonUtil.put("success",true);
         } catch (Exception e) {
             CommonUtil.put("message","系统错误");
@@ -103,6 +117,8 @@ public class EmpController {
         }
         return CommonUtil.getMap();
     }
+
+
 
     /**
      * 判断员工是否有重复用户名
@@ -135,6 +151,48 @@ public class EmpController {
         map.put("data",empService.queryEmpPager(emp,pageBean));
         map.put("count",pageBean.getTotal());
         map.put("code",0);
+        return map;
+    }
+
+    /**
+     * 员工分页Map集合查询返回JOSN数据
+     * @param request
+     * @param emp
+     * @return
+     */
+    @RequestMapping("/queryEmpMapPager")
+    @ResponseBody
+    public Map<String,Object> queryEmpMapPager(HttpServletRequest request, EmpVo emp){
+        Map<String,Object> map=new HashMap<String, Object>();
+        PageBean pageBean=new PageBean();
+        pageBean.setRequest(request);
+        List<Map> maps = empService.queryEmpMapPager(emp, pageBean);
+        map.put("data",maps);
+        map.put("count",pageBean.getTotal());
+        map.put("code",0);
+        return map;
+    }
+
+
+    /**
+     * 员工登录
+     * @param empVo
+     * @return
+     */
+    @RequestMapping("/EmpLogin")
+    @ResponseBody
+    public Map<String,Object> EmpLogin(EmpVo empVo){
+        Map<String,Object> map=new HashMap<>();
+        EmpVo login = empService.EmpLogin(empVo);
+
+        if(null==login){
+            map.put("success",true);
+            map.put("message","登录成功");
+
+        }else{
+            map.put("success",false);
+            map.put("message","账号或密码错误");
+        }
         return map;
     }
 

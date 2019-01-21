@@ -29,7 +29,7 @@ function inventory(parameters){
             url: 'warehouse/inventory/queryInventoryPager', //数据接口
             where:parameters,
             page: true ,//开启分页
-            title : "是",
+            title : "盘盈盘亏登记页面",
             method : "post",
             // toolbar: '#toolbarDemo',//这是个神奇的标签
             text : {
@@ -40,21 +40,25 @@ function inventory(parameters){
             },
             cols: [[ //表头
                 {field: 'uuid', title: '编号', width:'5%', align: 'center'},
-                {field: 'type', title: '类型', width:'5%',align: 'center'},
-                {field: 'pname', title: '登记人', width:'5%',align: 'center'},
-                {field: 'shname', title: '审核人', width:'5%',align: 'center'},
-                {field: 'dname', title: '状态', width:'5%',align: 'center'},
-                {field: 'num', title: '库存数量', width:'7%',align: 'center'},
-                {field: 'gname', title: '商品名称', width:'8%',align: 'center'},
+                {field: 'gname', title: '商品名称', width:'10%',align: 'center'},
                 {field: 'sname', title: '仓库名称', width:'10%',align: 'center'},
-                {field: 'createtime', title: '登记日期', width:'25%',align: 'center',
+                {field: 'pname', title: '登记人', width:'10%',align: 'center'},
+                {field: 'remark', title: '备注', width:'10%',align: 'center'},
+                {field: 'num', title: '数量', width:'5%',align: 'center'},
+                {field: 'type', title: '类型', width:'5%',align: 'center'},
+                {field: 'createtime', title: '登记日期', width:'15%',align: 'center',
                     templet : function(data) {
-                        return dateParseString(data.createtime);
+                        return getDateTime(data.createtime);
                     }
                 },
-                {field: 'checktime', title: '审核日期', width:'25%',align: 'center',
+                {field: 'shname', title: '审核人', width:'8%',align: 'center'},
+                {field: 'dname', title: '状态', width:'7%',align: 'center'},
+                {field: 'checktime', title: '审核日期', width:'15%',align: 'center',
                     templet : function(data) {
-                        return dateParseString(data.checktime);
+                        if(data.checktime==null){
+                            return "";
+                        }else
+                            return getDateTime(data.checktime);
                     }
                 },
             ]],
@@ -72,7 +76,8 @@ function invenListSe(){
         var paraments = {
             type: getValue('#type '),
             goodsuuid: getValue('#goodsuuid'),
-            // 'createtime': getValue('#createtime'),
+            'startcreatetime': getValue('#startcreatetime'),
+            'endcreatetime': getValue('#endcreatetime'),
         };
         console.log(paraments.createtime);
         table.reload('queryInvenregister2', {

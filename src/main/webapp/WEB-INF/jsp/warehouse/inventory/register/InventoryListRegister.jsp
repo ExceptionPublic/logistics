@@ -11,28 +11,34 @@
     <%@ include file="/WEB-INF/jsp/common/head.jsp" %>
     <title>Title</title>
     <script type="text/javascript" src="${ctx}/js/warehouse/inventory/register/InventoryListRegister.js"></script>
+    <script>
+        //执行一个laydate实例
+        layui.use('laydate', function() {
+            var laydate = layui.laydate;
+            //执行一个laydate实例
+            laydate.render({
+                elem : '#startcreatetime',
+                type : 'date',
+                max:0,
+            });
+            laydate.render({
+                elem : '#endcreatetime',
+                type : 'date',
+                min:0,
+            });
+
+        });
+    </script>
 </head>
 <body>
+
+
 <div class="layui-container layui-form" style="margin-top: 10px;">
     <div class="layui-row">
-        <%--<div class="layui-col-md3">--%>
-            <%--<div class="layui-form-item">--%>
-                <%--<label class="layui-form-label">登记日期：</label>--%>
-                <%--<div class="layui-input-block" style="width:40px;" align="center">--%>
-                    <%--<input type="text"--%>
-                           <%--name="createtime"--%>
-                           <%--id="createtime"--%>
-                           <%--style="width: 200px;"--%>
-                           <%--placeholder="请输入"--%>
-                           <%--class="layui-input">--%>
-                <%--</div>--%>
-            <%--</div>--%>
-
-        <%--</div>--%>
         <div class="layui-col-md3">
             <div class="layui-form-item">
                 <label class="layui-form-label">类型：</label>
-                <div class="layui-input-block" style="width: 200px">
+                <div class="layui-input-block" style="width: 150px">
                     <select name="type"
                             id="type">
                         <option value=""></option>
@@ -45,7 +51,7 @@
         <div class="layui-col-md3">
             <div class="layui-form-item">
                 <label class="layui-form-label">商品名称：</label>
-                <div class="layui-input-block" style="width: 200px">
+                <div class="layui-input-block" style="width: 150px">
                     <select name="goodsuuid"
                             lay-verify="required"
                             id="goodsuuid"
@@ -55,7 +61,30 @@
                 </div>
             </div>
         </div>
-        <div class="layui-col-md2 layui-col-md-offset1">
+    </div>
+
+    <div class="layui-row layui-col-space0">
+        <div class="layui-col-md5">
+            <div class="layui-form-item">
+                <label class="layui-form-label">登记时间：</label>
+                <div class="layui-input-block" style="width: 320px;" align="center">
+                    <div class="layui-col-md5">
+                        <input type="text" id="startcreatetime"
+                               placeholder="起始时间(&gt;)"
+                               class="layui-input">
+                    </div>
+                    <div class="layui-col-md1" style="padding-top: 10px;">
+                        <span>----</span>
+                    </div>
+                    <div class="layui-col-md6">
+                        <input type="text" id="endcreatetime"
+                               placeholder="终止时间(&lt;)"
+                               class="layui-input">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md2 ">
             <button class="layui-btn layui-btn-sm layui-btn-primary"
                     id="btn_queryInvenregister">
                 <i class="layui-icon">&#xe615;</i>查询
@@ -64,10 +93,10 @@
                     id="btn_invenAdd" onclick="InvenAdd()">
                 <i class="layui-icon">&#xe608;</i>盘盈盘亏登记
             </button>
-
         </div>
     </div>
 </div>
+
 <table id="queryInvenregister" lay-filter="queryInvenregister"></table>
 
 </body>

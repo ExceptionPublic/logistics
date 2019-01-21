@@ -5,13 +5,13 @@ import com.zking.logistics.warehouse.model.Storeoper;
 import java.util.Date;
 
 public class StoreoperVo extends Storeoper{
-    private Date endTime;
+    private String endTime;
 
-    public Date getEndTime() {
+    public String getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Date endTime) {
+    public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
 }

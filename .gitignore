@@ -12,9 +12,9 @@ gen
 /src/main/webapp/index/
 /src/main/webapp/WEB-INF/css/
 /src/main/webapp/WEB-INF/jsp/index.jsp
-/src/main/webapp/WEB-INF/jsp/login.jsp
 /src/main/webapp/WEB-INF/spring-mvc.xml
 /src/main/webapp/WEB-INF/web.xml
 /src/test/
 /.gitignore
 /pom.xml
+/logs/

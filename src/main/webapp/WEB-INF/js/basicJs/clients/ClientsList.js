@@ -27,7 +27,7 @@ function clients(parameters){
             url: '/basicJsp/clients/queryLstClients', //数据接口
             where:parameters,
             page: true ,//开启分页
-            title : "是",
+            title : "客户页面",
             method : "post",
             // toolbar: '#toolbarDemo',//这是个神奇的标签
             text : {
@@ -61,7 +61,7 @@ function clients(parameters){
                         var toolbar='<div >';
                         toolbar+='<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="save">保存</a>';
                         toolbar+='<a href="javascript:ClientsAdd(\'修改' + data.name + '信息\',' + row + ');" class="layui-btn layui-btn-xs">';
-                        toolbar += '编辑</a></span>';
+                        toolbar += '编辑</a>';
                         toolbar+='<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>';
                         toolbar+='</div>';
                         return toolbar;

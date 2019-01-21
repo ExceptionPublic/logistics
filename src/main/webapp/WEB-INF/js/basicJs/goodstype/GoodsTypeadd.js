@@ -3,6 +3,9 @@ $(function () {
     layui.use(['form'], function () {
         var form = layui.form;
 
+        if(null==rowData)
+            initSelect("basicJsp/supplier/SupplierList", [], "#supplieruuid", "uuid", "name");
+
         $("#btn_close").click(function () {
             close();
         });
@@ -63,5 +66,8 @@ function close() {
 function initGtpForm(row) {
     rowData = row;
     //初始化部门下拉
+
+    initSelect("basicJsp/supplier/SupplierList", [], "#supplieruuid", "uuid", "name");
     initForm("goodeTypeAdd", row);
+    renderForm("select", "supplieruuid");
 }

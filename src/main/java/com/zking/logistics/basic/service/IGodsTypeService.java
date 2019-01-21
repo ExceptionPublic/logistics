@@ -17,5 +17,5 @@ public interface IGodsTypeService {
 
     List<GodsType> queryLstGoodTypePager(GodsType godsType, PageBean pageBean);
     //应用商品下拉
-    List<GodsType> SelectGtype();
+    List<GodsType> SelectGtype(GodsType godsType);
 }

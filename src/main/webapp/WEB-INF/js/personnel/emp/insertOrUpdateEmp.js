@@ -7,6 +7,10 @@ $(function () {
         //初始化部门
         if (null == rowData)
             initSelect("personnel/dep/queryDep", [], "#dep", "uuid", "name");
+        form.on('select(depuuid)', function(data){
+            $('#roleId').empty();
+            initSelect("roles/role/roleByDepuuid", {'depuuid':data.value}, "#roleId", "uuid", "name");
+        });
 
         //日期控件配置
         laydate.render({
@@ -48,6 +52,7 @@ $(function () {
         form.on('submit(btn_saveEmp)', function (data) {
             //获取form表单中的字段
             var field = data.field;//form表单字段{name:vlaue}
+            console.log("员工"+field)
             //转换为int类型
             field.gender = parseInt(field.gender);
             field.depuuid = parseInt(field.depuuid);
@@ -66,7 +71,7 @@ $(function () {
                 success: function (data) {
                     msg(data.message);
                     close();
-                    parent.queryEmp();
+                    parent.initTable();
                 }
             });
             return false; //阻止表单跳转。

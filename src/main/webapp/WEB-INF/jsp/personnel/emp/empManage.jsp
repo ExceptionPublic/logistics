@@ -3,6 +3,7 @@
 <head>
     <title>员工管理</title>
     <%@ include file="/WEB-INF/jsp/common/head.jsp" %>
+    <%--<script src="${ctx}/js/personnel/emp/empMap.js"></script>--%>
     <script src="${ctx}/js/personnel/emp/empManage.js"></script>
 </head>
 <body>

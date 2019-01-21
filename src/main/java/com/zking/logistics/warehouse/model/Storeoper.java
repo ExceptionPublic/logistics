@@ -4,18 +4,19 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * 仓库操作记录
  */
 @ToString
-public class Storeoper {
+public class Storeoper implements Serializable{
     private Integer uuid;
 
     private Integer empuuid;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+//    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date opertime;
 
     private Integer storeuuid;

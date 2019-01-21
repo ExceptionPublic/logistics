@@ -11,6 +11,17 @@
         <div class="layui-row">
             <div class="layui-col-md3">
                 <div class="layui-form-item">
+                    <label class="layui-form-label">盘点人：</label>
+                    <div class="layui-input-block" style="width:200px;" align="center">
+                        <%--<input type="hidden" name="creater">--%>
+                        <input type="text" name=""
+                               disabled="disabled"
+                               class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md3">
+                <div class="layui-form-item">
                     <label class="layui-form-label">备注：</label>
                     <div class="layui-input-block" style="width:200px;" align="center">
                         <input type="text" name="remark" id="remark"
@@ -74,7 +85,7 @@
             </div>
             <div class="layui-form-item">
                 <div class="layui-input-block">
-                    <button class="layui-btn" lay-submit lay-filter="btn_inventoryAdd">确认提交</button>
+                    <button class="layui-btn" lay-submit lay-filter="btn_inventoryAddregister">确认提交</button>
                     <button id="btn_close" class="layui-btn layui-btn-primary">关闭</button>
                 </div>
             </div>

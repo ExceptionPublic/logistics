@@ -45,4 +45,16 @@ public class StoreoperServiceImpl implements IStoreoperService {
         return storeoperMapper.queryStoreoperPager(storeoperVo);
     }
 
+    @Transactional(readOnly = true)
+    @Override
+    public List<Map<String,Object>> StatisticsMap(StoreoperVo storeoperVo) {
+        return storeoperMapper.StatisticsMap(storeoperVo);
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<Map<String, Object>> TendencyMap(StoreoperVo storeoperVo) {
+        return storeoperMapper.TendencyMap(storeoperVo);
+    }
+
 }

@@ -27,6 +27,19 @@
                 </div>
             </div>
         </div>
+        <div class="layui-col-md3">
+            <div class="layui-form-item">
+                <label class="layui-form-label">供应商：</label>
+                <div class="layui-input-block" style="width: 200px">
+                    <select name="supplieruuid"
+                            lay-verify="required"
+                            id="supplieruuid"
+                            lay-filter="supplieruuid">
+                        <option value=""></option>
+                    </select>
+                </div>
+            </div>
+        </div>
         <div class="layui-form-item">
             <div class="layui-input-block">
                 <button class="layui-btn" lay-submit lay-filter="btn_goodstyAdd">立即提交</button>

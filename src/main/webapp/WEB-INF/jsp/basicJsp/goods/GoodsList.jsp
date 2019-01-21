@@ -10,7 +10,7 @@
 <head>
     <%@ include file="/WEB-INF/jsp/common/head.jsp" %>
     <title>Title</title>
-    <script type="text/javascript" src="/js/basicJs/goods/GoodsList.js"></script>
+    <script type="text/javascript" src="${ctx}/js/basicJs/goods/GoodsList.js"></script>
 </head>
 <body>
 <div class="layui-container layui-form" style="margin-top: 10px;">

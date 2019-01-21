@@ -67,7 +67,7 @@ public class StoreController {
         CommonUtil.createMap();
         try {
             int insert = storeService.insert(store);
-            CommonUtil.put("message","添加成功");
+            CommonUtil.put("message","添加"+store.getName()+"成功");
             CommonUtil.put("success",true);
         } catch (Exception e) {
             CommonUtil.put("message","系统错误");
@@ -90,7 +90,7 @@ public class StoreController {
         try {
             int i = storeService.updateByPrimaryKeySelective(store);
 
-            CommonUtil.put("message","修改成功");
+            CommonUtil.put("message","修改"+store.getName()+"成功");
             CommonUtil.put("success",true);
         } catch (Exception e) {
             CommonUtil.put("message","系统错误");
@@ -101,14 +101,14 @@ public class StoreController {
         return CommonUtil.getMap();
     }
 
-    //商品删除
+    //仓库删除
     @RequestMapping("/storeDel")
     @ResponseBody
     public Map<String, Object> storeDel(Store store){
         CommonUtil.createMap();
         try {
             int i = storeService.deleteByPrimaryKey(store);
-            CommonUtil.put("message","删除成功");
+            CommonUtil.put("message","删除"+store.getName()+"成功");
             CommonUtil.put("success",true);
         } catch (Exception e) {
             CommonUtil.put("message","系统错误");
@@ -128,12 +128,12 @@ public class StoreController {
         boolean storename = storeService.isStoreName(name);
         CommonUtil.put("success",storename);
         if(storename){
-            CommonUtil.put("message","该仓库存在");
+            CommonUtil.put("message","‘"+name+"’该仓库存在");
         }
         return CommonUtil.getMap();
     }
 
-
+    //库管员下拉
     @RequestMapping("/empMap")
     @ResponseBody
     public List<Map<String,Object>> empMap(){
