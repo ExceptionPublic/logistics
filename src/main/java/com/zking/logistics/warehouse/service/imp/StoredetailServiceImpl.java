@@ -28,11 +28,6 @@ public class StoredetailServiceImpl implements IStoredetailService {
         return storedetailMapper.insertStoredetail(record);
     }
 
-    @Override
-    @Transactional(readOnly = true)
-    public Storedetail querySingleStoredetail(Integer uuid) {
-        return storedetailMapper.querySingleStoredetail(uuid);
-    }
 
     @Override
     public int updateStoredetail(Storedetail record) {

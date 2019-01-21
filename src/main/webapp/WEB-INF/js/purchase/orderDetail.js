@@ -67,32 +67,42 @@ function initTable(row) {
                 },
                 {
                     title: '采购员',
-                    field: 'checker',
+                    field: 'purchaseName',
                     width: '8%',
                     align: "center"
                 },
                 {
                     title: '采购日期',
-                    field: 'supplierName',
-                    width: '15%',
+                    field: 'purchaseDate',
+                    width: '10%',
                     align: "center"
                 },
                 {
                     title: '仓库名',
-                    field: 'totalMoney',
-                    width: '8%',
-                    align: "center"
+                    field: 'storeName',
+                    width: '18%',
+                    align: "center",
+                    templet:function (data) {
+                        if(data.state==1){
+                            var str="<div>";
+                            str+="<select name='store' id='store_"+data.detailId+"'><option></option></select>";
+                            str+="</div>";
+                            return str;
+                        }
+
+                        return null==data.storeName ? "" : data.storeName;
+                    }
                 },
                 {
                     title: '入库员',
-                    field: 'totalMoney',
+                    field: 'enderName',
                     width: '8%',
                     align: "center"
                 },
                 {
                     title: '入库日期',
-                    field: 'totalMoney',
-                    width: '15%',
+                    field: 'enderDate',
+                    width: '10%',
                     align: "center"
                 },
                 {
@@ -104,20 +114,29 @@ function initTable(row) {
                         var state = data.state;
                         if (row.state == 0) {
                             state = "未确认";
+                        } else if(state==2){
+                            state="已入库";
                         } else {
                             var toolbar = "<div>";
                             var title = "";
-                            var functionName = "void(0)";
+                            var paraments = {
+                                detailId:data.detailId
+                            };
                             switch (state) {
                                 case "0":
                                     title = "确认采购";
+                                    paraments.state=1;
                                     break;
                                 case "1":
                                     title = "确认入库";
+                                    paraments.state=2
+                                    paraments.storeId="store_"+data.detailId+" option:selected";
+                                    paraments.goodsId=data.goodsId;
+                                    paraments.num=data.num;
                                     break;
                             }
                             toolbar += '<span class="layui-badge  layui-bg-gray" style="margin-top: 5px;">';
-                            toolbar += '<a href="javascript:alterOrdersDetailState()" class="layui-btn layui-btn-xs">' + title + '</a>';
+                            toolbar += '<a href="javascript:alterOrdersDetailState('+JSON.stringify(paraments).replace(/\"/g,"'")+')" class="layui-btn layui-btn-xs">' + title + '</a>';
                             toolbar += "</div>";
                             state=toolbar;
                         }
@@ -126,6 +145,7 @@ function initTable(row) {
                 }
             ]],
             done: function (res, curr, count) {
+                initSelect("basicJsp/store/StoreList",{},"select[name=store]","uuid","name");
                 if (res.success == false)
                     msg(res.message)
             }
@@ -134,9 +154,29 @@ function initTable(row) {
 }
 
 /**
+ * 刷新表格
+ */
+function queryOrdersDateil() {
+    layui.use('table', function () {
+        var table = layui.table;
+        table.reload('orderDateilTable', {
+            url: 'purchase/queryOrdersDetailPager'
+        });
+    });
+}
+
+/**
  * 改变订单详情状态
  */
 function alterOrdersDetailState(paraments) {
+    if(isBlank(paraments.storeId)){
+        if(!isBlank(getValue("#"+paraments.storeId))){
+            msg("请选择仓库！");
+            return;
+        }
+        paraments.storeId=getValue("#"+paraments.storeId);
+        paraments.ordersId=getValue("input [name=ordersId]");
+    }
     $.ajax({
         url: "purchase/alterOrdersDetailState",
         data: paraments,
@@ -145,7 +185,7 @@ function alterOrdersDetailState(paraments) {
         async: false,
         success: function (data) {
             msg(data.message);
-            queryOrders();
+            queryOrdersDateil();
         }
     });
 }

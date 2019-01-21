@@ -25,13 +25,6 @@ public interface IStoredetailService {
     int insertStoredetail(Storedetail record);
 
     /**
-     * 查询单个
-     * @param uuid
-     * @return
-     */
-    Storedetail querySingleStoredetail(Integer uuid);
-
-    /**
      * 修改
      * @param record
      * @return

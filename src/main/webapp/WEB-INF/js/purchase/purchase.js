@@ -95,8 +95,16 @@ function initTable() {
                             },"layui-icon layui-icon-ok-circle");
                             toolbar += '</div>';
                             return toolbar;
+                        }else if(state==2){
+                            var toolbar = '<div >';
+                            toolbar+=getToolbar("退货","alterOrdersState",{
+                                ordersId:data.ordersId,
+                                state:"3"
+                            },"layui-icon layui-icon-ok-circle");
+                            toolbar += '</div>';
+                            return toolbar;
                         }
-                        return state=="1" ? "已确认" :"未知";
+                        return state=="1" ? "已确认" : state=="3"? "正在退货中！" :state=="4" ?"已退回":"未知";
                     }
                 }
             ]],
@@ -141,12 +149,10 @@ function queryOrders() {
     layui.use('table', function () {
         var table = layui.table;
         var paraments = {
-            genders: getCheckboxs("gender"),
-            name: getValue("#name"),
-            depuuid: getValue("#dep")
+
         };
         table.reload('purchaseTable', {
-            url: 'personnel/emp/queryEmpPager',
+            url: 'purchase/queryOrdersPager',
             where: paraments,
             page: {
                 curr: 1

@@ -4,6 +4,59 @@
     <title>订单明细</title>
     <%@ include file="/WEB-INF/jsp/common/head.jsp" %>
     <script src="${ctx}/js/purchase/orderDetail.js"></script>
+    <style>
+        .layui-table-view .layui-table[lay-size="sm"] .layui-select-title .layui-input
+        {
+            height: 28px;
+            margin-top: -8px;
+        }
+
+        .layui-table-view .layui-table[lay-size="sm"] .layui-form-select dl dt,
+        .layui-table-view .layui-form-select dl dd {
+            line-height: 28px;
+        }
+
+        .layui-table-view .layui-table[lay-size="sm"] .layui-form-select dl {
+            top: 28px;
+        }
+
+        .layui-table-view .layui-table .layui-select-title .layui-input {
+            height: 32px;
+            margin-top: -3px;
+        }
+
+        .layui-table-view .layui-table .layui-form-select dl dt,
+        .layui-table-view .layui-form-select dl dd {
+            line-height: 32px;
+        }
+
+        .layui-table-view .layui-table .layui-form-select dl {
+            top: 32px;
+        }
+
+        .layui-table-view .layui-table[lay-size="lg"] .layui-select-title .layui-input
+        {
+            height: 38px;
+            margin-top: 0;
+        }
+
+        .layui-table-view .layui-table[lay-size="lg"] .layui-form-select dl dt,
+        .layui-table-view .layui-form-select dl dd {
+            line-height: 38px;
+        }
+
+        .layui-table-view .layui-table[lay-size="lg"] .layui-form-select dl {
+            top: 38px;
+        }
+
+        .layui-form-select dl {
+            z-index: 9999;
+        }
+
+        .layui-table-cell{
+            overflow:visible !important;
+        }
+    </style>
 </head>
 <body>
 <%--布局容器--%>
@@ -72,7 +125,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">审核员：</label>
                 <div class="layui-input-block">
-                    <input class="layui-input" type="text" readonly="readonly" name="checker"/>
+                    <input class="layui-input" type="text" readonly="readonly" name="checkerName"/>
                 </div>
             </div>
         </div>

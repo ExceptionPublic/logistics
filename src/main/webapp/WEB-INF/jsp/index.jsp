@@ -38,8 +38,6 @@
                             <dl class="layui-nav-child">
                                 <dd><a id="1806" class="open" lay-url="${ctx}/purchase/toPurchase" href="javascript:void(0);">采购管理</a>
                                 </dd>
-                                <dd><a id="1807" class="open" lay-url="${ctx}/personnel/emp/toEmpManage" href="javascript:void(0);">退货管理</a>
-                                </dd>
                             </dl>
                         </li>
                         <li class="layui-nav-item">

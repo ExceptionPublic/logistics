@@ -72,10 +72,11 @@ public class PurchaseController {
 
     /**
      * 跳转至订单详情界面
+     *
      * @return
      */
     @RequestMapping("/toOrderDetail")
-    public String toOrderDetail(){
+    public String toOrderDetail() {
         return "purchase/orderdetail";
     }
 
@@ -87,10 +88,15 @@ public class PurchaseController {
      */
     @RequestMapping("/alterOrdersState")
     @ResponseBody
-    public Map<String, Object> alterOrdersState(Orders orders) {
+    public Map<String, Object> alterOrdersState(Orders orders,HttpSession session) {
         CommonUtil.createMap();
+
         try {
-            ordersService.alterOrdersState(orders);
+            Emp emp = (Emp) session.getAttribute("emp");
+//            orders.setChecker(emp.getUuid());
+            orders.setChecker(5);
+            orders.setCheckerDate(new Date());
+            ordersService.updateOrder(orders);
             CommonUtil.put("message", "通过成功");
             CommonUtil.put("success", true);
         } catch (Exception e) {
@@ -100,18 +106,32 @@ public class PurchaseController {
         }
         return CommonUtil.getMap();
     }
+
     /**
-     * 改变订单状态
+     * 改变订单详情状态
+     *
      * @param orderdetail
      * @return
      */
     @RequestMapping("/alterOrdersDetailState")
     @ResponseBody
-    public Map<String, Object> alterOrdersDetailState(Orderdetail orderdetail) {
+    public Map<String, Object> alterOrdersDetailState(Orderdetail orderdetail,HttpSession session) {
         CommonUtil.createMap();
+        Emp emp = (Emp) session.getAttribute("emp");
         try {
+            String str="";
+//            orderdetail.setPurchase(emp.getUuid());
+            if(orderdetail.getState().equals("1")){
+                orderdetail.setPurchaseDate(new Date());
+                orderdetail.setPurchase(5);
+                str="采购";
+            }else if(orderdetail.getState().equals("2")){
+                orderdetail.setEnder(5);
+                orderdetail.setEnderDate(new Date());
+                str="入库";
+            }
             orderdetailService.updateOrderdetail(orderdetail);
-            CommonUtil.put("message", "通过成功");
+            CommonUtil.put("message", str+"成功");
             CommonUtil.put("success", true);
         } catch (Exception e) {
             CommonUtil.put("message", "系统错误");
@@ -170,7 +190,7 @@ public class PurchaseController {
     @ResponseBody
     public Map<String, Object> insertOrder(@RequestParam String[] orderdetails, Integer supplierId, HttpSession session) throws IOException {
         CommonUtil.createMap();
-        OrdersVo ordersVo =new OrdersVo();
+        OrdersVo ordersVo = new OrdersVo();
         ordersVo.setOrderdetails(orderdetails);
         ordersVo.setSupplierId(supplierId);
         //获取下单员
@@ -191,12 +211,13 @@ public class PurchaseController {
 
     /**
      * 取消订单
+     *
      * @param ordersId
      * @return
      */
     @RequestMapping("/deleteOrder")
     @ResponseBody
-    public Map<String, Object> deleteOrder(@RequestParam Integer ordersId){
+    public Map<String, Object> deleteOrder(@RequestParam Integer ordersId) {
         CommonUtil.createMap();
         try {
             ordersService.deleteOrder(ordersId);

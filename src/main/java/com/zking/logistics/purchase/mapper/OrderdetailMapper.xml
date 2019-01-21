@@ -34,9 +34,18 @@
   <select id="queryOrderdetailsPager" resultType="com.zking.logistics.purchase.vo.OrderdetailVo"
           parameterType="com.zking.logistics.purchase.model.Orderdetail">
     select
-     detail_id,goods_id,store_id, price, num, money, ender, ender_date, purchase, purchase_date,
+     detail_id,goods_id,store_id,store.name as store_name, price, num, money, ender,enderTable.name as enderName, ender_date, purchase,purchaseTable.name as purchaseName, purchase_date,
      state, orders_id,goods.name as goods_name
-    from orderdetail LEFT JOIN goods on goods.uuid=orderdetail.goods_id WHERE orders_id = #{ordersId}
+    from orderdetail
+    LEFT JOIN goods on goods.uuid=orderdetail.goods_id
+    LEFT JOIN emp purchaseTable ON purchaseTable.uuid=purchase
+    LEFT JOIN emp enderTable ON enderTable.uuid=ender
+    LEFT JOIN store ON store.uuid=store_id
+    WHERE orders_id = #{ordersId}
+  </select>
+  <select id="queryOrdersdetail" resultType="com.zking.logistics.purchase.model.Orderdetail"
+          parameterType="com.zking.logistics.purchase.model.Orders">
+    SELECT <include refid="Base_Column_List"/> FROM orderdetail WHERE orders_id=#{ordersId}
   </select>
   <!--删除-->
   <delete id="deleteOrderdetail" parameterType="java.lang.Integer" >
@@ -78,7 +87,7 @@
         store_id = #{storeId,jdbcType=INTEGER},
       </if>
       <if test="goodsId != null" >
-        store_id = #{goodsId,jdbcType=INTEGER},
+        goods_id = #{goodsId,jdbcType=INTEGER},
       </if>
       <if test="state != null" >
         state = #{state,jdbcType=VARCHAR},

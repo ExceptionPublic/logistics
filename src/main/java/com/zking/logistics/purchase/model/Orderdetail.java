@@ -1,6 +1,7 @@
 package com.zking.logistics.purchase.model;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.ToString;
 
 import java.io.Serializable;
@@ -20,10 +21,12 @@ public class Orderdetail implements Serializable{
 
     private Integer ender;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date enderDate;
 
     private Integer purchase;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date purchaseDate;
 
     private Integer storeId;

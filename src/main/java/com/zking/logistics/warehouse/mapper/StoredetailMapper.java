@@ -27,10 +27,11 @@ public interface StoredetailMapper {
 
     /**
      * 查询单个
-     * @param uuid
+     * @param storedetail
      * @return
      */
-    Storedetail querySingleStoredetail(Integer uuid);
+    Storedetail querySingleStoredetail(Storedetail storedetail);
+
 
     /**
      * 修改

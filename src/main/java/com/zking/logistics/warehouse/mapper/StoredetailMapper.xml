@@ -14,12 +14,7 @@
         UUID, STOREUUID, GOODSUUID, NUM
     </sql>
     <!--查询单个-->
-    <select id="querySingleStoredetail" resultMap="BaseResultMap" parameterType="java.lang.Integer">
-        select
-        <include refid="Base_Column_List"/>
-        from storedetail
-        where UUID = #{uuid,jdbcType=INTEGER}
-    </select>
+
     <select id="queryStoredetailPager" resultType="map"
             parameterType="com.zking.logistics.warehouse.model.Storedetail">
         select sd.`uuid`,s.`name` sname,g.`name` gname,sd.`num` quantity,
@@ -32,6 +27,11 @@
             and sd.storeuuid = #{storeuuid}
         </if>
         ORDER BY sd.uuid DESC
+    </select>
+    <!--查询单个-->
+    <select id="querySingleStoredetail" resultType="com.zking.logistics.warehouse.model.Storedetail"
+            parameterType="com.zking.logistics.warehouse.model.Storedetail">
+        select <include refid="Base_Column_List"/> from storedetail where storeuuid=#{storeuuid} and goodsuuid=#{goodsuuid}
     </select>
     <!--删除-->
     <delete id="deleteStoredetail" parameterType="java.lang.Integer">
