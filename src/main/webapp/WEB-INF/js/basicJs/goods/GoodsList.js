@@ -27,7 +27,7 @@ function goods(parameters){
             url: 'basicJsp/goods/queryGoodsPager', //数据接口
             where:parameters,
             page: true ,//开启分页
-            title : "是",
+            title : "商品页面",
             method : "post",
             // toolbar: '#toolbarDemo',//这是个神奇的标签
             text : {
@@ -61,9 +61,7 @@ function goods(parameters){
                         var row = JSON.stringify(data).replace(/\"/g, "'");
                         var toolbar='<div >';
                         toolbar+='<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="save">保存</a>';
-                        toolbar+='<a href="javascript:goodsedit(\'修改' + data.name + '信息\',' + row + ');" class="layui-btn layui-btn-xs">';
-                        toolbar += '编辑</a>';
-                        toolbar += '<span class="layui-badge  layui-bg-gray" style="margin-left: 10px;margin-top: 5px;">';
+                        toolbar+='<a href="javascript:goodsedit(\'修改' + data.name + '信息\',' + row + ');" class="layui-btn layui-btn-xs">编辑</a>';
                         toolbar+='<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>';
                         toolbar+='</div>';
                         return toolbar;
@@ -147,29 +145,8 @@ function goodsListSe(){
 }
 
 
-
-function GoodsAdd() {
-    layui.use('layer', function() {
-        var layer = layui.layer;
-        layer.open({
-            id : "goodsAdd",
-            title : "新增商品",
-            type : 2,
-            anim : 1,
-            shadeClose: false,
-            shade: 0.8,
-            btnAlign: 'c',
-            offset : 'auto',
-            area : [ '400px', '480px' ],
-            // area : [ 宽, 高 ],
-            content : '/basicJsp/goods/togoodsAdd',
-        });
-    });
-}
-
-
 function goodsedit(title,row) {
-    console.log(row.goodstypeuuid);
+    // console.log(row.goodstypeuuid);
     layui.use([ 'layer'], function() {
         var layer = layui.layer;
         layer.open({

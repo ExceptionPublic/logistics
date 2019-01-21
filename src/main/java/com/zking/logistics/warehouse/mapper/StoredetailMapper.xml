@@ -16,15 +16,20 @@
     <!--查询单个-->
 
     <select id="queryStoredetailPager" resultType="map"
-            parameterType="com.zking.logistics.warehouse.model.Storedetail">
-        select sd.`uuid`,s.`name` sname,g.`name` gname,sd.`num` quantity,
-        sd.storeuuid storeuuid
+            parameterType="com.zking.logistics.warehouse.vo.StoredetailVo">
+        select sd.`uuid`,s.`name` sname,g.`name` gname,g.outprice outprice,
+        gt.name gtname,sd.`num` quantity,sd.storeuuid storeuuid,g.uuid goodsuuid,
+        g.supplieruuid supplieruuid
         from storedetail sd inner join store s
         on s.`uuid`=sd.`storeuuid` inner join goods g
-        on g.`uuid`=sd.`goodsuuid`
+        on g.`uuid`=sd.`goodsuuid` inner join goodstype gt
+        on gt.uuid=g.goodstypeuuid
         where 1=1
         <if test="null!=storeuuid and ''!=storeuuid">
             and sd.storeuuid = #{storeuuid}
+        </if>
+        <if test="null!=supplieruuid and ''!=supplieruuid">
+            and g.supplieruuid = #{supplieruuid}
         </if>
         ORDER BY sd.uuid DESC
     </select>

@@ -31,7 +31,7 @@ function storeOp(parameters){
             url: 'warehouse/storeDetail/queryStoredetailPager', //数据接口
             where:parameters,
             page: true ,//开启分页
-            title : "是",
+            title : "库存查询",
             method : "post",
             // toolbar: '#toolbarDemo',//这是个神奇的标签
             text : {

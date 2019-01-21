@@ -29,7 +29,7 @@ function inventory(parameters){
             url: 'warehouse/inventory/queryInventoryPager', //数据接口
             where:parameters,
             page: true ,//开启分页
-            title : "是",
+            title : "盘盈盘亏审核页面",
             method : "post",
             // toolbar: '#toolbarDemo',//这是个神奇的标签
             text : {
@@ -40,21 +40,39 @@ function inventory(parameters){
             },
             cols: [[ //表头
                 {field: 'uuid', title: '编号', width:'5%', align: 'center'},
-                {field: 'type', title: '类型', width:'5%',align: 'center'},
-                {field: 'pname', title: '登记人', width:'5%',align: 'center'},
-                {field: 'shname', title: '审核人', width:'5%',align: 'center'},
-                {field: 'dname', title: '状态', width:'5%',align: 'center'},
-                {field: 'num', title: '库存数量', width:'7%',align: 'center'},
                 {field: 'gname', title: '商品名称', width:'8%',align: 'center'},
                 {field: 'sname', title: '仓库名称', width:'10%',align: 'center'},
-                {field: 'createtime', title: '登记日期', width:'25%',align: 'center',
+                {field: 'pname', title: '登记人', width:'8%',align: 'center'},
+                {field: 'remark', title: '备注', width:'5%',align: 'center'},
+                {field: 'num', title: '数量', width:'5%',align: 'center'},
+                {field: 'type', title: '类型', width:'7%',align: 'center'},
+                {field: 'createtime', title: '登记日期', width:'15%',align: 'center',
                     templet : function(data) {
-                        return dateParseString(data.createtime);
+                        return getDateTime(data.createtime);
                     }
                 },
-                {field: 'checktime', title: '审核日期', width:'25%',align: 'center',
+                {field: 'shname', title: '审核人', width:'7%',align: 'center'},
+                {field: 'dname', title: '状态', width:'8%',align: 'center'},
+                {field: 'checktime', title: '审核日期', width:'15%',align: 'center',
                     templet : function(data) {
-                        return dateParseString(data.checktime);
+                        if(data.checktime==null){
+                            return "";
+                        }else
+                            return getDateTime(data.checktime);
+                    }
+                },
+                {field: '', title: '操作', width: '7%',align: 'center',
+                    templet : function(data) {
+                        var row = JSON.stringify(data).replace(/\"/g, "'");
+
+                        if(data.state==2){
+                            return '已审核';
+                        }else{
+                            var toolbar='<div >';
+                            toolbar+='<a href="javascript:InvenEditrau(' + row + ');" class="layui-btn layui-btn-normal layui-btn-xs">审核</a>';
+                            toolbar+='</div>';
+                            return toolbar;
+                        }
                     }
                 },
             ]],
@@ -72,7 +90,8 @@ function invenListSe(){
         var paraments = {
             type: getValue('#type '),
             goodsuuid: getValue('#goodsuuid'),
-            // 'createtime': getValue('#createtime'),
+            'startcreatetime': getValue('#startcreatetime'),
+            'endcreatetime': getValue('#endcreatetime'),
         };
         console.log(paraments.createtime);
         table.reload('queryInvenAudit2', {
@@ -85,21 +104,28 @@ function invenListSe(){
     });
 }
 
-function InvenAdd() {
+function InvenEditrau(row) {
+    console.log(row.checktime)
     layui.use('layer', function() {
         var layer = layui.layer;
         layer.open({
-            id : "invenAdd",
-            title : "新增盘盈盘亏",
+            id : "InventoryEditAudit",
+            title : "盘盈盘亏审核",
             type : 2,
             anim : 1,
             shadeClose: false,
             shade: 0.8,
             btnAlign: 'c',
             offset : 'auto',
-            area : [ '400px', '480px' ],
+            area : [ '400px', '535px' ],
             // area : [ 宽, 高 ],
-            content : 'warehouse/inventory/toInvenAdd',
+            content : 'warehouse/inventory/toInvenEditAudit',
+            success : function(layero, index) {
+                if(row){
+                    var iframeWin = window[layero.find('iframe')[0]['name']];
+                    iframeWin.initInvenEditForm(row);
+                }
+            },
         });
     });
 }

@@ -9,6 +9,15 @@ import java.util.List;
 public class EmpVo extends Emp {
     private String genders;
     private String depName;
+    private String rname;
+
+    public String getRname() {
+        return rname;
+    }
+
+    public void setRname(String rname) {
+        this.rname = rname;
+    }
 
     public String getDepName() {
         return depName;

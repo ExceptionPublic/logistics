@@ -41,6 +41,9 @@
     <if test="null!=name and ''!=name">
       and g.`name` like concat(concat('%',#{name}),'%')
     </if>
+    <if test="null!=supplieruuid and ''!=supplieruuid">
+      and g.supplieruuid=#{supplieruuid}
+    </if>
     ORDER BY g.uuid DESC
   </select>
   <select id="queryGoods" resultType="com.zking.logistics.basic.model.Goods">

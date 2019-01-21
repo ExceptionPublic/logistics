@@ -27,7 +27,7 @@ function supplier(parameters){
             url: '/basicJsp/supplier/queryLstSupplier', //数据接口
             where:parameters,
             page: true ,//开启分页
-            title : "是",
+            title : "供应商页面",
             method : "post",
             // toolbar: '#toolbarDemo',//这是个神奇的标签
             text : {
@@ -72,11 +72,6 @@ function supplier(parameters){
                 if(res.success==false)
                     layer.msg(res.message);
             }
-            // done : function(res, curr, count) {
-            //     if(res.success==false)
-            //         layer.msg(res.message);
-            // }
-
         });
         //头工具栏事件
         // 监听工具条

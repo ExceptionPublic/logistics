@@ -4,6 +4,7 @@ import com.zking.logistics.util.PageBean;
 import com.zking.logistics.warehouse.mapper.StoredetailMapper;
 import com.zking.logistics.warehouse.model.Storedetail;
 import com.zking.logistics.warehouse.service.IStoredetailService;
+import com.zking.logistics.warehouse.vo.StoredetailVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,8 +37,8 @@ public class StoredetailServiceImpl implements IStoredetailService {
 
     @Transactional(readOnly = true)
     @Override
-    public List<Map<String, Object>> queryStoredetailPager(Storedetail storedetail, PageBean pageBean) {
-        return storedetailMapper.queryStoredetailPager(storedetail);
+    public List<Map<String, Object>> queryStoredetailPager(StoredetailVo storedetailVo, PageBean pageBean) {
+        return storedetailMapper.queryStoredetailPager(storedetailVo);
     }
 
 

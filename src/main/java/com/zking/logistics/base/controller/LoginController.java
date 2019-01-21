@@ -10,7 +10,7 @@ public class LoginController {
 
     @RequestMapping("/index/index.shtml")
     public String toLogin(){
-        return "index";
+        return "login";
     }
 
     @RequestMapping("/loginOut")

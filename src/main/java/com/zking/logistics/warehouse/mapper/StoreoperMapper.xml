@@ -46,6 +46,26 @@
         ORDER by opertime DESC
 
     </select>
+    <select id="StatisticsMap" resultType="map" parameterType="com.zking.logistics.warehouse.vo.StoreoperVo">
+        SELECT i.type itype,g.name gname,sum(sp.num) count,sp.opertime FROM inventory i
+        INNER JOIN goods g ON i.goodsuuid=g.uuid
+        INNER JOIN storeoper sp ON sp.goodsuuid=g.uuid WHERE i.type='盘盈'
+        <if test="null!=endTime and ''!=endTime">
+            and sp.opertime like concat(#{endTime},'%')
+        </if>
+        group by gname
+        order by sp.num DESC
+    </select>
+    <select id="TendencyMap" resultType="map" parameterType="com.zking.logistics.warehouse.vo.StoreoperVo">
+        SELECT DATE_FORMAT(opertime,'%m') opertime,SUM(num) sum
+        FROM storeoper where 1=1
+        <if test="null!=endTime and ''!=endTime">
+            and opertime like concat(#{endTime},'%')
+        </if>
+        GROUP BY DATE_FORMAT(opertime,'%m')
+        ORDER BY DATE_FORMAT(opertime,'%m')
+    </select>
+
 
     <!--分页查询-->
     <!--删除-->

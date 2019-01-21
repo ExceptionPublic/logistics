@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.logistics.sell.mapper.MarketMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.logistics.sell.model.Market" >
+    <constructor >
+      <idArg column="maid" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="marketTIME" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="chukuTIME" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="salesman" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ENDER" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="SUPPLIERUUID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="TOTALMONEY" jdbcType="REAL" javaType="java.lang.Float" />
+      <arg column="STATE" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    maid, marketTIME, chukuTIME, salesman, ENDER, SUPPLIERUUID, TOTALMONEY, STATE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from market
+    where maid = #{maid,jdbcType=INTEGER}
+  </select>
+  <select id="queryMarketPager" resultType="map" parameterType="com.zking.logistics.sell.vo.MarketVo">
+    select m.maid,m.markettime,m.chukutime,e2.name empsalesman,e.`name` empender,
+    c.name cname,m.totalmoney,m.state,m.supplieruuid,m.ender,m.salesman
+    from market m inner join clients c
+    on m.supplieruuid=c.`uuid` inner join emp e
+    on e.`uuid`=m.ender inner join emp e2
+    on e2.uuid=m.salesman where 1=1
+    <if test="null!=startcreatetime and ''!=startcreatetime">
+      AND m.markettime &gt;=#{startcreatetime}
+    </if>
+    <if test="null!=endcreatetime and ''!=endcreatetime">
+      AND m.markettime &lt;=#{endcreatetime}
+    </if>
+    <if test="null!=state and ''!=state">
+      AND m.state =#{state}
+    </if>
+    ORDER by maid DESC
+
+
+  </select>
+  <select id="queryMarketMap" resultType="map" parameterType="com.zking.logistics.sell.vo.MarketVo">
+    select m.maid,m.markettime,m.salesman,e.name empsalesman,
+    sp.name suppliername,m.state
+    from market m inner join marketdetail mt
+    on m.maid=mt.ordersuuid inner join emp e
+    on e.uuid=m.salesman inner join role r
+    on e.role_id=r.uuid inner join supplier sp
+    on sp.uuid=m.supplieruuid where 1=1
+    <if test="null!=maid and ''!=maid">
+      and m.maid=#{maid}
+    </if>
+    ORDER by maid DESC
+
+
+  </select>
+  <insert id="insert" parameterType="com.zking.logistics.sell.model.Market" >
+    insert into market (maid, marketTIME, chukuTIME, 
+      salesman, ENDER, SUPPLIERUUID, 
+      TOTALMONEY, STATE)
+    values (#{maid,jdbcType=INTEGER}, #{markettime,jdbcType=TIMESTAMP}, #{chukutime,jdbcType=TIMESTAMP}, 
+      #{salesman,jdbcType=INTEGER}, #{ender,jdbcType=INTEGER}, #{supplieruuid,jdbcType=INTEGER}, 
+      #{totalmoney,jdbcType=REAL}, #{state,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.logistics.sell.model.Market" >
+    insert into market
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="markettime != null" >
+        marketTIME,
+      </if>
+      <if test="chukutime != null" >
+        chukuTIME,
+      </if>
+      <if test="salesman != null" >
+        salesman,
+      </if>
+      <if test="ender != null" >
+        ENDER,
+      </if>
+      <if test="supplieruuid != null" >
+        SUPPLIERUUID,
+      </if>
+      <if test="totalmoney != null" >
+        TOTALMONEY,
+      </if>
+      <if test="state != null" >
+        STATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="markettime != null" >
+        #{markettime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chukutime != null" >
+        #{chukutime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="salesman != null" >
+        #{salesman,jdbcType=INTEGER},
+      </if>
+      <if test="ender != null" >
+        #{ender,jdbcType=INTEGER},
+      </if>
+      <if test="supplieruuid != null" >
+        #{supplieruuid,jdbcType=INTEGER},
+      </if>
+      <if test="totalmoney != null" >
+        #{totalmoney,jdbcType=REAL},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.logistics.sell.model.Market" >
+    update market
+    <set >
+      <if test="markettime != null" >
+        marketTIME = #{markettime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chukutime != null" >
+        chukuTIME = #{chukutime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="salesman != null" >
+        salesman = #{salesman,jdbcType=INTEGER},
+      </if>
+      <if test="ender != null" >
+        ENDER = #{ender,jdbcType=INTEGER},
+      </if>
+      <if test="supplieruuid != null" >
+        SUPPLIERUUID = #{supplieruuid,jdbcType=INTEGER},
+      </if>
+      <if test="totalmoney != null" >
+        TOTALMONEY = #{totalmoney,jdbcType=REAL},
+      </if>
+      <if test="state != null" >
+        STATE = #{state,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where maid = #{maid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.logistics.sell.model.Market" >
+    update market
+    set marketTIME = #{markettime,jdbcType=TIMESTAMP},
+      chukuTIME = #{chukutime,jdbcType=TIMESTAMP},
+      salesman = #{salesman,jdbcType=INTEGER},
+      ENDER = #{ender,jdbcType=INTEGER},
+      SUPPLIERUUID = #{supplieruuid,jdbcType=INTEGER},
+      TOTALMONEY = #{totalmoney,jdbcType=REAL},
+      STATE = #{state,jdbcType=VARCHAR}
+    where maid = #{maid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -5,11 +5,16 @@ $(function () {
         var form = layui.form;
 
         //初始化部门
-        if (null == rowData)
-            initSelect("basicJsp/goodstype/SelectGtype", [], "#goodstypeuuid", "uuid", "name");
+        // if (null == rowData)
+        //     initSelect("basicJsp/goodstype/SelectGtype", [], "#goodstypeuuid", "uuid", "name");
 
         if(null==rowData)
             initSelect("basicJsp/supplier/SupplierList", [], "#supplieruuid", "uuid", "name");
+
+        form.on('select(supplieruuid)', function(data){
+            $('#goodstypeuuid').empty();
+            initSelect("basicJsp/goodstype/SelectGtype", {'supplieruuid':data.value}, "#goodstypeuuid", "uuid", "name");
+        });
 
         //按钮监听
         //关闭按钮
@@ -75,7 +80,7 @@ function close() {
 function initGoodsForm(row) {
     rowData = row;
     //初始化部门下拉
-    initSelect("basicJsp/goodstype/SelectGtype", [], "#goodstypeuuid", "uuid", "name");
+    initSelect("basicJsp/goodstype/SelectGtype", {supplieruuid:rowData.supplieruuid}, "#goodstypeuuid", "uuid", "name");
     initSelect("basicJsp/supplier/SupplierList", [], "#supplieruuid", "uuid", "name");
     initForm("goodsEdit", row);
     renderForm("select", "supplieruuid");

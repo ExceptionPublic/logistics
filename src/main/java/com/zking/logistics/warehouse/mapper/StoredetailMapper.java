@@ -1,6 +1,7 @@
 package com.zking.logistics.warehouse.mapper;
 
 import com.zking.logistics.warehouse.model.Storedetail;
+import com.zking.logistics.warehouse.vo.StoredetailVo;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -42,9 +43,9 @@ public interface StoredetailMapper {
 
     /**
      * 分页查询
-     * @param storedetail
+     * @param storedetailVo
      * @return
      */
-    List<Map<String,Object>> queryStoredetailPager(Storedetail storedetail);
+    List<Map<String,Object>> queryStoredetailPager(StoredetailVo storedetailVo);
 
 }

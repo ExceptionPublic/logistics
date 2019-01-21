@@ -27,7 +27,7 @@ function goodsType(parameters){
             url: '/basicJsp/goodstype/goodsTypeLst', //数据接口
             where:parameters,
             page: true ,//开启分页
-            title : "是",
+            title : "商品类型页面",
             method : "post",
             // toolbar: '#toolbarDemo',//这是个神奇的标签
             text : {
@@ -135,7 +135,7 @@ function GoodsTyAdd(title,row) {
             shade: 0.8,
             btnAlign: 'c',
             offset : 'auto',
-            area : [ '350px', '170px' ],
+            area : [ '350px', '250px' ],
             content : '/basicJsp/goodstype/togoodstypeAdd',
             success : function(layero, index) {
                 if(row){

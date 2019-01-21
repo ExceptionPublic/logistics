@@ -32,7 +32,7 @@ public class GoodsController {
 
     }
 
-//    查询所有商品
+//    查询所有商品页面
     @RequestMapping("/queryGoods")
     @ResponseBody
     public List<Goods> queryGoods(){
@@ -40,6 +40,7 @@ public class GoodsController {
     }
 
 
+    //查询所有商品
     @RequestMapping("/queryGoodsPager")
     @ResponseBody
     public Map<String,Object> queryGoodsPager(Goods goods,
@@ -55,13 +56,12 @@ public class GoodsController {
 
     }
 
+//    @RequestMapping("/togoodsAdd")
+//    public String togoodsAdd(){
+//        return "basicJsp/goods/GoodsAdd";
+//    }
+
     //商品新增
-    @RequestMapping("/togoodsAdd")
-    public String togoodsAdd(){
-        return "basicJsp/goods/GoodsAdd";
-    }
-
-
     @RequestMapping(value = "/goodsAdd",method = RequestMethod.POST)
     @ResponseBody
     public Map<String,Object> goodsAdd(Goods goods){
@@ -117,7 +117,7 @@ public class GoodsController {
         try {
             goodsService.deleteByPrimaryKey(goods);
             System.out.println(goods);
-            CommonUtil.put("message","删除成功");
+            CommonUtil.put("message","删除"+goods.getName()+"成功");
             CommonUtil.put("success",true);
         } catch (Exception e) {
             CommonUtil.put("message","系统错误");
@@ -135,10 +135,10 @@ public class GoodsController {
     public Map<String,Object> goodsService(String name){
         CommonUtil.createMap();
         boolean goodsname = goodsService.isGoodsname(name);
-        System.out.println("商品name:"+goodsname);
+//        System.out.println("商品name:"+goodsname);
         CommonUtil.put("success",goodsname);
         if(goodsname){
-            CommonUtil.put("message","该商品存在");
+            CommonUtil.put("message","‘"+name+"’该商品存在");
         }
         return CommonUtil.getMap();
     }

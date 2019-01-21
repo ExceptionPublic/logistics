@@ -3,13 +3,11 @@ package com.zking.logistics.personnel.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.ToString;
 
-import java.io.Serializable;
 import java.util.Date;
-@ToString
-public class Emp implements Serializable {
-    private Integer uuid;
 
-    private Integer roleId;
+@ToString
+public class Emp {
+    private Integer uuid;
 
     private String username;
 
@@ -30,9 +28,10 @@ public class Emp implements Serializable {
 
     private Integer depuuid;
 
-    public Emp(Integer uuid, Integer roleId, String username, String pwd, String name, Integer gender, String email, String tele, String address, Date birthday, Integer depuuid) {
+    private Integer roleId;
+
+    public Emp(Integer uuid, String username, String pwd, String name, Integer gender, String email, String tele, String address, Date birthday, Integer depuuid, Integer roleId) {
         this.uuid = uuid;
-        this.roleId = roleId;
         this.username = username;
         this.pwd = pwd;
         this.name = name;
@@ -42,18 +41,11 @@ public class Emp implements Serializable {
         this.address = address;
         this.birthday = birthday;
         this.depuuid = depuuid;
+        this.roleId = roleId;
     }
 
     public Emp() {
         super();
-    }
-
-    public Integer getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(Integer roleId) {
-        this.roleId = roleId;
     }
 
     public Integer getUuid() {
@@ -134,5 +126,13 @@ public class Emp implements Serializable {
 
     public void setDepuuid(Integer depuuid) {
         this.depuuid = depuuid;
+    }
+
+    public Integer getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
     }
 }

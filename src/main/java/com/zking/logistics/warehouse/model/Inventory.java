@@ -1,10 +1,13 @@
 package com.zking.logistics.warehouse.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.ToString;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Inventory {
+@ToString
+public class Inventory implements Serializable{
     private Integer uuid;
 
     private Integer goodsuuid;
@@ -15,10 +18,8 @@ public class Inventory {
 
     private String type;
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date createtime;
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date checktime;
 
     private Integer creater;
